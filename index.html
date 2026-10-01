@@ -32,6 +32,7 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 <section id="r" class="hide"><div id="rec"></div></section>
 <section id="o" class="hide"><h2>ONLINE ACUM</h2><div id="peers" class="mu">Se conectează…</div></section>
 <section id="p" class="hide"><div class="c"><div class="b">👤 Profilul meu</div><div class="mu" id="pe" style="margin:4px 0 10px"></div>
+<div class="mu" id="pa" style="margin:0 0 10px"></div>
 <label class="mu">Numele tău</label><input id="pn" maxlength="24" class="fi">
 <label class="mu">Grupa ta</label><input id="pg" maxlength="12" list="gl" placeholder="ex: 1234 (alege sau scrie)" class="fi"><datalist id="gl"></datalist>
 <div class="mu" id="pm" style="min-height:18px;color:var(--ok)"></div>
@@ -94,7 +95,7 @@ function renAdm(){if(!isAdm)return;const gs=[...new Set(Object.keys(all).map(u=>
  const f=sel.value,us=Object.keys(all).filter(u=>f==='*'||(grp[u]||'')===f).sort((a,b)=>String(names[a]||'').localeCompare(String(names[b]||'')));
  $('mc').textContent=us.length+' elevi';
  $('ml').innerHTML=us.map(u=>{const v=Object.values(all[u]),p=v.filter(x=>x===1).length,a=v.filter(x=>x===0).length;return`<div class="c"><div class="b">${esc(names[u]||'Elev')}<span class="tag">${esc(grp[u]||'fără grupă')}</span></div><div class="mu">✅ ${p} · ❌ ${a}</div><div class="r"><button data-ag="${u}">Schimbă grupa</button><button data-ad="${u}">Șterge</button></div></div>`}).join('')}
-function fillProf(){const a=document.activeElement;if(a&&(a.id==='pn'||a.id==='pg'))return;$('pn').value=myName;$('pg').value=myGroup;$('pe').textContent=(auth.currentUser&&auth.currentUser.email)||'';$('gl').innerHTML=[...new Set(Object.values(grp).filter(Boolean))].map(g=>`<option value="${esc(g)}">`).join('')}
+function fillProf(){const a=document.activeElement;if(a&&(a.id==='pn'||a.id==='pg'))return;$('pn').value=myName;$('pg').value=myGroup;$('pe').textContent=((auth.currentUser&&auth.currentUser.email)||'')+' · UID: '+(uid||'');$('gl').innerHTML=[...new Set(Object.values(grp).filter(Boolean))].map(g=>`<option value="${esc(g)}">`).join('')}
 const fb=initializeApp(CFG),auth=getAuth(fb),fs=getFirestore(fb),pr={};let un=[],hb=null;
 const em=u=>u.trim().toLowerCase(),er=(t,ok)=>{$('er').style.color=ok?'var(--ok)':'var(--no)';$('er').textContent=t};
 const msg=c=>({'auth/invalid-credential':'Utilizator sau parolă greșită.','auth/email-already-in-use':'Există deja un cont cu acest email.','auth/weak-password':'Parola trebuie să aibă minim 6 caractere.','auth/invalid-email':'Email invalid.','auth/too-many-requests':'Prea multe încercări, așteaptă puțin.','auth/operation-not-allowed':'Activează Email/Password în Firebase.','auth/api-key-not-valid.-please-pass-a-valid-api-key.':'Cheia API e greșită.'}[c]||'Eroare: '+c);
@@ -115,7 +116,7 @@ function peers(){const t=Date.now(),ps=Object.entries(pr).filter(([k,v])=>t-(v.t
 function pres(){if(!uid||document.hidden)return;const n=new Date(),o=occ(0).find(o=>start(o)<=n&&n<end(o));setDoc(doc(fs,'presence',uid),{name:myName,g:myGroup,now:o?o.c[3]:'Liber',t:Date.now()}).catch(()=>{})}
 onAuthStateChanged(auth,u=>{un.forEach(f=>f());un=[];clearInterval(hb);
   if(!u){isAdm=false;$('tm').classList.add('hide');uid=null;myName='';all={};mine={};$('ov').classList.remove('hide');$('me').textContent='';render();return}
-  uid=u.uid;myName=u.displayName||'';names[uid]=myName;getDoc(doc(fs,'admins',uid)).then(d=>{isAdm=d.exists();$('tm').classList.toggle('hide',!isAdm);renAdm()}).catch(()=>{isAdm=false});$('ov').classList.add('hide');showMe();
+  uid=u.uid;myName=u.displayName||'';names[uid]=myName;$('pa').textContent='Admin: verific…';getDoc(doc(fs,'admins',uid)).then(d=>{isAdm=d.exists();$('tm').classList.toggle('hide',!isAdm);$('pa').textContent=isAdm?'Admin: da ✓':'Admin: nu — nu există documentul admins/'+uid;renAdm()}).catch(e=>{isAdm=false;$('pa').textContent='Admin: eroare ('+(e.code||e.message)+'). Verifică regulile din Firestore.'});$('ov').classList.add('hide');showMe();
   un.push(onSnapshot(collection(fs,'attendance'),s=>{all={};s.docs.forEach(d=>{const x=d.data();all[d.id]=x.m||{};grp[d.id]=ng(x.g);if(x.n)names[d.id]=x.n});if(uid&&grp[uid]!==undefined)myGroup=grp[uid];fillProf();renAdm();if(!dirty)mine={...(all[uid]||{})};else all[uid]={...mine};if(myName)names[uid]=myName;render()},()=>{}));
   un.push(onSnapshot(collection(fs,'presence'),s=>{for(const k in pr)delete pr[k];s.docs.forEach(d=>pr[d.id]=d.data());peers()},()=>{}));
   pres();hb=setInterval(pres,90000)});
