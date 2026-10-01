@@ -19,7 +19,8 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 .ok.on{background:var(--ok);border-color:var(--ok)}.no.on{background:var(--no);border-color:var(--no)}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--ok);margin-right:7px}
 .tag{font-size:11px;border:1px solid var(--bd);border-radius:6px;padding:1px 6px;margin-left:6px;color:var(--mu)}
-.hide{display:none}.fi{width:100%;font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:11px;margin-bottom:8px}#ov{display:flex}#ov.hide{display:none}.warn{border-left:5px solid var(--no)}
+.hide{display:none}#sup{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:7;background:var(--ac);color:#fff;border-color:var(--ac);border-radius:999px;padding:10px 14px;box-shadow:0 2px 10px #0006}
+.fi{width:100%;font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:11px;margin-bottom:8px}#ov{display:flex}#ov.hide{display:none}.warn{border-left:5px solid var(--no)}
 </style></head><body><div id="ov" style="position:fixed;inset:0;z-index:9;background:var(--bg);align-items:center;justify-content:center;padding:20px;overflow:auto"><div class="c" style="width:100%;max-width:380px"><div class="b" style="font-size:20px">📚 Orar grupă</div><div class="mu" style="margin:6px 0 10px">Intră sau creează cont (email + parolă).</div><input id="an" maxlength="24" placeholder="Numele tău (doar la cont nou)" class="fi"><input id="au" type="email" placeholder="Email" autocapitalize="none" autocomplete="email" class="fi"><input id="ap" type="password" placeholder="Parolă (minim 6 caractere)" autocomplete="current-password" class="fi"><div id="er" class="mu" style="color:var(--no);min-height:18px"></div><div class="mu" style="margin:-4px 0 10px"><a href="#" id="fg">Ai uitat parola?</a></div><label class="mu" style="display:flex;gap:8px;align-items:center;margin:0 0 10px"><input type="checkbox" id="rm" checked style="width:auto;margin:0"> Ține-mă minte pe acest dispozitiv</label><div class="r"><button id="lg" class="on">Intră</button><button id="rg">Cont nou</button></div></div></div><main>
 <h1>📚 Orar grupă</h1>
 <div class="mu" id="me">Se conectează…</div>
@@ -38,13 +39,17 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 <div class="mu" id="pm" style="min-height:18px;color:var(--ok)"></div>
 <div class="r"><button id="psv" class="on">Salvează</button><button id="pout">Ieși din cont</button></div></div>
 <div class="mu">Colegii din aceeași grupă apar la „Colegi” și la „Au fost”. Dacă lași grupa goală, vezi pe toată lumea.</div></section>
-<section id="m" class="hide"><div class="r" style="margin:0 0 8px"><select id="mg" class="fi" style="margin:0"></select><button id="mx" style="flex:0 0 auto;padding:9px 12px">⬇ CSV</button></div><div class="mu" id="mc" style="margin-bottom:8px"></div><div id="ml"></div></section>
+<section id="m" class="hide"><div id="st" style="margin-bottom:10px"></div><div class="r" style="margin:0 0 8px"><select id="mg" class="fi" style="margin:0"></select><button id="mx" style="flex:0 0 auto;padding:9px 12px">⬇ CSV</button></div><div class="mu" id="mc" style="margin-bottom:8px"></div><div id="ml"></div></section>
+<button id="sup">💬 Suport</button>
+<div id="sp" class="hide" style="position:fixed;inset:0;z-index:8;background:var(--bg);overflow:auto;padding:calc(14px + env(safe-area-inset-top,0px)) 14px 30px"><div style="max-width:600px;margin:0 auto"><div class="r" style="margin:0 0 10px;align-items:center"><div class="b" style="font-size:18px">💬 Suport</div><button id="sx" style="flex:0 0 auto">Închide</button></div>
+<div class="c"><textarea id="stx" maxlength="1000" rows="4" placeholder="Descrie problema…" class="fi" style="margin:0;resize:vertical"></textarea><div class="mu" id="sm" style="min-height:18px;margin:6px 0"></div><button id="sb" class="on" style="width:100%">Trimite</button></div>
+<h2>MESAJELE MELE</h2><div id="sl"></div></div></div>
 <p class="mu" id="note"></p>
 </main>
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,updateProfile,sendPasswordResetEmail,setPersistence,browserLocalPersistence,browserSessionPersistence}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import{getFirestore,doc,setDoc,getDoc,deleteDoc,collection,onSnapshot}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import{getFirestore,doc,setDoc,getDoc,deleteDoc,addDoc,updateDoc,query,where,collection,onSnapshot}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 const P='Programarea calculatoarelor și limbaje de programare',S='Știința și ingineria materialelor',PM='Protecția mediului',AL='Algebră liniară, geometrie analitică și diferențială',CH='Chimie',PS='Psihologia educației',CO='Comunicare',LM='Limbi moderne',
 NE='Ș.L. Neacșulescu Alina',VM='Vasilescu Marius',MA='Matei Ecaterina',SE='Semenescu Augustin',HS='Hainagiu Simona',CD='Cotoară D.';
 // zi,start,end,materie,tip,sala,prof,săptămâna (b=ambele,i=impară,p=pară)
@@ -90,11 +95,17 @@ document.addEventListener('click',e=>{if(e.target.id==='chg'){e.preventDefault()
 $('pw').onclick=()=>{off--;render()};$('nw').onclick=()=>{off++;render()};
 $('sw').onclick=()=>{swap=1-swap;try{localStorage.setItem('swap',swap)}catch(e){}render()};
 const CFG={apiKey:"AIzaSyDLnd7BAqNvM6ZsgmvpMg3ZBsZmtVEYTn4",authDomain:"orar-upb.firebaseapp.com",projectId:"orar-upb",storageBucket:"orar-upb.firebasestorage.app",messagingSenderId:"970129347906",appId:"1:970129347906:web:71da2aee9c7424dc08a4db"};
-let isAdm=false,myGroup='';const grp={},ng=g=>String(g||'').toUpperCase().replace(/[^A-Z0-9 ._-]/g,'').trim().slice(0,12),sameG=u=>!myGroup||grp[u]===myGroup;
+let isAdm=false,myGroup='',tkMine=[],tkAll=[];const grp={},ng=g=>String(g||'').toUpperCase().replace(/[^A-Z0-9 ._-]/g,'').trim().slice(0,12),sameG=u=>!myGroup||grp[u]===myGroup;
 function renAdm(){if(!isAdm)return;const gs=[...new Set(Object.keys(all).map(u=>grp[u]||''))].sort(),sel=$('mg'),cv=sel.value;sel.innerHTML='<option value="*">Toate grupele</option>'+gs.map(g=>`<option value="${esc(g)}">${g?esc(g):'(fără grupă)'}</option>`).join('');sel.value=[...sel.options].some(o=>o.value===cv)?cv:'*';
  const f=sel.value,us=Object.keys(all).filter(u=>f==='*'||(grp[u]||'')===f).sort((a,b)=>String(names[a]||'').localeCompare(String(names[b]||'')));
  $('mc').textContent=us.length+' elevi';
  $('ml').innerHTML=us.map(u=>{const v=Object.values(all[u]),p=v.filter(x=>x===1).length,a=v.filter(x=>x===0).length;return`<div class="c"><div class="b">${esc(names[u]||'Elev')}<span class="tag">${esc(grp[u]||'fără grupă')}</span></div><div class="mu">✅ ${p} · ❌ ${a}</div><div class="r"><button data-ag="${u}">Schimbă grupa</button><button data-ad="${u}">Șterge</button></div></div>`}).join('')}
+const fmtT=t=>{const d=new Date(t||0);return d.getDate()+'.'+String(d.getMonth()+1).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')},stt=x=>x.status==='solved'?'✅ rezolvat':'🟡 deschis';
+function renSup(){
+ $('sl').innerHTML=[...tkMine].sort((a,b)=>b.t-a.t).map(x=>`<div class="c"><div class="mu">${fmtT(x.t)} · ${stt(x)}</div><div>${esc(x.text)}</div>${x.reply?`<div class="mu" style="margin-top:6px">💬 Răspuns: ${esc(x.reply)}</div>`:''}</div>`).join('')||'<div class="mu">Nu ai trimis mesaje.</div>';
+ if(isAdm){const o=tkAll.filter(x=>x.status!=='solved').length;$('tm').textContent='Admin'+(o?' ('+o+')':'');
+  const l=[...tkAll].sort((a,b)=>(a.status==='solved')-(b.status==='solved')||b.t-a.t).slice(0,40);
+  $('st').innerHTML=`<h2>SUPORT · ${o} deschise</h2>`+(l.map(x=>`<div class="c ${x.status==='solved'?'':'warn'}"><div class="b">${esc(x.name||'Elev')}<span class="tag">${esc(x.g||'fără grupă')}</span></div><div class="mu">${fmtT(x.t)} · ${stt(x)}</div><div style="margin:6px 0">${esc(x.text)}</div>${x.reply?`<div class="mu">💬 ${esc(x.reply)}</div>`:''}<div class="r"><button data-sr="${x.id}">Răspunde</button><button data-sv="${x.id}">${x.status==='solved'?'Redeschide':'Rezolvat ✓'}</button></div></div>`).join('')||'<div class="mu">Niciun mesaj.</div>')}}
 function fillProf(){const a=document.activeElement;if(a&&(a.id==='pn'||a.id==='pg'))return;$('pn').value=myName;$('pg').value=myGroup;$('pe').textContent=((auth.currentUser&&auth.currentUser.email)||'')+' · UID: '+(uid||'');$('gl').innerHTML=[...new Set(Object.values(grp).filter(Boolean))].map(g=>`<option value="${esc(g)}">`).join('')}
 const fb=initializeApp(CFG),auth=getAuth(fb),fs=getFirestore(fb),pr={};let un=[],hb=null;
 const em=u=>u.trim().toLowerCase(),er=(t,ok)=>{$('er').style.color=ok?'var(--ok)':'var(--no)';$('er').textContent=t};
@@ -104,6 +115,11 @@ async function go(reg){er('');const u=$('au').value,p=$('ap').value,n=$('an').va
 $('fg').onclick=async e=>{e.preventDefault();const u=$('au').value;if(!/^\S+@\S+\.\S+$/.test(em(u)))return er('Scrie emailul mai sus, apoi apasă din nou „Ai uitat parola?”.');try{await sendPasswordResetEmail(auth,em(u));er('Dacă există un cont cu acest email, ți-am trimis un link de resetare. Verifică și Spam.',1)}catch(x){er(msg(x.code))}};$('lg').onclick=()=>go(false);$('rg').onclick=()=>go(true);try{$('au').value=localStorage.getItem('em')||''}catch(e){}
 $('psv').onclick=async()=>{if(!uid)return;const n=$('pn').value.trim().slice(0,24)||myName;myName=n;myGroup=ng($('pg').value);names[uid]=n;grp[uid]=myGroup;try{await updateProfile(auth.currentUser,{displayName:n})}catch(e){}setDoc(doc(fs,'attendance',uid),{m:{...mine},n:myName,g:myGroup}).catch(()=>{});pres();showMe();render();peers();$('pn').value=myName;$('pg').value=myGroup;$('pm').textContent='✓ Salvat'};
 $('pout').onclick=()=>signOut(auth);
+$('sup').onclick=()=>{$('sm').textContent='';$('sp').classList.remove('hide')};$('sx').onclick=()=>$('sp').classList.add('hide');
+$('sb').onclick=async()=>{const t=$('stx').value.trim().slice(0,1000);if(!t||!uid)return;$('sb').disabled=true;try{await addDoc(collection(fs,'support'),{uid,name:myName,g:myGroup,text:t,status:'open',t:Date.now()});$('stx').value='';$('sm').textContent='✓ Trimis. Revino aici pentru răspuns.'}catch(e){$('sm').textContent='Nu s-a trimis ('+(e.code||'eroare')+'). Verifică regulile din Firestore.'}$('sb').disabled=false};
+document.addEventListener('click',e=>{if(!isAdm)return;const r=e.target.closest('[data-sr]'),v=e.target.closest('[data-sv]');
+ if(r){const x=tkAll.find(y=>y.id===r.dataset.sr);if(!x)return;const a=prompt('Răspuns pentru '+(x.name||'elev')+':',x.reply||'');if(a===null)return;updateDoc(doc(fs,'support',x.id),{reply:a.trim().slice(0,1000)}).catch(()=>alert('Nu ai drept de admin.'))}
+ if(v){const x=tkAll.find(y=>y.id===v.dataset.sv);if(x)updateDoc(doc(fs,'support',x.id),{status:x.status==='solved'?'open':'solved'}).catch(()=>alert('Nu ai drept de admin.'))}});
 document.addEventListener('click',e=>{if(!isAdm)return;const g=e.target.closest('[data-ag]'),d=e.target.closest('[data-ad]');
  if(g){const u=g.dataset.ag,v=prompt('Grupa nouă pentru '+(names[u]||'elev')+':',grp[u]||'');if(v===null)return;setDoc(doc(fs,'attendance',u),{m:{...all[u]},n:names[u]||'',g:ng(v)}).catch(()=>alert('Nu ai drept de admin.'))}
  if(d){const u=d.dataset.ad;if(!confirm('Ștergi datele lui '+(names[u]||'elev')+'? Contul rămâne în Firebase Authentication.'))return;deleteDoc(doc(fs,'attendance',u)).catch(()=>{});deleteDoc(doc(fs,'presence',u)).catch(()=>{})}});
@@ -115,9 +131,10 @@ function showMe(){$('me').innerHTML=(myName?'Conectat ca <b>'+esc(myName)+'</b>'
 function peers(){const t=Date.now(),ps=Object.entries(pr).filter(([k,v])=>t-(v.t||0)<200000&&(!myGroup||ng(v.g)===myGroup||k===uid));$('peers').innerHTML=ps.length?ps.map(([k,v])=>`<div class="c"><span class="dot"></span>${esc(String(v.name||'Coleg').slice(0,24))}${k===uid?' (tu)':''}<div class="mu">${esc(String(v.now||'Liber').slice(0,60))}</div></div>`).join(''):'Nimeni acum.'}
 function pres(){if(!uid||document.hidden)return;const n=new Date(),o=occ(0).find(o=>start(o)<=n&&n<end(o));setDoc(doc(fs,'presence',uid),{name:myName,g:myGroup,now:o?o.c[3]:'Liber',t:Date.now()}).catch(()=>{})}
 onAuthStateChanged(auth,u=>{un.forEach(f=>f());un=[];clearInterval(hb);
-  if(!u){isAdm=false;$('tm').classList.add('hide');uid=null;myName='';all={};mine={};$('ov').classList.remove('hide');$('me').textContent='';render();return}
-  uid=u.uid;myName=u.displayName||'';names[uid]=myName;$('pa').textContent='Admin: verific…';getDoc(doc(fs,'admins',uid)).then(d=>{isAdm=d.exists();$('tm').classList.toggle('hide',!isAdm);$('pa').textContent=isAdm?'Admin: da ✓':'Admin: nu — nu există documentul admins/'+uid;renAdm()}).catch(e=>{isAdm=false;$('pa').textContent='Admin: eroare ('+(e.code||e.message)+'). Verifică regulile din Firestore.'});$('ov').classList.add('hide');showMe();
+  if(!u){tkMine=[];tkAll=[];isAdm=false;$('tm').classList.add('hide');uid=null;myName='';all={};mine={};$('ov').classList.remove('hide');$('me').textContent='';render();return}
+  uid=u.uid;myName=u.displayName||'';names[uid]=myName;$('pa').textContent='Admin: verific…';getDoc(doc(fs,'admins',uid)).then(d=>{isAdm=d.exists();$('tm').classList.toggle('hide',!isAdm);$('pa').textContent=isAdm?'Admin: da ✓':'Admin: nu — nu există documentul admins/'+uid;if(isAdm)un.push(onSnapshot(collection(fs,'support'),s=>{tkAll=s.docs.map(d=>({id:d.id,...d.data()}));renSup()},()=>{}));renAdm()}).catch(e=>{isAdm=false;$('pa').textContent='Admin: eroare ('+(e.code||e.message)+'). Verifică regulile din Firestore.'});$('ov').classList.add('hide');showMe();
   un.push(onSnapshot(collection(fs,'attendance'),s=>{all={};s.docs.forEach(d=>{const x=d.data();all[d.id]=x.m||{};grp[d.id]=ng(x.g);if(x.n)names[d.id]=x.n});if(uid&&grp[uid]!==undefined)myGroup=grp[uid];fillProf();renAdm();if(!dirty)mine={...(all[uid]||{})};else all[uid]={...mine};if(myName)names[uid]=myName;render()},()=>{}));
+  un.push(onSnapshot(query(collection(fs,'support'),where('uid','==',uid)),s=>{tkMine=s.docs.map(d=>({id:d.id,...d.data()}));renSup()},()=>{}));
   un.push(onSnapshot(collection(fs,'presence'),s=>{for(const k in pr)delete pr[k];s.docs.forEach(d=>pr[d.id]=d.data());peers()},()=>{}));
   pres();hb=setInterval(pres,90000)});
 render();setInterval(()=>{render();peers()},30000);
