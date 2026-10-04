@@ -153,7 +153,8 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 </div>
 <section id="ann" class="hide"><div id="anl"></div></section>
 <section id="grpc" class="hide">
-<div class="c" style="display:flex;align-items:center;gap:10px"><div style="font-size:24px">👥</div><div style="flex:1"><div class="b" id="gtl">Grupa</div><div class="mu" id="gsub"></div></div></div>
+<div class="c" style="display:flex;align-items:center;gap:10px"><div style="font-size:24px">👥</div><div style="flex:1"><div class="b" id="gtl">Grupa</div><div class="mu" id="gsub"></div></div><button id="gmb" style="flex:0 0 auto">👥 Membri</button></div>
+<div id="gmem" class="hide" style="margin-top:8px"></div>
 <div id="gpin"></div>
 <div id="gms" style="display:flex;flex-direction:column;gap:6px;max-height:52vh;overflow:auto;padding:4px 0"></div>
 <div class="r" style="margin-top:8px;align-items:center"><button id="gph" style="flex:0 0 auto" title="Trimite o poză">📷</button><input id="gin" class="fi" placeholder="Scrie în grup…" maxlength="2000" style="margin:0"><button id="gsd" class="on" style="flex:0 0 auto">Trimite</button></div>
@@ -463,15 +464,15 @@ const okImg=x=>String(x||'').startsWith('data:image/')?x:'',canMod=()=>isAdm||gA
 function chkGrp(){if(gCur===myGroup)return;gUn.forEach(f=>f());gUn=[];gCur=myGroup;gMsgs=[];gAdmins=[];if(!myGroup||!uid){renGrp();return}
  gUn.push(onSnapshot(query(collection(fs,'groupChats',myGroup,'messages'),orderBy('t','desc'),limit(60)),s=>{gMsgs=s.docs.map(d=>({id:d.id,...d.data()})).reverse();renGrp()},()=>{gMsgs=[];renGrp()}));
  gUn.push(onSnapshot(doc(fs,'groupChats',myGroup),s=>{gAdmins=(s.exists()&&s.data().admins)||[];renGrp()},()=>{}))}
-function renGrp(){if(!$('gms'))return;const open=!$('grpc').classList.contains('hide');$('gtl').textContent=myGroup?'Grupa '+myGroup:'Grup';
- $('gsub').textContent=myGroup?(gMsgs.length+' mesaje'+(canMod()?' · ești șef/admin: poți fixa mesaje':'')):'Alege grupa în Profil ca să intri în grup.';
+function renGrp(){if(!$('gms'))return;const mc=Object.keys(all).filter(u=>u!=='_'&&grp[u]===myGroup).length;const open=!$('grpc').classList.contains('hide');$('gtl').textContent=myGroup?'Grupa '+myGroup:'Grup';
+ $('gsub').textContent=myGroup?(mc+' membri · '+gMsgs.length+' mesaje'+(canMod()?' · ești șef/admin: poți fixa mesaje':'')):'Alege grupa în Profil ca să intri în grup.';
  const seen=gSeen();if(open&&gMsgs.length){try{localStorage.setItem(gSeenK(),String(Math.max(...gMsgs.map(m=>m.t))))}catch(e){}}
  const nu=open?0:gMsgs.filter(m=>m.t>seen&&m.uid!==uid).length;$('tgr').textContent='Grup'+(nu?' ('+nu+')':'');
  const pins=gMsgs.filter(m=>m.pin).slice(-3).reverse();
  $('gpin').innerHTML=pins.map(m=>`<div class="c now" style="padding:8px 12px"><div class="mu">📌 Fixat · ${esc(m.name||'')}</div><div style="white-space:pre-wrap;word-break:break-word">${m.ph?'📸 '+esc(m.ph.subj)+(m.ph.title?' · '+esc(m.ph.title):''):linkify(String(m.text||'').slice(0,300))}</div></div>`).join('');
  const el=$('gms'),near=el.scrollHeight-el.scrollTop-el.clientHeight<80||!el.dataset.init;
  el.innerHTML=gMsgs.map(m=>{const me=m.uid===uid;return`<div class="gm ${me?'me':''}">${me?'':`<div class="gn">${esc(m.name||'Coleg')}</div>`}${m.ph?`<img class="gi" alt="" data-gph="${esc(m.ph.id)}" src="${okImg(m.ph.th)}"><div class="gs">📚 ${esc(m.ph.subj)}${m.ph.title?' · '+esc(m.ph.title):''}</div>`:''}${m.text?`<div>${linkify(m.text)}</div>`:''}<small>${fmtT(m.t)}${m.pin?' · 📌':''}</small><span class="gx">${canMod()?`<button data-gpin="${m.id}">${m.pin?'Scoate 📌':'📌 Fixează'}</button>`:''}${me||canMod()?`<button data-gdel="${m.id}">🗑</button>`:''}</span></div>`}).join('')||'<div class="mu">Niciun mesaj încă. Scrie primul!</div>';
- if(near){el.scrollTop=el.scrollHeight;el.dataset.init='1'}}
+ if(near){el.scrollTop=el.scrollHeight;el.dataset.init='1'}renMem()}
 const gCol=n=>collection(fs,'groupChats',myGroup,n);
 $('gsd').onclick=async()=>{const t=$('gin').value.trim().slice(0,2000);if(!t||!uid||!myGroup)return;$('gsd').disabled=true;try{await addDoc(gCol('messages'),{uid,name:myName,text:t,t:Date.now()});$('gin').value=''}catch(e){alert('Nu s-a trimis ('+(e.code||'eroare')+'). Verifică regulile din Firestore.')}$('gsd').disabled=false};
 $('gin').onkeydown=e=>{if(e.key==='Enter')$('gsd').click()};
@@ -499,6 +500,13 @@ document.addEventListener('click',async e=>{const g=k=>e.target.closest('['+k+']
  if(b=g('data-gpin')){const m=gMsgs.find(x=>x.id===b.dataset.gpin);if(m)updateDoc(doc(fs,'groupChats',myGroup,'messages',m.id),{pin:!m.pin}).catch(()=>alert('Doar șeful grupei sau adminul poate fixa mesaje.'));return}
  if(b=g('data-gdel')){const m=gMsgs.find(x=>x.id===b.dataset.gdel);if(m&&confirm('Ștergi mesajul?'))deleteDoc(doc(fs,'groupChats',myGroup,'messages',m.id)).catch(()=>alert('Nu s-a putut șterge.'));return}
  if(b=g('data-gad')){if(!isAdm||!edG)return;const cur=gcDocs[edG]||[],u=b.dataset.gad,nx=cur.includes(u)?cur.filter(x=>x!==u):[...cur,u];setDoc(doc(fs,'groupChats',edG),{admins:nx},{merge:true}).catch(()=>alert('Nu s-a salvat.'))}});
+
+let gMemOn=false;
+function renMem(){const el=$('gmem');if(!el)return;el.classList.toggle('hide',!gMemOn);$('gmb').textContent=gMemOn?'Ascunde':'👥 Membri';if(!gMemOn)return;
+ const t=Date.now(),us=Object.keys(all).filter(u=>u!=='_'&&grp[u]===myGroup).map(u=>{const p=pr[u];return{u,n:names[u]||'Coleg',adm:gAdmins.includes(u),on:!!p&&t-(p.t||0)<200000}});
+ us.sort((a,b)=>(b.adm-a.adm)||(b.on-a.on)||a.n.localeCompare(b.n));
+ el.innerHTML=`<div class="c"><div class="mu" style="margin-bottom:6px">${us.length} ${us.length===1?'membru':'membri'} · ${us.filter(x=>x.on).length} online</div>`+us.map(x=>`<div style="display:flex;gap:10px;align-items:center;margin:8px 0">${avBox(x.u,x.n,38)}<div style="flex:1;min-width:0"><div class="b">${esc(x.n)}${x.u===uid?' <span class="tag">tu</span>':''}${x.adm?' <span class="tag">👑 șef</span>':''}</div><div class="mu">${x.on?'<span style="color:var(--ok)">● online</span>':'offline'}</div></div>${x.u!==uid?`<button data-dm="${x.u}" style="flex:0 0 auto;padding:6px 10px">💬</button>`:''}</div>`).join('')+'</div>'}
+$('gmb').onclick=()=>{gMemOn=!gMemOn;renMem()};
 function pres(){if(!uid||document.hidden)return;const n=new Date(),o=occ(0).find(o=>start(o)<=n&&n<end(o));setDoc(doc(fs,'presence',uid),{name:myName,g:myGroup,now:o?o.c[3]:'Liber',t:Date.now()}).catch(()=>{})}
 let regBusy=false,attLoaded=false,grbOn=false;
 const onAuth=u=>{if(u&&regBusy)return;un.forEach(f=>f());un=[];clearInterval(hb);
@@ -510,7 +518,7 @@ const onAuth=u=>{if(u&&regBusy)return;un.forEach(f=>f());un=[];clearInterval(hb)
   un.push(onSnapshot(query(collection(fs,'announcements'),orderBy('t','desc'),limit(50)),s=>{anns=s.docs.map(d=>({id:d.id,...d.data()}));renAnn()},()=>{}));
   un.push(onSnapshot(collection(fs,'profiles'),s=>{profs={};profLoaded=true;s.docs.forEach(d=>profs[d.id]=d.data());peers();renChats();fillProf();renAdm();render()},()=>{}));
   un.push(onSnapshot(query(collection(fs,'chats'),where('members','array-contains',uid)),s=>{chats=s.docs.map(d=>({id:d.id,...d.data()}));renChats()},()=>{}));
-  un.push(onSnapshot(collection(fs,'presence'),s=>{for(const k in pr)delete pr[k];s.docs.forEach(d=>pr[d.id]=d.data());peers()},()=>{}));
+  un.push(onSnapshot(collection(fs,'presence'),s=>{for(const k in pr)delete pr[k];s.docs.forEach(d=>pr[d.id]=d.data());peers();renMem()},()=>{}));
   pres();hb=setInterval(pres,90000)};
 onAuthStateChanged(auth,onAuth);
 render();setInterval(()=>{render();peers()},30000);
