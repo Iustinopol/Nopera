@@ -269,7 +269,7 @@ $('pout').onclick=()=>signOut(auth);
 $('sup').onclick=()=>{$('sm').textContent='';$('sp').classList.remove('hide')};$('sx').onclick=()=>$('sp').classList.add('hide');
 $('eg').oninput=renEd;
 const ims=t=>{$('ims').textContent=t},ND=x=>String(x).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim(),p2=t=>String(t).padStart(5,'0');
-function parseCsv(t){const L=t.replace(/^\ufeff/,'').split(/\r?\n/).filter(x=>x.trim());if(!L.length)return[];const cn=c=>L[0].split(c).length-1,sep=cn('\t')>0&&cn('\t')>=Math.max(cn(';'),cn(','))?'\t':cn(';')>cn(',')?';':',';return L.map(l=>{const o=[];let c='',q=false;for(const ch of l){if(ch==='"')q=!q;else if(ch===sep&&!q){o.push(c);c=''}else c+=ch}o.push(c);return o.map(x=>x.trim())})}
+function parseCsv(t){const L=t.replace(/^\ufeff/,'').split(/\r?\n/).filter(x=>x.trim());if(!L.length)return[];const T0=L.slice(0,25).join('\n'),cn=c=>T0.split(c).length-1,sep=cn('\t')>0&&cn('\t')>=Math.max(cn(';'),cn(','))?'\t':cn(';')>cn(',')?';':',';return L.map(l=>{const o=[];let c='',q=false;for(const ch of l){if(ch==='"')q=!q;else if(ch===sep&&!q){o.push(c);c=''}else c+=ch}o.push(c);return o.map(x=>x.trim())})}
 $('et').onclick=e=>{e.preventDefault();const b=new Blob(['\ufeffzi,start,end,materie,tip,sala,profesor,saptamana\nLuni,08:00,09:50,Programare,LAB,JK103,Ion Popescu,ambele\nMarti,10:00,11:50,Algebra,CURS,JA101,Maria Ionescu,impara\n'],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='sablon-orar.csv';a.click()};
 $('ei').onclick=()=>$('ef').click();
 let edG=null,grpDocs=[],pend=[],pvErr=[],pvDup=0;
@@ -277,14 +277,32 @@ const kk=x=>[x.day,p2(x.start),p2(x.end),String(x.subject).toLowerCase(),x.type,
 function mapRows(rows){rows=rows.filter(r=>r.some(c=>String(c).trim()));if(!rows.length)return[];
  const H={zi:['zi','ziua','day'],a:['start','inceput','de la','ora start','ora inceput'],b:['end','sfarsit','pana la','ora sfarsit','final'],o:['ora','ore','interval'],s:['materie','materia','disciplina','disciplina si titular'],t:['tip','activitate','forma'],r:['sala','sali'],p:['profesor','titular','cadru didactic','prof'],w:['saptamana','sapt','paritate'],l:['limba','limba moderna','lang']};
  const h=rows[0].map(c=>ND(c)),ix={};let hdr=false;for(const k in H){const i=h.findIndex(x=>H[k].includes(x));if(i>=0){ix[k]=i;hdr=true}}
- if(!hdr)return rows;
+ if(!hdr){let ld='';return rows.map(r=>{r=[...r];if(String(r[0]||'').trim())ld=r[0];else r[0]=ld;return r})}
  const g=(r,k)=>ix[k]==null?'':String(r[ix[k]]==null?'':r[ix[k]]).trim(),fx=t=>String(t).replace('.',':').replace(/^(\d{1,2}:\d{2}):\d{2}$/,'$1');
- return rows.slice(1).map(r=>{let a=g(r,'a'),b=g(r,'b');if(ix.o!=null&&(!a||!b)){const m=g(r,'o').match(/(\d{1,2})[:.]?(\d{2})?\s*[-–]\s*(\d{1,2})[:.]?(\d{2})?/);if(m){a=m[1]+':'+(m[2]||'00');b=m[3]+':'+(m[4]||'00')}}
+ let lastD='';return rows.slice(1).map(r=>{let zz=g(r,'zi');if(zz)lastD=zz;else zz=lastD;let a=g(r,'a'),b=g(r,'b');if(ix.o!=null&&(!a||!b)){const m=g(r,'o').match(/(\d{1,2})[:.]?(\d{2})?\s*[-–]\s*(\d{1,2})[:.]?(\d{2})?/);if(m){a=m[1]+':'+(m[2]||'00');b=m[3]+':'+(m[4]||'00')}}
   const ty=ND(g(r,'t')),tt=/^lab/.test(ty)?'LAB':/^sem/.test(ty)?'SEM':/^curs/.test(ty)?'CURS':/^proi/.test(ty)?'PROIECT':g(r,'t');
-  return[g(r,'zi'),fx(a),fx(b),g(r,'s'),tt,g(r,'r'),g(r,'p'),g(r,'w'),g(r,'l')]})}
+  return[zz,fx(a),fx(b),g(r,'s'),tt,g(r,'r'),g(r,'p'),g(r,'w'),g(r,'l')]})}
+
+function gridRows(M){const DAYS={luni:1,marti:2,miercuri:3,joi:4,vineri:5,sambata:6},TIME=/^(\d{1,2})[:.]?(\d{2})?\s*[-–]\s*(\d{1,2})[:.]?(\d{2})?$/,E=[];let wk='b',blocks=null,dayAt={};
+ for(const r of M){const cells=r.map(x=>String(x==null?'':x).trim()),nd=cells.map(x=>ND(x)),wm=nd.find(x=>/saptamana\s*(impara|para)/.test(x));
+  if(wm){wk=/impara/.test(wm)?'i':'p';blocks=null;dayAt={};continue}
+  const dc=nd.map((x,i)=>DAYS[x]?[i,DAYS[x]]:null).filter(Boolean);
+  if(dc.length>=2&&!nd.includes('ora')){dayAt={};dc.forEach(([i,d])=>{dayAt[i]=d});continue}
+  if(nd.includes('ora')&&nd.some(x=>x==='disciplina'||x==='materie')){const st=[];nd.forEach((x,i)=>{if(x==='ora'||x==='ore')st.push(i)});
+   blocks=st.map((s0,k)=>{const e=k+1<st.length?st[k+1]:nd.length;let sc=-1,rc=-1,pc=-1,day=0;for(let c=s0+1;c<e;c++){const x=nd[c];if(sc<0&&(x==='disciplina'||x==='materie'))sc=c;else if(rc<0&&x==='sala')rc=c;else if(pc<0&&/^(prof|titular)/.test(x))pc=c}
+    for(const c of Object.keys(dayAt))if(+c>=s0&&+c<e)day=dayAt[c];return{s:s0,sc,rc,pc,day}});
+   const ord=Object.keys(dayAt).map(Number).sort((a,b)=>a-b);if(blocks.some(b=>!b.day)&&ord.length===blocks.length)blocks.forEach((b,i)=>{b.day=dayAt[ord[i]]});
+   continue}
+  if(!blocks)continue;
+  for(const b of blocks){const tm=(cells[b.s]||'').match(TIME);if(!tm||b.sc<0||!b.day)continue;const sub=cells[b.sc]||'';if(!sub)continue;
+   let t='';for(const g of[...sub.matchAll(/\(([^)]*)\)/g)].map(m=>m[1])){const w=ND(g.split(',')[0]),m2=/^lab/.test(w)?'LAB':/^sem/.test(w)?'SEM':/^curs/.test(w)?'CURS':/^proi/.test(w)?'PROIECT':'';if(m2){t=m2;break}}
+   E.push({d:b.day,a:tm[1]+':'+(tm[2]||'00'),b:tm[3]+':'+(tm[4]||'00'),s:sub.replace(/\([^)]*\)/g,'').replace(/\s+/g,' ').trim(),t,r:b.rc>=0?cells[b.rc]||'':'',p:b.pc>=0?cells[b.pc]||'':'',w:wk})}}
+ const mp=new Map();E.forEach(x=>{const k=[x.d,x.a,x.b,x.s.toLowerCase(),x.t,x.r,x.p].join('|'),o=mp.get(k);if(o&&o.w!==x.w&&o.w!=='b')o.w='b';else if(!o)mp.set(k,{...x})});
+ return[...mp.values()].map(x=>[x.d,x.a,x.b,x.s,x.t,x.r,x.p,x.w==='b'?'ambele':x.w==='i'?'impara':'para'])}
+const smart=M=>{const g=gridRows(M);return g.length?g:mapRows(M)};
 function validate(rows,g){const er=[],ok=[],DM={luni:1,marti:2,miercuri:3,joi:4,vineri:5,sambata:6},WM={'':'b',b:'b',ambele:'b',both:'b',i:'i',impara:'i',impar:'i',p:'p',para:'p',par:'p'},TY=['LAB','CURS','SEM','PROIECT'],TM=/^\d{1,2}:\d{2}$/;
  rows.forEach((r,n)=>{if(n===0&&!(+r[0]>0)&&!DM[ND(r[0]||'')])return;const L='Rândul '+(n+1)+': ',d=+r[0]>0?+r[0]:DM[ND(r[0]||'')],w=WM[ND(r[7]||'')],t=String(r[4]||'').toUpperCase().trim(),lg=LGM[ND(r[8]||'')];
-  if(ND(r[8]||'')&&!lg)return er.push(L+'limbă invalidă (engleză/spaniolă/franceză/germană)');if(!(d>=1&&d<=6))return er.push(L+'zi invalidă');if(!TM.test(r[1]||'')||!TM.test(r[2]||''))return er.push(L+'oră invalidă (HH:MM)');if(mn(r[2])<=mn(r[1]))return er.push(L+'sfârșitul trebuie să fie după început');if(!r[3])return er.push(L+'lipsește materia');if(!TY.includes(t))return er.push(L+'tip invalid (LAB/CURS/SEM/PROIECT)');if(!w)return er.push(L+'săptămână invalidă (ambele/impară/pară)');
+  if(ND(r[8]||'')&&!lg)return er.push(L+'limbă invalidă („'+String(r[8]).slice(0,16)+'”; coloana a 9-a trebuie să fie engleză/spaniolă/franceză/germană sau goală)');if(!(d>=1&&d<=6))return er.push(L+'zi invalidă („'+String(r[0]||'').slice(0,24)+'”)');if(!TM.test(r[1]||'')||!TM.test(r[2]||''))return er.push(L+'oră invalidă („'+String(r[1]||'').slice(0,12)+'” – „'+String(r[2]||'').slice(0,12)+'”, trebuie HH:MM)');if(mn(r[2])<=mn(r[1]))return er.push(L+'sfârșitul trebuie să fie după început');if(!r[3])return er.push(L+'lipsește materia');if(!TY.includes(t))return er.push(L+'tip invalid („'+t.slice(0,16)+'”, trebuie LAB/CURS/SEM/PROIECT)');if(!w)return er.push(L+'săptămână invalidă („'+String(r[7]||'').slice(0,16)+'”, trebuie ambele/impară/pară)');
   ok.push({universityId:UNI,groupId:g,day:d,start:p2(r[1]),end:p2(r[2]),subject:String(r[3]).slice(0,120),type:t,room:String(r[5]||'').slice(0,20),prof:String(r[6]||'').slice(0,60),weeks:w,...(lg?{lang:lg}:{})})});return{er,ok}}
 function pdfLines(L){const out=[],DR=/^(luni|marti|miercuri|joi|vineri|sambata)\b/;let day='';
  for(const raw of L){let l=raw.trim(),n=ND(l);const dm=n.match(DR);if(dm){day=dm[1];l=l.slice(dm[0].length).trim();n=ND(l)}
@@ -294,17 +312,17 @@ function pdfLines(L){const out=[],DR=/^(luni|marti|miercuri|joi|vineri|sambata)\
   let rest=l.replace(t[0],'').replace(rm?rm[0]:'','').replace(new RegExp(ty[0],'i'),'').replace(/\b(impar[aă]?|par[aă]?)\b/gi,'').replace(/[|;]+/g,' ').replace(/\s+/g,' ').trim();
   out.push([day,t[1]+':'+t[2],t[3]+':'+t[4],rest,{laborator:'LAB',lab:'LAB',seminar:'SEM',sem:'SEM',curs:'CURS',proiect:'PROIECT'}[ty[0]],rm?rm[0].replace(/\s/g,''):'','',wk])}return out}
 
-function stage(rows){const g=ng($('eg').value);if(!g)return ims('Alege întâi o grupă.');const{er,ok}=validate(rows,g),have=new Set(allSched.filter(x=>x.groupId===g).map(kk)),nw=ok.filter(x=>!have.has(kk(x)));pend=nw;pvErr=er;pvDup=ok.length-nw.length;if(!nw.length&&!er.length)ims(pvDup?'Toate cele '+pvDup+' ore există deja în '+g+'.':'Nu am găsit ore în text.');renPv()}
+function stage(rows){const g=ng($('eg').value);if(!g)return ims('Alege întâi o grupă.');const{er,ok}=validate(rows,g),have=new Set(allSched.filter(x=>x.groupId===g).map(kk)),nw=ok.filter(x=>!have.has(kk(x)));pend=nw;pvErr=er;pvDup=ok.length-nw.length;if(!nw.length&&er.length)ims('Nu am găsit nicio oră validă. Fișierul nu pare să aibă formatul din „Șablon Excel/CSV” (o oră pe rând: zi, start, end, materie, tip, sală, profesor, săptămână). Descarcă șablonul sau trimite-mi fișierul în chat, ca să-l convertesc.');if(!nw.length&&!er.length)ims(pvDup?'Toate cele '+pvDup+' ore există deja în '+g+'.':'Nu am găsit ore în text.');renPv()}
 function renPv(){const b=$('ipv');if(!pend.length&&!pvErr.length){b.innerHTML='';return}
  b.innerHTML=(pvErr.length?`<div class="mu" style="color:var(--no);white-space:pre-line;margin:8px 0">${pvErr.length} rânduri ignorate:\n${esc(pvErr.slice(0,6).join('\n'))}${pvErr.length>6?'\n…':''}</div>`:'')+(pvDup?`<div class="mu" style="margin:6px 0">${pvDup} ore există deja și sunt sărite.</div>`:'')+
  (pend.length?`<div class="mu" style="margin:6px 0"><b>${pend.length} ore găsite.</b> Verifică și șterge cu ✕ ce e greșit:</div>`+pend.map((x,i)=>`<div class="c" style="display:flex;gap:8px;align-items:center;padding:8px"><div style="flex:1;font-size:14px"><b>${DN[x.day]} ${esc(x.start)}–${esc(x.end)}</b> · ${esc(x.subject)} <span class="tag">${esc(x.type)}</span>${x.lang?`<span class="tag">${LN[x.lang]}</span>`:''}<div class="mu">${esc(x.room)||'—'} · ${esc(x.prof)||'—'} · ${x.weeks==='b'?'ambele':x.weeks==='i'?'impară':'pară'}</div></div><button data-pr="${i}" style="flex:0 0 auto;padding:6px 10px">✕</button></div>`).join('')+`<div class="r"><button id="ips" class="on">Salvează ${pend.length} ore</button><button id="ipc">Anulează</button></div>`:'')}
-function runImp(text){stage(parseCsv(text))}
+function runImp(text){stage(smart(parseCsv(text)))}
 async function pdfRows(f){const V='4.4.168',P=await import('https://cdn.jsdelivr.net/npm/pdfjs-dist@'+V+'/build/pdf.min.mjs');P.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@'+V+'/build/pdf.worker.min.mjs';
  const pdf=await P.getDocument({data:await f.arrayBuffer()}).promise,L=[];
  for(let p=1;p<=pdf.numPages;p++){const tc=await(await pdf.getPage(p)).getTextContent(),rw={};tc.items.forEach(it=>{const y=Math.round(it.transform[5]/4);(rw[y]=rw[y]||[]).push([it.transform[4],it.str])});Object.keys(rw).map(Number).sort((a,b)=>b-a).forEach(y=>L.push(rw[y].sort((a,b)=>a[0]-b[0]).map(x=>x[1]).join(' ').replace(/\s+/g,' ').trim()))}
  return pdfLines(L)}
 async function impFile(f){if(!isAdm)return;const n=f.name.toLowerCase();ims('Se citește '+f.name+'…');
- try{let rows;if(n.endsWith('.pdf'))rows=await pdfRows(f);else if(/\.xlsx?$/.test(n)){const X=await import('https://cdn.sheetjs.com/xlsx-0.20.3/package/xlsx.mjs'),wb=X.read(await f.arrayBuffer()),ws=wb.Sheets[wb.SheetNames[0]];rows=mapRows(X.utils.sheet_to_json(ws,{header:1,raw:false,defval:''}).map(r=>r.map(c=>String(c).trim())))}else rows=mapRows(parseCsv(await f.text()));
+ try{let rows;if(n.endsWith('.pdf'))rows=await pdfRows(f);else if(/\.xlsx?$/.test(n)){const X=await import('https://cdn.sheetjs.com/xlsx-0.20.3/package/xlsx.mjs'),wb=X.read(await f.arrayBuffer()),ws=wb.Sheets[wb.SheetNames[0]];rows=smart(X.utils.sheet_to_json(ws,{header:1,raw:false,defval:''}).map(r=>r.map(c=>String(c).trim())))}else rows=smart(parseCsv(await f.text()));
   if(!rows.length)return ims('Nu am găsit ore în '+f.name+'.'+(n.endsWith('.pdf')?' Citirea automată merge doar la PDF-uri cu tabel simplu. Pentru orare cu mai multe grupe pe coloane, folosește Excel sau trimite-mi PDF-ul în chat.':''));
   ims('');stage(rows)}catch(e){ims('Nu am putut citi fișierul ('+(e.message||'eroare')+'). Încearcă Excel/CSV sau lipește orele.')}}
 document.addEventListener('click',async e=>{if(!isAdm)return;const r=e.target.closest('[data-pr]'),o=e.target.closest('[data-og]');
