@@ -103,7 +103,7 @@ function who(key){const ids=Object.keys(all).filter(u=>all[u][key]===1&&sameG(u)
 function setAtt(key,v){mine={...mine};if(mine[key]===v)delete mine[key];else mine[key]=v;try{localStorage.setItem('mine',JSON.stringify(mine))}catch(e){}
   if(uid){dirty++;setDoc(doc(fs,'attendance',uid),{m:{...mine},n:myName,g:myGroup}).catch(()=>{}).finally(()=>{dirty--})}all[uid||'_']={...mine};render()}
 function btns(o){const v=mine[o.key];return`<div class="r"><button class="ok ${v===1?'on':''}" data-k="${o.key}" data-v="1">✔ Am fost</button><button class="no ${v===0?'on':''}" data-k="${o.key}" data-v="0">✖ Lipsă</button></div>`}
-function render(){
+function render(){migrateMarks();
   const pn=par(mon(0)),pt=x=>x==='i'?'IMPARĂ':'PARĂ',sun=addD(mon(0),6),f=d=>d.getDate()+'.'+String(d.getMonth()+1).padStart(2,'0');
   $('par').innerHTML=`<div class="mu">SĂPTĂMÂNA CURENTĂ (${f(mon(0))} – ${f(sun)})</div><div class="b" style="font-size:22px">${pt(pn)}</div><div class="mu">Săptămâna viitoare: ${pt(par(mon(1)))}</div>`;
   const n=new Date(),cur=occ(0),nowO=cur.find(o=>start(o)<=n&&n<end(o));
@@ -126,6 +126,11 @@ const CFG={apiKey:"AIzaSyDLnd7BAqNvM6ZsgmvpMg3ZBsZmtVEYTn4",authDomain:"orar-upb
 let sched=null,allSched=[],unS=()=>{},curSG=null,isAdm=false,myGroup='',tkMine=[],tkAll=[],showHist=false;const grp={},ng=g=>String(g||'').toUpperCase().replace(/[^A-Z0-9 ._-]/g,'').trim().slice(0,12),sameG=u=>!myGroup||grp[u]===myGroup;
 const UNI='upb',tup=e=>[e.day,e.start,e.end,e.subject,e.type,e.room||'',e.prof||'',e.weeks||'b'];
 const TT=()=>sched&&sched.length?sched.map(e=>({id:e.id,c:tup(e)})):sched?[]:T.map((c,i)=>({id:String(i),c}));
+function migrateMarks(){if(!uid||!sched||!sched.length)return;const ks=Object.keys(mine).filter(k=>/^\d{4}-\d{2}-\d{2}\|\d+$/.test(k));if(!ks.length)return;
+ const nm=x=>[+x[0],p2(String(x[1])),p2(String(x[2])),String(x[3]).toLowerCase().trim(),x[4],x[7]||'b'].join('|'),map={};sched.forEach(e=>{map[nm(tup(e))]=e.id});
+ const nmine={...mine};let ch=0;ks.forEach(k=>{const[d,i]=k.split('|'),c=T[+i];if(!c)return;const id=map[nm(c)];if(!id)return;const nk=d+'|'+id;if(nmine[nk]===undefined)nmine[nk]=mine[k];delete nmine[k];ch++});
+ if(!ch)return;mine=nmine;try{localStorage.setItem('mine',JSON.stringify(mine))}catch(e){}
+ dirty++;setDoc(doc(fs,'attendance',uid),{m:{...mine},n:myName,g:myGroup}).catch(()=>{}).finally(()=>{dirty--});all[uid]={...mine}}
 function chkSched(){if(curSG===myGroup)return;curSG=myGroup;unS();unS=()=>{};sched=null;if(!myGroup){render();return}unS=onSnapshot(query(collection(fs,'scheduleEntries'),where('groupId','==',myGroup)),s=>{sched=s.docs.map(d=>({id:d.id,...d.data()}));render()},()=>{sched=null;render()})}
 function renEd(){if(!isAdm)return;renLists();const g=ng($('eg').value);const l=allSched.filter(e=>e.groupId===g).sort((a,b)=>a.day-b.day||mn(a.start)-mn(b.start));
  $('el').innerHTML=g?(l.map(e=>`<div class="c"><div class="b">${esc(e.subject)}<span class="tag">${esc(e.type)}</span><span class="tag">${e.weeks==='b'?'ambele':e.weeks==='i'?'impară':'pară'}</span></div><div class="mu">${DN[e.day]} ${esc(e.start)}–${esc(e.end)} · ${esc(e.room)||'—'} · ${esc(e.prof)||'—'}</div><div class="r"><button data-ee="${e.id}">✏️ Modifică</button><button data-ed="${e.id}">🗑 Șterge</button></div></div>`).join('')||'<div class="mu">Nicio oră în această grupă. Importă un fișier sau adaugă manual.</div>'):'<div class="mu">Scrie grupa mai sus.</div>'}
