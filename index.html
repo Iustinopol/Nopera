@@ -222,7 +222,7 @@ $('pw').onclick=()=>{off--;render()};$('nw').onclick=()=>{off++;render()};
 $('sw').onclick=()=>{swap=1-swap;try{localStorage.setItem('swap',swap)}catch(e){}render()};
 const CFG={apiKey:"AIzaSyDLnd7BAqNvM6ZsgmvpMg3ZBsZmtVEYTn4",authDomain:"orar-upb.firebaseapp.com",projectId:"orar-upb",storageBucket:"orar-upb.firebasestorage.app",messagingSenderId:"970129347906",appId:"1:970129347906:web:71da2aee9c7424dc08a4db"};
 let sched=null,allSched=[],unS=()=>{},curSG=null,isAdm=false,myGroup='',tkMine=[],tkAll=[],showHist=false;const grp={},ng=g=>String(g||'').toUpperCase().replace(/[^A-Z0-9 ._-]/g,'').trim().slice(0,12),sameG=u=>!myGroup||grp[u]===myGroup;
-const REQUIRE_VERIFY=false; /* true = cont confirmat prin email obligatoriu */
+const REQUIRE_VERIFY=true; /* true = cont confirmat prin email obligatoriu */
 const UNI='upb',LN={en:'Engleză',es:'Spaniolă',fr:'Franceză',de:'Germană'},LGM={'':'',engleza:'en',en:'en',spaniola:'es',es:'es',franceza:'fr',fr:'fr',germana:'de',de:'de'},myLang=()=>(profs[uid]&&profs[uid].lang)||'',tup=e=>[e.day,e.start,e.end,e.subject+(e.lang&&LN[e.lang]?' – '+LN[e.lang]:''),e.type,e.room||'',e.prof||'',e.weeks||'b'];
 const TT=()=>sched&&sched.length?sched.filter(e=>!e.lang||e.lang===myLang()).map(e=>({id:e.id,c:tup(e)})):sched?[]:T.map((c,i)=>({id:String(i),c}));
 function migrateMarks(){if(!uid||!sched||!sched.length)return;const ks=Object.keys(mine).filter(k=>/^\d{4}-\d{2}-\d{2}\|\d+$/.test(k));if(!ks.length)return;
@@ -512,7 +512,7 @@ function renMem(){const el=$('gmem');if(!el)return;el.classList.toggle('hide',!g
 $('gmb').onclick=()=>{gMemOn=!gMemOn;renMem()};
 
 const vfm=(t,ok)=>{$('vfm').style.color=ok?'var(--ok)':'var(--mu)';$('vfm').textContent=t};
-function showVerify(u,sent){$('ov').classList.add('hide');if(!sent&&!$('vf').classList.contains('hide'))return;$('vft').innerHTML=sent?'Ți-am trimis un email la <b>'+esc(u.email)+'</b>. Deschide-l și apasă linkul de confirmare. Caută mesaje de la <b>noreply@'+esc(CFG.authDomain)+'</b> și verifică și în <b>Spam</b> (Yahoo și Gmail îl pun uneori acolo sau îl întârzie câteva minute). Fără confirmare nu poți folosi aplicația.':'Adresa <b>'+esc(u.email)+'</b> nu e confirmată încă. Apasă „Trimite emailul de confirmare", deschide linkul din email, apoi revino aici.';
+function showVerify(u,sent){$('ov').classList.add('hide');if(!sent&&!$('vf').classList.contains('hide'))return;$('vft').innerHTML=sent?'Ți-am trimis un email la <b>'+esc(u.email)+'</b>. Deschide-l și apasă linkul de confirmare. Caută mesaje de la <b>noreply@'+esc(CFG.authDomain)+'</b> și <b>uită-te mai întâi în Spam</b>: Gmail și Yahoo îl pun adesea acolo sau îl întârzie câteva minute. Dacă e în Spam, apasă „Nu e spam” și deschide linkul. Fără confirmare nu poți folosi aplicația.':'Adresa <b>'+esc(u.email)+'</b> nu e confirmată încă. Apasă „Trimite emailul de confirmare", deschide linkul din email, apoi revino aici.';
  $('vf').classList.remove('hide');vfm(sent?'✓ Email trimis. Poate dura 1–2 minute.':(vfErr?'Nu s-a putut trimite emailul ('+vfErr+'). Apasă „Trimite emailul de confirmare”.':''),sent);vfErr='';clearInterval(vfTm);vfTm=setInterval(vfCheck,4000)}
 function hideVerify(){$('vf').classList.add('hide');clearInterval(vfTm);vfTm=null}
 async function vfCheck(){const u=auth.currentUser;if(!u)return;try{await u.reload()}catch(e){return}if(u.emailVerified){try{await u.getIdToken(true)}catch(e){}hideVerify();onAuth(u)}}
