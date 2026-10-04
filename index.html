@@ -12,9 +12,9 @@ main{max-width:600px;margin:0 auto;padding:14px 14px 70px}
 h1{font-size:21px;margin:2px 0 10px}h2{font-size:14px;color:var(--mu);margin:18px 0 8px}
 .c{background:var(--cd);border:1px solid var(--bd);border-radius:14px;padding:12px;margin-bottom:9px}
 .now{border-left:5px solid var(--ac)}.b{font-weight:700}.mu{color:var(--mu);font-size:13.5px}
-.tabs{display:flex;gap:5px;margin-bottom:10px}
+.tabs{display:flex;gap:5px;margin-bottom:10px;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
 button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:9px 8px;cursor:pointer}
-.tabs button{flex:1;font-size:12.5px;padding:9px 3px}button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.tabs button{flex:1 0 auto;font-size:12.5px;padding:9px 10px}button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
 .r{display:flex;gap:6px;margin-top:8px}.r button{flex:1}
 .ok.on{background:var(--ok);border-color:var(--ok)}.no.on{background:var(--no);border-color:var(--no)}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--ok);margin-right:7px}
@@ -50,12 +50,19 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 @keyframes pulse{0%{box-shadow:0 0 0 0 #16a34a88}70%{box-shadow:0 0 0 8px #16a34a00}100%{box-shadow:0 0 0 0 #16a34a00}}
 @media (prefers-reduced-motion:reduce){.col.on .st{animation:none}}
 [data-theme="halloween"] .col.on .av{box-shadow:0 0 0 2px #ff7518,0 0 14px #ff751866}
+
+.bub{max-width:80%;border:1px solid var(--bd);background:var(--cd);color:var(--tx);border-radius:14px;padding:8px 12px;white-space:pre-wrap;word-break:break-word;align-self:flex-start}
+.bub.me{background:var(--ac);color:#fff;border-color:var(--ac);align-self:flex-end}
+.bub small{display:block;font-size:11px;opacity:.7;margin-top:2px}
+.nb{background:var(--ac);color:#fff;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:700}
+[data-theme="halloween"] .bub.me,[data-theme="halloween"] .nb{color:#1b0f2a}
+.av img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
 </style></head><body><div id="ov" style="position:fixed;inset:0;z-index:9;background:var(--bg);align-items:center;justify-content:center;padding:20px;overflow:auto"><div class="c" style="width:100%;max-width:380px"><div class="b" style="font-size:20px">📚 Nopora</div><div class="mu" style="margin:6px 0 10px">Intră sau creează cont (email + parolă).</div><input id="an" maxlength="24" placeholder="Numele tău (doar la cont nou)" class="fi"><input id="au" type="email" placeholder="Email" autocapitalize="none" autocomplete="email" class="fi"><input id="ap" type="password" placeholder="Parolă (minim 6 caractere)" autocomplete="current-password" class="fi"><div id="er" class="mu" style="color:var(--no);min-height:18px"></div><div class="mu" style="margin:-4px 0 10px"><a href="#" id="fg">Ai uitat parola?</a></div><label class="mu" style="display:flex;gap:8px;align-items:center;margin:0 0 10px"><input type="checkbox" id="rm" checked style="width:auto;margin:0"> Ține-mă minte pe acest dispozitiv</label><div class="r"><button id="lg" class="on">Intră</button><button id="rg">Cont nou</button></div></div></div><div id="hw" aria-hidden="true"><span class="b1">🦇</span><span class="b2">🦇</span><span class="b3">🦇</span><span class="g">👻</span><span class="w">🕸️</span></div>
 <main>
 <h1>📚 Nopora</h1>
 <div class="mu" id="me">Se conectează…</div>
 <div class="c" id="par" style="margin-top:8px;border-left:5px solid var(--ac)"></div>
-<div class="tabs" style="margin-top:8px"><button data-t="a" class="on">Acum</button><button data-t="s">Săptămâna</button><button data-t="r">Recuperări</button><button data-t="o">Colegi</button><button data-t="p">Profil</button><button data-t="m" id="tm" class="hide">Admin</button></div>
+<div class="tabs" style="margin-top:8px"><button data-t="a" class="on">Acum</button><button data-t="s">Săptămâna</button><button data-t="r">Recuperări</button><button data-t="o">Colegi</button><button data-t="g" id="tg">Mesaje</button><button data-t="p">Profil</button><button data-t="m" id="tm" class="hide">Admin</button></div>
 
 <section id="a"><div class="c now" id="now"></div><h2>AZI</h2><div id="today"></div></section>
 <section id="s" class="hide"><div class="r" style="margin:0 0 8px"><button id="pw">◀ Săpt. trecută</button><button id="nw">Următoarea ▶</button></div><div class="mu" id="wl"></div><div id="wk"></div>
@@ -67,6 +74,7 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 <div id="peers"></div></section>
 <section id="p" class="hide"><div class="c"><div class="b">👤 Profilul meu</div><div class="mu" id="pe" style="margin:4px 0 10px"></div>
 <div class="mu" id="pa" style="margin:0 0 10px"></div>
+<div style="display:flex;gap:14px;align-items:center;margin:4px 0 12px"><div id="pav" class="av" style="width:72px;height:72px;font-size:24px;filter:none"></div><div><button id="pfb">📷 Schimbă poza</button> <button id="pfd" class="hide">Șterge</button></div><input type="file" id="pfi" accept="image/*" class="hide"></div>
 <label class="mu">Numele tău</label><input id="pn" maxlength="24" class="fi">
 <label class="mu">Grupa ta</label><input id="pg" maxlength="12" list="gl" placeholder="ex: 1234 (alege sau scrie)" class="fi"><datalist id="gl"></datalist>
 <div class="mu" id="pm" style="min-height:18px;color:var(--ok)"></div>
@@ -106,12 +114,18 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 <div id="sp" class="hide" style="position:fixed;inset:0;z-index:8;background:var(--bg);overflow:auto;padding:calc(14px + env(safe-area-inset-top,0px)) 14px 30px"><div style="max-width:600px;margin:0 auto"><div class="r" style="margin:0 0 10px;align-items:center"><div class="b" style="font-size:18px">💬 Suport</div><button id="sx" style="flex:0 0 auto">Închide</button></div>
 <div class="c"><textarea id="stx" maxlength="1000" rows="4" placeholder="Descrie problema…" class="fi" style="margin:0;resize:vertical"></textarea><div class="mu" id="sm" style="min-height:18px;margin:6px 0"></div><button id="sb" class="on" style="width:100%">Trimite</button></div>
 <h2>MESAJELE MELE</h2><div id="sl"></div></div></div>
+<section id="g" class="hide">
+<div id="ml2"><div id="cl"></div></div>
+<div id="mt" class="hide"><div class="r" style="align-items:center;margin:0 0 8px"><button id="mb" style="flex:0 0 auto">←</button><div id="mh" style="flex:1"></div></div>
+<div id="mm" style="display:flex;flex-direction:column;gap:6px;max-height:55vh;overflow:auto;padding:4px 0"></div>
+<div class="r" style="margin-top:8px"><input id="mi" class="fi" placeholder="Scrie un mesaj…" maxlength="1000" style="margin:0"><button id="ms" class="on" style="flex:0 0 auto">Trimite</button></div></div>
+</section>
 <p class="mu" id="note"></p>
 </main>
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,updateProfile,sendPasswordResetEmail,setPersistence,browserLocalPersistence,browserSessionPersistence}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import{getFirestore,doc,setDoc,getDoc,deleteDoc,addDoc,updateDoc,writeBatch,query,where,collection,onSnapshot}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import{getFirestore,doc,setDoc,getDoc,deleteDoc,addDoc,updateDoc,writeBatch,query,where,orderBy,limit,collection,onSnapshot}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 const P='Programarea calculatoarelor și limbaje de programare',S='Știința și ingineria materialelor',PM='Protecția mediului',AL='Algebră liniară, geometrie analitică și diferențială',CH='Chimie',PS='Psihologia educației',CO='Comunicare',LM='Limbi moderne',
 NE='Ș.L. Neacșulescu Alina',VM='Vasilescu Marius',MA='Matei Ecaterina',SE='Semenescu Augustin',HS='Hainagiu Simona',CD='Cotoară D.';
 // zi,start,end,materie,tip,sala,prof,săptămâna (b=ambele,i=impară,p=pară)
@@ -159,7 +173,7 @@ function render(){migrateMarks();peers();
   $('rec').innerHTML=past.length?past.map(o=>{const alt=fut.find(f=>f.c[3]===o.c[3]&&f.c[4]===o.c[4]&&f.key.split('|')[1]!==o.key.split('|')[1]);
     return`<div class="c warn">${lab(o)}<div style="margin-top:6px">${alt?`🔁 Poți recupera la: <b>${DN[alt.c[0]]} ${alt.date.getDate()}.${alt.date.getMonth()+1}, ${alt.c[1]}–${alt.c[2]}</b> în ${alt.c[5]}`:`⚠️ Nu există altă oră a acestei discipline în orar. Cere recuperare de la ${esc(o.c[6])||'profesor'}.`}</div></div>`}).join(''):'<div class="c">Nu ai ore marcate ca „Lipsă”. Marchează cu ✖ orele la care nu ai fost și vezi aici cum le recuperezi.</div>';
 }
-document.addEventListener('click',e=>{if(e.target.id==='chg'){e.preventDefault();signOut(auth);return}const b=e.target.closest('[data-k]');if(b)return setAtt(b.dataset.k,+b.dataset.v);const t=e.target.closest('[data-t]');if(t){document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===t));['a','s','r','o','p','m'].forEach(i=>$(i).classList.toggle('hide',i!==t.dataset.t))}});
+document.addEventListener('click',e=>{if(e.target.id==='chg'){e.preventDefault();signOut(auth);return}const b=e.target.closest('[data-k]');if(b)return setAtt(b.dataset.k,+b.dataset.v);const t=e.target.closest('[data-t]');if(t){document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===t));['a','s','r','o','g','p','m'].forEach(i=>$(i).classList.toggle('hide',i!==t.dataset.t))}});
 $('pw').onclick=()=>{off--;render()};$('nw').onclick=()=>{off++;render()};
 $('sw').onclick=()=>{swap=1-swap;try{localStorage.setItem('swap',swap)}catch(e){}render()};
 const CFG={apiKey:"AIzaSyDLnd7BAqNvM6ZsgmvpMg3ZBsZmtVEYTn4",authDomain:"orar-upb.firebaseapp.com",projectId:"orar-upb",storageBucket:"orar-upb.firebasestorage.app",messagingSenderId:"970129347906",appId:"1:970129347906:web:71da2aee9c7424dc08a4db"};
@@ -186,7 +200,7 @@ function renSup(){
   const nav=`<div class="r" style="margin:0 0 10px"><button data-sda ${sol?'':'disabled'}>🗑 Șterge rezolvate (${sol})</button><button data-sh>${showHist?'← Înapoi':'📜 Istoric ('+arch.length+')'}</button></div>`;
   const srt=a=>[...a].sort((a,b)=>(a.status==='solved')-(b.status==='solved')||b.t-a.t).slice(0,40);
   $('st').innerHTML=showHist?`<h2>ISTORIC · ${arch.length} șterse</h2>${nav}`+(srt(arch).map(x=>card(x,1)).join('')||'<div class="mu">Istoricul e gol.</div>'):`<h2>SUPORT · ${o} deschise</h2>${nav}`+(srt(act).map(x=>card(x,0)).join('')||'<div class="mu">Niciun mesaj.</div>')}}
-function fillProf(){const a=document.activeElement;if(a&&(a.id==='pn'||a.id==='pg'))return;$('pn').value=myName;$('pg').value=myGroup;$('pe').textContent=((auth.currentUser&&auth.currentUser.email)||'')+' · UID: '+(uid||'');$('gl').innerHTML=[...new Set(Object.values(grp).filter(Boolean))].map(g=>`<option value="${esc(g)}">`).join('')}
+function fillProf(){const a=document.activeElement;if(a&&(a.id==='pn'||a.id==='pg'))return;$('pn').value=myName;$('pg').value=myGroup;$('pe').textContent=((auth.currentUser&&auth.currentUser.email)||'')+'';$('pav').innerHTML=avIn(uid,myName);$('pav').style.background='hsl('+hue(myName)+',55%,42%)';$('pfd').classList.toggle('hide',!(profs[uid]&&profs[uid].pic));$('gl').innerHTML=[...new Set(Object.values(grp).filter(Boolean))].map(g=>`<option value="${esc(g)}">`).join('')}
 const fb=initializeApp(CFG),auth=getAuth(fb),fs=getFirestore(fb),pr={};let un=[],hb=null;
 const em=u=>u.trim().toLowerCase(),er=(t,ok)=>{$('er').style.color=ok?'var(--ok)':'var(--no)';$('er').textContent=t};
 const msg=c=>({'auth/invalid-credential':'Utilizator sau parolă greșită.','auth/email-already-in-use':'Există deja un cont cu acest email.','auth/weak-password':'Parola trebuie să aibă minim 6 caractere.','auth/invalid-email':'Email invalid.','auth/too-many-requests':'Prea multe încercări, așteaptă puțin.','auth/operation-not-allowed':'Activează Email/Password în Firebase.','auth/api-key-not-valid.-please-pass-a-valid-api-key.':'Cheia API e greșită.'}[c]||'Eroare: '+c);
@@ -291,15 +305,39 @@ function peers(){const el=$('peers');if(!el)return;const t=Date.now();
  $('cs1').innerHTML=`<div class="b" style="font-size:18px">${rows.length} ${rows.length===1?'coleg':'colegi'} · <span style="color:var(--ok)">${nOn} online</span></div><div class="mu">${myGroup?'Grupa '+esc(myGroup):'Setează grupa în Profil ca să-i vezi doar pe colegii tăi.'}</div>`;
  document.querySelectorAll('[data-cf]').forEach(b=>b.classList.toggle('on',b.dataset.cf===colF));
  el.innerHTML=l.map(r=>{const st=r.on?(r.p.now&&r.p.now!=='Liber'?'📚 La oră: '+esc(String(r.p.now).slice(0,50)):'Online · liber acum'):'Offline · văzut '+ago(r.p&&r.p.t);
-  return`<div class="c col ${r.on?'on':''}"><div class="av" style="background:hsl(${hue(r.n)},55%,42%)">${esc(ini(r.n))}<span class="st"></span></div><div style="flex:1;min-width:0"><div class="b">${esc(r.n)}${r.u===uid?' <span class="tag">tu</span>':''}</div><div class="mu">${st}</div></div></div>`}).join('')||'<div class="mu">'+(colF==='on'?'Niciun coleg online acum.':'Niciun coleg găsit.')+'</div>'}
+  return`<div class="c col ${r.on?'on':''}"><div class="av" style="background:hsl(${hue(r.n)},55%,42%)">${avIn(r.u,r.n)}<span class="st"></span></div><div style="flex:1;min-width:0"><div class="b">${esc(r.n)}${r.u===uid?' <span class="tag">tu</span>':''}</div><div class="mu">${st}</div></div>${r.u!==uid?`<button data-dm="${r.u}" title="Scrie un mesaj" style="flex:0 0 auto;padding:8px 11px">💬</button>`:''}</div>`}).join('')||'<div class="mu">'+(colF==='on'?'Niciun coleg online acum.':'Niciun coleg găsit.')+'</div>'}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-cf]');if(b){colF=b.dataset.cf;peers()}});
 $('cq').oninput=e=>{colQ=e.target.value;peers()};
+
+let profs={},chats=[],dm=null,dmUn=null,dmErr=false,msgs=[];
+const avIn=(u,n)=>{const p=profs[u]&&profs[u].pic;return p&&String(p).startsWith('data:image/')?`<img alt="" src="${p}">`:esc(ini(n))},
+ avBox=(u,n,z)=>`<div class="av" style="width:${z}px;height:${z}px;font-size:${Math.round(z*.34)}px;background:hsl(${hue(n)},55%,42%);filter:none">${avIn(u,n)}</div>`,
+ cid=o=>[uid,o].sort().join('_'),unread=c=>!!c.lastFrom&&c.lastFrom!==uid&&((c.seen&&c.seen[uid])||0)<(c.lastT||0),nm=u=>names[u]||(profs[u]&&profs[u].name)||'Coleg';
+function renChats(){const n=chats.filter(unread).length;$('tg').textContent='Mesaje'+(n?' ('+n+')':'');if(dm){renThread();return}
+ const l=[...chats].sort((a,b)=>(b.lastT||0)-(a.lastT||0));
+ $('cl').innerHTML=l.map(c=>{const o=(c.members||[]).find(x=>x!==uid)||'',u=unread(c);return`<div class="c" data-oc="${esc(o)}" style="display:flex;gap:12px;align-items:center;cursor:pointer">${avBox(o,nm(o),44)}<div style="flex:1;min-width:0"><div class="b">${esc(nm(o))}</div><div class="mu" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;${u?'font-weight:700;color:var(--tx)':''}">${c.lastFrom===uid?'Tu: ':''}${esc(c.last||'')}</div></div>${u?'<span class="nb">nou</span>':`<div class="mu">${fmtT(c.lastT)}</div>`}</div>`}).join('')||'<div class="c mu">Niciun mesaj încă. Apasă 💬 lângă un coleg din tabul „Colegi" ca să începi o conversație.</div>'}
+function renThread(){const o=dm;$('mh').innerHTML=`<div style="display:flex;gap:10px;align-items:center">${avBox(o,nm(o),36)}<b>${esc(nm(o))}</b></div>`;
+ $('mm').innerHTML=msgs.map(m=>`<div class="bub ${m.from===uid?'me':''}">${esc(m.text)}<small>${fmtT(m.t)}</small></div>`).join('')||'<div class="mu">Niciun mesaj încă. Scrie primul!</div>';
+ const el=$('mm');el.scrollTop=el.scrollHeight;const c=chats.find(x=>x.id===cid(o));if(c&&unread(c))setDoc(doc(fs,'chats',c.id),{seen:{[uid]:Date.now()}},{merge:true}).catch(()=>{})}
+function openDm(o){if(!uid||!o||o===uid)return;if(dmUn){dmUn();dmUn=null}dm=o;msgs=[];dmErr=false;$('ml2').classList.add('hide');$('mt').classList.remove('hide');renThread();
+ dmUn=onSnapshot(query(collection(fs,'chats',cid(o),'messages'),orderBy('t','desc'),limit(100)),s=>{dmErr=false;msgs=s.docs.map(d=>({id:d.id,...d.data()})).reverse();renThread()},()=>{dmErr=true;msgs=[];renThread()})}
+$('mb').onclick=()=>{dm=null;if(dmUn){dmUn();dmUn=null}$('mt').classList.add('hide');$('ml2').classList.remove('hide');renChats()};
+$('ms').onclick=async()=>{const t=$('mi').value.trim().slice(0,1000);if(!t||!dm||!uid)return;$('ms').disabled=true;const id=cid(dm),now=Date.now();
+ try{await setDoc(doc(fs,'chats',id),{members:[uid,dm].sort(),last:t.slice(0,80),lastT:now,lastFrom:uid,seen:{[uid]:now}},{merge:true});await addDoc(collection(fs,'chats',id,'messages'),{from:uid,text:t,t:now});$('mi').value='';if(dmErr)openDm(dm)}
+ catch(e){alert('Nu s-a trimis ('+(e.code||'eroare')+'). Verifică regulile din Firestore.')}$('ms').disabled=false};
+$('mi').onkeydown=e=>{if(e.key==='Enter')$('ms').click()};
+document.addEventListener('click',e=>{const d=e.target.closest('[data-dm]'),c=e.target.closest('[data-oc]');if(d){openDm(d.dataset.dm);$('tg').click()}else if(c)openDm(c.dataset.oc)});
+$('pfb').onclick=()=>$('pfi').click();
+$('pfi').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f||!uid)return;try{const bm=await createImageBitmap(f),c=document.createElement('canvas');c.width=c.height=128;const z=Math.min(bm.width,bm.height);c.getContext('2d').drawImage(bm,(bm.width-z)/2,(bm.height-z)/2,z,z,0,0,128,128);await setDoc(doc(fs,'profiles',uid),{pic:c.toDataURL('image/jpeg',.72),name:myName,t:Date.now()});$('pm').textContent='✓ Poza a fost salvată'}catch(err){$('pm').textContent='Nu am putut salva poza ('+(err.code||err.message||'eroare')+')'}};
+$('pfd').onclick=async()=>{if(!uid||!confirm('Ștergi poza de profil?'))return;try{await deleteDoc(doc(fs,'profiles',uid));$('pm').textContent='✓ Poza a fost ștearsă'}catch(e){$('pm').textContent='Nu s-a șters ('+(e.code||'eroare')+')'}};
 function pres(){if(!uid||document.hidden)return;const n=new Date(),o=occ(0).find(o=>start(o)<=n&&n<end(o));setDoc(doc(fs,'presence',uid),{name:myName,g:myGroup,now:o?o.c[3]:'Liber',t:Date.now()}).catch(()=>{})}
 onAuthStateChanged(auth,u=>{un.forEach(f=>f());un=[];clearInterval(hb);
-  if(!u){unS();unS=()=>{};curSG=null;sched=null;allSched=[];tkMine=[];tkAll=[];isAdm=false;$('tm').classList.add('hide');uid=null;myName='';all={};mine={};$('ov').classList.remove('hide');$('me').textContent='';render();return}
-  uid=u.uid;myName=u.displayName||'';names[uid]=myName;$('pa').textContent='Admin: verific…';getDoc(doc(fs,'admins',uid)).then(d=>{isAdm=d.exists();$('tm').classList.toggle('hide',!isAdm);$('pa').textContent=isAdm?'Admin: da ✓':'Admin: nu — nu există documentul admins/'+uid;if(isAdm)un.push(onSnapshot(collection(fs,'scheduleEntries'),s=>{allSched=s.docs.map(d=>({id:d.id,...d.data()}));renGroups()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'groups'),s=>{grpDocs=s.docs.map(d=>d.data().groupId).filter(Boolean);renGroups()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'support'),s=>{tkAll=s.docs.map(d=>({id:d.id,...d.data()}));renSup()},()=>{}));renAdm()}).catch(e=>{isAdm=false;$('pa').textContent='Admin: eroare ('+(e.code||e.message)+'). Verifică regulile din Firestore.'});$('ov').classList.add('hide');showMe();
+  if(!u){if(dmUn){dmUn();dmUn=null}dm=null;msgs=[];chats=[];profs={};unS();unS=()=>{};curSG=null;sched=null;allSched=[];tkMine=[];tkAll=[];isAdm=false;$('tm').classList.add('hide');uid=null;myName='';all={};mine={};$('ov').classList.remove('hide');$('me').textContent='';render();return}
+  uid=u.uid;myName=u.displayName||'';names[uid]=myName;$('pa').textContent='';getDoc(doc(fs,'admins',uid)).then(d=>{isAdm=d.exists();$('tm').classList.toggle('hide',!isAdm);$('pa').textContent=isAdm?'🛡️ Cont de administrator':'';if(isAdm)un.push(onSnapshot(collection(fs,'scheduleEntries'),s=>{allSched=s.docs.map(d=>({id:d.id,...d.data()}));renGroups()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'groups'),s=>{grpDocs=s.docs.map(d=>d.data().groupId).filter(Boolean);renGroups()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'support'),s=>{tkAll=s.docs.map(d=>({id:d.id,...d.data()}));renSup()},()=>{}));renAdm()}).catch(e=>{isAdm=false;$('pa').textContent=''});$('ov').classList.add('hide');showMe();
   un.push(onSnapshot(collection(fs,'attendance'),s=>{all={};s.docs.forEach(d=>{const x=d.data();all[d.id]=x.m||{};grp[d.id]=ng(x.g);if(x.n)names[d.id]=x.n});if(uid&&grp[uid]!==undefined)myGroup=grp[uid];chkSched();fillProf();renAdm();if(!dirty)mine={...(all[uid]||{})};else all[uid]={...mine};if(myName)names[uid]=myName;render()},()=>{}));
   un.push(onSnapshot(query(collection(fs,'support'),where('uid','==',uid)),s=>{tkMine=s.docs.map(d=>({id:d.id,...d.data()}));renSup()},()=>{}));
+  un.push(onSnapshot(collection(fs,'profiles'),s=>{profs={};s.docs.forEach(d=>profs[d.id]=d.data());peers();renChats();fillProf()},()=>{}));
+  un.push(onSnapshot(query(collection(fs,'chats'),where('members','array-contains',uid)),s=>{chats=s.docs.map(d=>({id:d.id,...d.data()}));renChats()},()=>{}));
   un.push(onSnapshot(collection(fs,'presence'),s=>{for(const k in pr)delete pr[k];s.docs.forEach(d=>pr[d.id]=d.data());peers()},()=>{}));
   pres();hb=setInterval(pres,90000)});
 render();setInterval(()=>{render();peers()},30000);
