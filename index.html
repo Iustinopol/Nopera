@@ -67,9 +67,9 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 <h1>📚 Nopora</h1>
 <div class="mu" id="me">Se conectează…</div>
 <div class="c" id="par" style="margin-top:8px;border-left:5px solid var(--ac)"></div>
-<div class="tabs" style="margin-top:8px"><button data-t="a" class="on">Acum</button><button data-t="s">Săptămâna</button><button data-t="r">Recuperări</button><button data-t="nbk">Caiete</button><button data-t="o">Colegi</button><button data-t="g" id="tg">Mesaje</button><button data-t="p">Profil</button><button data-t="m" id="tm" class="hide">Admin</button></div>
+<div class="tabs" style="margin-top:8px"><button data-t="a" class="on">Acum</button><button data-t="ann" id="tan">Anunțuri</button><button data-t="s">Săptămâna</button><button data-t="r">Recuperări</button><button data-t="nbk">Caiete</button><button data-t="o">Colegi</button><button data-t="g" id="tg">Mesaje</button><button data-t="p">Profil</button><button data-t="m" id="tm" class="hide">Admin</button></div>
 
-<section id="a"><div id="grb"></div><div id="lgb"></div><div class="c now" id="now"></div><h2>AZI</h2><div id="today"></div></section>
+<section id="a"><div id="anp"></div><div id="grb"></div><div id="lgb"></div><div class="c now" id="now"></div><h2>AZI</h2><div id="today"></div></section>
 <section id="s" class="hide"><div class="r" style="margin:0 0 8px"><button id="pw">◀ Săpt. trecută</button><button id="nw">Următoarea ▶</button></div><div class="mu" id="wl"></div><div id="wk"></div>
 <div class="r"><button id="sw">Inversează săptămâna pară/impară</button></div></section>
 <section id="r" class="hide"><div id="rec"></div></section>
@@ -87,7 +87,14 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 <label class="mu" style="display:flex;gap:8px;align-items:center;margin:8px 0"><input type="checkbox" id="hwt" style="width:auto;margin:0"> 🎃 Temă Halloween</label>
 <div class="r"><button id="psv" class="on">Salvează</button><button id="pout">Ieși din cont</button></div></div>
 <div class="mu">Colegii din aceeași grupă apar la „Colegi” și la „Au fost”. Dacă lași grupa goală, vezi pe toată lumea.</div></section>
-<section id="m" class="hide"><div id="st" style="margin-bottom:10px"></div>
+<section id="m" class="hide"><details class="c" id="anc"><summary class="b">📢 Anunț nou</summary>
+<select id="ant" class="fi" style="margin-top:8px"></select>
+<input id="anh" class="fi" placeholder="Titlu" maxlength="100">
+<textarea id="anb" rows="4" class="fi" placeholder="Textul anunțului…" maxlength="1500" style="resize:vertical"></textarea>
+<label class="mu" style="display:flex;gap:8px;align-items:center;margin:4px 0 10px"><input type="checkbox" id="anf" style="width:auto;margin:0"> 📌 Fixat (rămâne primul)</label>
+<div class="mu" id="ans" style="min-height:18px"></div>
+<button id="anq" class="on" style="width:100%">Publică anunțul</button></details>
+<div id="st" style="margin-bottom:10px"></div>
 <details id="ed" class="c" open><summary class="b">📅 Orare pe grupe</summary>
 <div id="edl">
 <div class="r" style="margin-top:8px"><input id="ngi" class="fi" placeholder="Grupă nouă (ex: 1012B)" maxlength="12" style="margin:0"><button id="nga" class="on" style="flex:0 0 auto">➕ Adaugă grupă</button></div>
@@ -133,6 +140,7 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 <div id="nbtb" style="padding:6px 10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--bd)"></div>
 <div id="nbw" style="flex:1;overflow:auto;-webkit-overflow-scrolling:touch;background:var(--bg)"></div>
 </div>
+<section id="ann" class="hide"><div id="anl"></div></section>
 <p class="mu" id="note"></p>
 </main>
 <script type="module">
@@ -170,7 +178,7 @@ function who(key){const ids=Object.keys(all).filter(u=>all[u][key]===1&&sameG(u)
 function setAtt(key,v){mine={...mine};if(mine[key]===v)delete mine[key];else mine[key]=v;try{localStorage.setItem('mine',JSON.stringify(mine))}catch(e){}
   if(uid){dirty++;setDoc(doc(fs,'attendance',uid),{m:{...mine},n:myName,g:myGroup}).catch(()=>{}).finally(()=>{dirty--})}all[uid||'_']={...mine};render()}
 function btns(o){const v=mine[o.key];return`<div class="r"><button class="ok ${v===1?'on':''}" data-k="${o.key}" data-v="1">✔ Am fost</button><button class="no ${v===0?'on':''}" data-k="${o.key}" data-v="0">✖ Lipsă</button></div>`}
-function render(){migrateMarks();peers();grBanner();lgBanner();nbRender();
+function render(){migrateMarks();renAnn();peers();grBanner();lgBanner();nbRender();
   const pn=par(mon(0)),pt=x=>x==='i'?'IMPARĂ':'PARĂ',sun=addD(mon(0),6),f=d=>d.getDate()+'.'+String(d.getMonth()+1).padStart(2,'0');
   $('par').innerHTML=`<div class="mu">SĂPTĂMÂNA CURENTĂ (${f(mon(0))} – ${f(sun)})</div><div class="b" style="font-size:22px">${pt(pn)}</div><div class="mu">Săptămâna viitoare: ${pt(par(mon(1)))}</div>`;
   const n=new Date(),cur=occ(0),nowO=cur.find(o=>start(o)<=n&&n<end(o));
@@ -186,7 +194,7 @@ function render(){migrateMarks();peers();grBanner();lgBanner();nbRender();
   $('rec').innerHTML=past.length?past.map(o=>{const alt=fut.find(f=>f.c[3]===o.c[3]&&f.c[4]===o.c[4]&&f.key.split('|')[1]!==o.key.split('|')[1]);
     return`<div class="c warn">${lab(o)}<div style="margin-top:6px">${alt?`🔁 Poți recupera la: <b>${DN[alt.c[0]]} ${alt.date.getDate()}.${alt.date.getMonth()+1}, ${alt.c[1]}–${alt.c[2]}</b> în ${alt.c[5]}`:`⚠️ Nu există altă oră a acestei discipline în orar. Cere recuperare de la ${esc(o.c[6])||'profesor'}.`}</div></div>`}).join(''):'<div class="c">Nu ai ore marcate ca „Lipsă”. Marchează cu ✖ orele la care nu ai fost și vezi aici cum le recuperezi.</div>';
 }
-document.addEventListener('click',e=>{if(e.target.id==='chg'){e.preventDefault();signOut(auth);return}const b=e.target.closest('[data-k]');if(b)return setAtt(b.dataset.k,+b.dataset.v);const t=e.target.closest('[data-t]');if(t){document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===t));['a','s','r','nbk','o','g','p','m'].forEach(i=>$(i).classList.toggle('hide',i!==t.dataset.t))}});
+document.addEventListener('click',e=>{if(e.target.id==='chg'){e.preventDefault();signOut(auth);return}const b=e.target.closest('[data-k]');if(b)return setAtt(b.dataset.k,+b.dataset.v);const t=e.target.closest('[data-t]');if(t){document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===t));['a','ann','s','r','nbk','o','g','p','m'].forEach(i=>$(i).classList.toggle('hide',i!==t.dataset.t))}});
 $('pw').onclick=()=>{off--;render()};$('nw').onclick=()=>{off++;render()};
 $('sw').onclick=()=>{swap=1-swap;try{localStorage.setItem('swap',swap)}catch(e){}render()};
 const CFG={apiKey:"AIzaSyDLnd7BAqNvM6ZsgmvpMg3ZBsZmtVEYTn4",authDomain:"orar-upb.firebaseapp.com",projectId:"orar-upb",storageBucket:"orar-upb.firebasestorage.app",messagingSenderId:"970129347906",appId:"1:970129347906:web:71da2aee9c7424dc08a4db"};
@@ -408,14 +416,34 @@ function grBanner(){const el=$('grb');if(!el)return;const show=!!uid&&!isAdm&&at
 function saveGroup(g){g=ng(g);if(!uid||!g)return;myGroup=g;grp[uid]=g;chkSched();dirty++;setDoc(doc(fs,'attendance',uid),{m:{...mine},n:myName,g}).catch(()=>{}).finally(()=>{dirty--});pres();render();peers();fillProf()}
 document.addEventListener('click',e=>{if(e.target.id==='grs')saveGroup($('gri').value)});
 document.addEventListener('keydown',e=>{if(e.target.id==='gri'&&e.key==='Enter')saveGroup(e.target.value)});
+
+let anns=[];
+const annSeen=()=>{try{return +localStorage.getItem('annSeen_'+uid)||0}catch(e){return 0}},
+ annList=()=>anns.filter(a=>isAdm||a.target==='ALL'||a.target===myGroup).sort((a,b)=>(b.pin?1:0)-(a.pin?1:0)||b.t-a.t);
+function renAnn(){if(!$('anl'))return;const l=annList(),seen=annSeen(),open=!$('ann').classList.contains('hide');
+ if(open&&!isAdm&&l.some(a=>a.t>seen)){try{localStorage.setItem('annSeen_'+uid,String(Math.max(...l.map(a=>a.t))))}catch(e){}}
+ const un=(open||isAdm)?[]:l.filter(a=>a.t>seen);$('tan').textContent='Anunțuri'+(un.length?' ('+un.length+')':'');
+ $('anp').innerHTML=un.length?`<div class="c now" data-goan style="cursor:pointer"><div class="b">📢 ${a0(un[0])}${un.length>1?` <span class="tag">+${un.length-1}</span>`:''}</div><div class="mu" style="margin-top:4px">${esc(un[0].text.slice(0,140))}${un[0].text.length>140?'…':''}</div><div class="mu" style="margin-top:4px">Atinge pentru toate anunțurile</div></div>`:'';
+ $('anl').innerHTML=l.map(a=>`<div class="c ${a.pin?'now':''}"><div class="b">${a.pin?'📌 ':''}${a0(a)}<span class="tag">${a.target==='ALL'?'Toate grupele':'Grupa '+esc(a.target)}</span></div><div class="mu">${fmtT(a.t)} · ${esc(a.by||'Admin')}</div><div style="margin-top:6px;white-space:pre-wrap;word-break:break-word">${esc(a.text)}</div>${isAdm?`<div class="r"><button data-anp="${a.id}">${a.pin?'Scoate din fixate':'📌 Fixează'}</button><button data-and="${a.id}">🗑 Șterge</button></div>`:''}</div>`).join('')||'<div class="c mu">Niciun anunț încă.</div>';
+ if(isAdm){const sel=$('ant'),cv=sel.value,gs=[...new Set([...grpDocs,...allSched.map(x=>x.groupId),...Object.values(grp)])].filter(Boolean).sort();sel.innerHTML='<option value="ALL">📣 Toate grupele</option>'+gs.map(g=>`<option value="${esc(g)}">Grupa ${esc(g)}</option>`).join('');sel.value=[...sel.options].some(o=>o.value===cv)?cv:'ALL'}}
+function a0(a){return esc(a.title)}
+document.addEventListener('click',e=>{const g=k=>e.target.closest('['+k+']');let b;
+ if(g('data-goan')){$('tan').click();return}
+ if(e.target.closest('[data-t="ann"]')){setTimeout(renAnn,0);return}
+ if(!isAdm)return;
+ if(b=g('data-anp')){const a=anns.find(x=>x.id===b.dataset.anp);if(a)updateDoc(doc(fs,'announcements',a.id),{pin:!a.pin}).catch(()=>alert('Nu s-a putut ('+'permisiuni'+').'));return}
+ if(b=g('data-and')){const a=anns.find(x=>x.id===b.dataset.and);if(a&&confirm('Ștergi anunțul „'+a.title+'”? Nu se poate anula.'))deleteDoc(doc(fs,'announcements',a.id)).catch(()=>alert('Nu s-a șters.'))}});
+$('anq').onclick=async()=>{if(!isAdm)return;const title=$('anh').value.trim().slice(0,100),text=$('anb').value.trim().slice(0,1500),st=$('ans');if(!title||!text){st.textContent='Scrie titlul și textul.';return}
+ $('anq').disabled=true;try{await addDoc(collection(fs,'announcements'),{title,text,target:$('ant').value||'ALL',pin:$('anf').checked,by:myName||'Admin',t:Date.now()});$('anh').value='';$('anb').value='';$('anf').checked=false;st.textContent='✓ Anunț publicat';}catch(e){st.textContent='Nu s-a publicat ('+(e.code||'eroare')+'). Verifică regulile din Firestore.'}$('anq').disabled=false};
 function pres(){if(!uid||document.hidden)return;const n=new Date(),o=occ(0).find(o=>start(o)<=n&&n<end(o));setDoc(doc(fs,'presence',uid),{name:myName,g:myGroup,now:o?o.c[3]:'Liber',t:Date.now()}).catch(()=>{})}
 let regBusy=false,attLoaded=false,grbOn=false;
 const onAuth=u=>{if(u&&regBusy)return;un.forEach(f=>f());un=[];clearInterval(hb);
-  if(!u){attLoaded=false;grbOn=false;setMode(false);nbNotes=[];nbCur=null;nbSubj=null;nbCv=null;$('nbe').classList.add('hide');if(dmUn){dmUn();dmUn=null}dm=null;msgs=[];chats=[];profs={};profLoaded=false;unS();unS=()=>{};curSG=null;sched=null;allSched=[];tkMine=[];tkAll=[];isAdm=false;$('tm').classList.add('hide');uid=null;myName='';all={};mine={};$('ov').classList.remove('hide');$('me').textContent='';render();return}
+  if(!u){anns=[];attLoaded=false;grbOn=false;setMode(false);nbNotes=[];nbCur=null;nbSubj=null;nbCv=null;$('nbe').classList.add('hide');if(dmUn){dmUn();dmUn=null}dm=null;msgs=[];chats=[];profs={};profLoaded=false;unS();unS=()=>{};curSG=null;sched=null;allSched=[];tkMine=[];tkAll=[];isAdm=false;$('tm').classList.add('hide');uid=null;myName='';all={};mine={};$('ov').classList.remove('hide');$('me').textContent='';render();return}
   uid=u.uid;myName=u.displayName||'';names[uid]=myName;$('pa').textContent='';getDoc(doc(fs,'admins',uid)).then(d=>{isAdm=d.exists();$('tm').classList.toggle('hide',!isAdm);$('pa').textContent=isAdm?'🛡️ Cont de administrator':'';if(isAdm)un.push(onSnapshot(collection(fs,'scheduleEntries'),s=>{allSched=s.docs.map(d=>({id:d.id,...d.data()}));renGroups()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'groups'),s=>{grpDocs=s.docs.map(d=>d.data().groupId).filter(Boolean);renGroups()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'support'),s=>{tkAll=s.docs.map(d=>({id:d.id,...d.data()}));renSup()},()=>{}));renAdm()}).catch(e=>{isAdm=false;$('pa').textContent=''});$('ov').classList.add('hide');showMe();
   un.push(onSnapshot(collection(fs,'attendance'),s=>{all={};attLoaded=true;s.docs.forEach(d=>{const x=d.data();all[d.id]=x.m||{};grp[d.id]=ng(x.g);if(x.n)names[d.id]=x.n});if(uid&&grp[uid]!==undefined)myGroup=grp[uid];chkSched();fillProf();renAdm();if(!dirty)mine={...(all[uid]||{})};else all[uid]={...mine};if(myName)names[uid]=myName;render()},()=>{}));
   un.push(onSnapshot(query(collection(fs,'support'),where('uid','==',uid)),s=>{tkMine=s.docs.map(d=>({id:d.id,...d.data()}));renSup()},()=>{}));
   un.push(onSnapshot(query(collection(fs,'notes'),where('uid','==',uid)),s=>{nbNotes=s.docs.map(d=>({id:d.id,...d.data()}));nbRender()},()=>{}));
+  un.push(onSnapshot(query(collection(fs,'announcements'),orderBy('t','desc'),limit(50)),s=>{anns=s.docs.map(d=>({id:d.id,...d.data()}));renAnn()},()=>{}));
   un.push(onSnapshot(collection(fs,'profiles'),s=>{profs={};profLoaded=true;s.docs.forEach(d=>profs[d.id]=d.data());peers();renChats();fillProf();renAdm();render()},()=>{}));
   un.push(onSnapshot(query(collection(fs,'chats'),where('members','array-contains',uid)),s=>{chats=s.docs.map(d=>({id:d.id,...d.data()}));renChats()},()=>{}));
   un.push(onSnapshot(collection(fs,'presence'),s=>{for(const k in pr)delete pr[k];s.docs.forEach(d=>pr[d.id]=d.data());peers()},()=>{}));
