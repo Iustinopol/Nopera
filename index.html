@@ -57,12 +57,17 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 .nb{background:var(--ac);color:#fff;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:700}
 [data-theme="halloween"] .bub.me,[data-theme="halloween"] .nb{color:#1b0f2a}
 .av img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+
+#nbe{display:flex;flex-direction:column;position:fixed;inset:0;z-index:8;background:var(--bg)}#nbe.hide{display:none}
+.ned{min-height:100%;padding:16px;outline:none;font-size:17px;line-height:1.6;background:var(--cd);color:var(--tx);max-width:820px;margin:0 auto}
+.ned h3{font-size:21px;margin:.6em 0 .3em}.ned mark{background:#ffe066;color:#111}
+#nbtb button{padding:7px 11px}.sw{width:28px;height:28px;border-radius:50%;padding:0;flex:0 0 auto;border:3px solid var(--bd)}.sw.on{border-color:var(--tx)}
 </style></head><body><div id="ov" style="position:fixed;inset:0;z-index:9;background:var(--bg);align-items:center;justify-content:center;padding:20px;overflow:auto"><div class="c" style="width:100%;max-width:380px"><div class="b" style="font-size:20px">📚 Nopora</div><div class="mu" style="margin:6px 0 10px">Intră sau creează cont (email + parolă).</div><input id="an" maxlength="24" placeholder="Numele tău (doar la cont nou)" class="fi"><input id="au" type="email" placeholder="Email" autocapitalize="none" autocomplete="email" class="fi"><input id="ap" type="password" placeholder="Parolă (minim 6 caractere)" autocomplete="current-password" class="fi"><div id="er" class="mu" style="color:var(--no);min-height:18px"></div><div class="mu" style="margin:-4px 0 10px"><a href="#" id="fg">Ai uitat parola?</a></div><label class="mu" style="display:flex;gap:8px;align-items:center;margin:0 0 10px"><input type="checkbox" id="rm" checked style="width:auto;margin:0"> Ține-mă minte pe acest dispozitiv</label><div class="r"><button id="lg" class="on">Intră</button><button id="rg">Cont nou</button></div></div></div><div id="hw" aria-hidden="true"><span class="b1">🦇</span><span class="b2">🦇</span><span class="b3">🦇</span><span class="g">👻</span><span class="w">🕸️</span></div>
 <main>
 <h1>📚 Nopora</h1>
 <div class="mu" id="me">Se conectează…</div>
 <div class="c" id="par" style="margin-top:8px;border-left:5px solid var(--ac)"></div>
-<div class="tabs" style="margin-top:8px"><button data-t="a" class="on">Acum</button><button data-t="s">Săptămâna</button><button data-t="r">Recuperări</button><button data-t="o">Colegi</button><button data-t="g" id="tg">Mesaje</button><button data-t="p">Profil</button><button data-t="m" id="tm" class="hide">Admin</button></div>
+<div class="tabs" style="margin-top:8px"><button data-t="a" class="on">Acum</button><button data-t="s">Săptămâna</button><button data-t="r">Recuperări</button><button data-t="nbk">Caiete</button><button data-t="o">Colegi</button><button data-t="g" id="tg">Mesaje</button><button data-t="p">Profil</button><button data-t="m" id="tm" class="hide">Admin</button></div>
 
 <section id="a"><div id="lgb"></div><div class="c now" id="now"></div><h2>AZI</h2><div id="today"></div></section>
 <section id="s" class="hide"><div class="r" style="margin:0 0 8px"><button id="pw">◀ Săpt. trecută</button><button id="nw">Următoarea ▶</button></div><div class="mu" id="wl"></div><div id="wk"></div>
@@ -122,6 +127,12 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 <div id="mm" style="display:flex;flex-direction:column;gap:6px;max-height:55vh;overflow:auto;padding:4px 0"></div>
 <div class="r" style="margin-top:8px"><input id="mi" class="fi" placeholder="Scrie un mesaj…" maxlength="1000" style="margin:0"><button id="ms" class="on" style="flex:0 0 auto">Trimite</button></div></div>
 </section>
+<section id="nbk" class="hide"><div id="nbl1"></div><div id="nbl2" class="hide"></div></section>
+<div id="nbe" class="hide">
+<div style="padding:calc(8px + env(safe-area-inset-top,0px)) 10px 8px;display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--bd)"><button id="nbx">←</button><input id="nbt" class="fi" maxlength="80" placeholder="Titlul lecției" style="margin:0;flex:1;min-width:0"><span id="nbs" class="mu" style="white-space:nowrap"></span><button id="nbd" title="Descarcă">⬇</button></div>
+<div id="nbtb" style="padding:6px 10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--bd)"></div>
+<div id="nbw" style="flex:1;overflow:auto;-webkit-overflow-scrolling:touch;background:var(--bg)"></div>
+</div>
 <p class="mu" id="note"></p>
 </main>
 <script type="module">
@@ -159,7 +170,7 @@ function who(key){const ids=Object.keys(all).filter(u=>all[u][key]===1&&sameG(u)
 function setAtt(key,v){mine={...mine};if(mine[key]===v)delete mine[key];else mine[key]=v;try{localStorage.setItem('mine',JSON.stringify(mine))}catch(e){}
   if(uid){dirty++;setDoc(doc(fs,'attendance',uid),{m:{...mine},n:myName,g:myGroup}).catch(()=>{}).finally(()=>{dirty--})}all[uid||'_']={...mine};render()}
 function btns(o){const v=mine[o.key];return`<div class="r"><button class="ok ${v===1?'on':''}" data-k="${o.key}" data-v="1">✔ Am fost</button><button class="no ${v===0?'on':''}" data-k="${o.key}" data-v="0">✖ Lipsă</button></div>`}
-function render(){migrateMarks();peers();lgBanner();
+function render(){migrateMarks();peers();lgBanner();nbRender();
   const pn=par(mon(0)),pt=x=>x==='i'?'IMPARĂ':'PARĂ',sun=addD(mon(0),6),f=d=>d.getDate()+'.'+String(d.getMonth()+1).padStart(2,'0');
   $('par').innerHTML=`<div class="mu">SĂPTĂMÂNA CURENTĂ (${f(mon(0))} – ${f(sun)})</div><div class="b" style="font-size:22px">${pt(pn)}</div><div class="mu">Săptămâna viitoare: ${pt(par(mon(1)))}</div>`;
   const n=new Date(),cur=occ(0),nowO=cur.find(o=>start(o)<=n&&n<end(o));
@@ -175,7 +186,7 @@ function render(){migrateMarks();peers();lgBanner();
   $('rec').innerHTML=past.length?past.map(o=>{const alt=fut.find(f=>f.c[3]===o.c[3]&&f.c[4]===o.c[4]&&f.key.split('|')[1]!==o.key.split('|')[1]);
     return`<div class="c warn">${lab(o)}<div style="margin-top:6px">${alt?`🔁 Poți recupera la: <b>${DN[alt.c[0]]} ${alt.date.getDate()}.${alt.date.getMonth()+1}, ${alt.c[1]}–${alt.c[2]}</b> în ${alt.c[5]}`:`⚠️ Nu există altă oră a acestei discipline în orar. Cere recuperare de la ${esc(o.c[6])||'profesor'}.`}</div></div>`}).join(''):'<div class="c">Nu ai ore marcate ca „Lipsă”. Marchează cu ✖ orele la care nu ai fost și vezi aici cum le recuperezi.</div>';
 }
-document.addEventListener('click',e=>{if(e.target.id==='chg'){e.preventDefault();signOut(auth);return}const b=e.target.closest('[data-k]');if(b)return setAtt(b.dataset.k,+b.dataset.v);const t=e.target.closest('[data-t]');if(t){document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===t));['a','s','r','o','g','p','m'].forEach(i=>$(i).classList.toggle('hide',i!==t.dataset.t))}});
+document.addEventListener('click',e=>{if(e.target.id==='chg'){e.preventDefault();signOut(auth);return}const b=e.target.closest('[data-k]');if(b)return setAtt(b.dataset.k,+b.dataset.v);const t=e.target.closest('[data-t]');if(t){document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===t));['a','s','r','nbk','o','g','p','m'].forEach(i=>$(i).classList.toggle('hide',i!==t.dataset.t))}});
 $('pw').onclick=()=>{off--;render()};$('nw').onclick=()=>{off++;render()};
 $('sw').onclick=()=>{swap=1-swap;try{localStorage.setItem('swap',swap)}catch(e){}render()};
 const CFG={apiKey:"AIzaSyDLnd7BAqNvM6ZsgmvpMg3ZBsZmtVEYTn4",authDomain:"orar-upb.firebaseapp.com",projectId:"orar-upb",storageBucket:"orar-upb.firebasestorage.app",messagingSenderId:"970129347906",appId:"1:970129347906:web:71da2aee9c7424dc08a4db"};
@@ -339,12 +350,63 @@ async function saveLang(l){if(!uid)return;const old=myLang();profs[uid]={...(pro
  try{await setDoc(doc(fs,'profiles',uid),{lang:l,name:myName,t:Date.now()},{merge:true})}catch(e){profs[uid]={...(profs[uid]||{}),lang:old};render();fillProf();alert('Nu s-a salvat limba ('+(e.code||'eroare')+'). Verifică regulile din Firestore pentru colecția profiles.')}}
 document.addEventListener('click',e=>{const g=e.target.closest('[data-lg]');if(g)saveLang(g.dataset.lg)});
 $('plg').onchange=e=>saveLang(e.target.value);
+
+let nbNotes=[],nbSubj=null,nbSubs=[],nbCur=null,nbDirty=false,nbTm=0,nbStr=[],nbHist=[],nbH=1400,nbTool='p',nbCol='#1b1d29',nbWd=3,nbPap=2,nbCv=null,nbCx=null,nbDraw=null,nbPan=null,nbPen=false;
+const hexA=(h,a)=>{const n=parseInt(h.slice(1),16);return`rgba(${n>>16},${n>>8&255},${n&255},${a})`},
+ dl=(b,n)=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=n;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000)},
+ OKT=new Set(['B','STRONG','I','EM','U','H2','H3','UL','OL','LI','P','BR','DIV','SPAN','MARK']),
+ TBT='<button data-cm="bold"><b>B</b></button><button data-cm="italic"><i>I</i></button><button data-cm="underline"><u>U</u></button><button data-cm="h3">Titlu</button><button data-cm="insertUnorderedList">• Listă</button><button data-cm="insertOrderedList">1. Listă</button><button data-cm="mark">🖍</button><button data-cm="undo">↶</button><button data-cm="redo">↷</button>',
+ COLS=['#1b1d29','#1d4ed8','#dc2626','#16a34a','#ea580c','#7c3aed'];
+function cleanHtml(h){const d=new DOMParser().parseFromString('<body>'+h+'</body>','text/html');const w=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3)return;if(c.nodeType!==1||c.tagName==='SCRIPT'||c.tagName==='STYLE'){c.remove();return}w(c);if(OKT.has(c.tagName))[...c.attributes].forEach(a=>c.removeAttribute(a.name));else c.replaceWith(...c.childNodes)})};w(d.body);return d.body.innerHTML}
+function nbSubjects(){return[...new Set([...TT().map(e=>e.c[3]),...nbNotes.map(x=>x.subject)])].filter(Boolean).sort((a,b)=>a.localeCompare(b))}
+function nbRender(){if(!$('nbl1'))return;$('nbl1').classList.toggle('hide',nbSubj!==null);$('nbl2').classList.toggle('hide',nbSubj===null);
+ if(nbSubj===null){nbSubs=nbSubjects();$('nbl1').innerHTML=nbSubs.map((x,i)=>{const n=nbNotes.filter(y=>y.subject===x).length;return`<div class="c" data-nsb="${i}" style="cursor:pointer;border-left:6px solid hsl(${hue(x)},60%,50%);display:flex;gap:12px;align-items:center"><div style="font-size:26px">📓</div><div style="flex:1"><div class="b">${esc(x)}</div><div class="mu">${n} ${n===1?'lecție':'lecții'}</div></div></div>`}).join('')||'<div class="c mu">Nu ai materii încă. Setează grupa în Profil.</div>';return}
+ const l=nbNotes.filter(x=>x.subject===nbSubj).sort((a,b)=>b.t-a.t);
+ $('nbl2').innerHTML=`<div class="r" style="align-items:center;margin:0 0 10px"><button id="nbb" style="flex:0 0 auto">←</button><div class="b" style="flex:1;font-size:17px">${esc(nbSubj)}</div></div><div class="r"><button data-nn="text" class="on">✏️ Notiță text</button><button data-nn="draw" class="on">🖊 Scris de mână</button></div><div style="margin-top:10px">${l.map(x=>`<div class="c" data-no="${x.id}" style="cursor:pointer;display:flex;gap:10px;align-items:center"><div style="font-size:22px">${x.kind==='draw'?'🖊':'📝'}</div><div style="flex:1;min-width:0"><div class="b">${esc(x.title)}</div><div class="mu" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${fmtT(x.t)} · ${esc(x.pv||'')}</div></div><button data-ndl="${x.id}" style="flex:0 0 auto;padding:6px 10px">🗑</button></div>`).join('')||'<div class="mu">Nicio lecție încă. Începe una cu butoanele de mai sus.</div>'}</div>`}
+function nbTouch(){nbDirty=true;$('nbs').textContent='Se salvează…';clearTimeout(nbTm);nbTm=setTimeout(nbSave,1200)}
+async function nbSave(){if(!nbCur||!uid||!nbDirty)return;clearTimeout(nbTm);const k=nbCur.kind,body=k==='text'?cleanHtml($('nbtx').innerHTML):JSON.stringify({h:nbH,pp:nbPap,s:nbStr});
+ if(body.length>700000){$('nbs').textContent='Pagină prea mare, începe una nouă';return}
+ const pv=k==='text'?($('nbtx').textContent||'').trim().slice(0,90):'✍️ '+nbStr.length+' tușe',d=new Date();nbDirty=false;
+ try{await setDoc(doc(fs,'noteBodies',nbCur.id),{uid,body});await setDoc(doc(fs,'notes',nbCur.id),{uid,subject:nbCur.subject,title:($('nbt').value.trim()||'Fără titlu').slice(0,80),kind:k,c:nbCur.c,t:Date.now(),pv});$('nbs').textContent='Salvat ✓'}catch(e){nbDirty=true;$('nbs').textContent='Nu s-a salvat ('+(e.code||'eroare')+')'}}
+function nbEdit(c,body){nbCur=c;nbDirty=false;$('nbt').value=c.title||'';$('nbs').textContent='';$('nbe').classList.remove('hide');
+ if(c.kind==='text'){$('nbtb').innerHTML=TBT;$('nbw').innerHTML='<div id="nbtx" class="ned" contenteditable="true"></div>';const t=$('nbtx');t.innerHTML=cleanHtml(body||'');t.oninput=nbTouch;t.addEventListener('paste',e=>{e.preventDefault();document.execCommand('insertText',false,e.clipboardData.getData('text/plain'))});if(!body)t.focus();return}
+ let o={};try{o=JSON.parse(body||'{}')}catch(e){}nbStr=o.s||[];nbH=o.h||1400;nbPap=o.pp==null?2:o.pp;nbHist=[];nbTool='p';nbDraw=null;nbPan=null;
+ nbTb();$('nbw').innerHTML='<canvas id="nbcv" style="display:block;margin:0 auto;touch-action:none;background:#fff;box-shadow:0 2px 12px #0004"></canvas>';nbCv=$('nbcv');nbCx=nbCv.getContext('2d');nbSize();
+ nbCv.onpointerdown=e=>{if(e.pointerType==='pen')nbPen=true;if(e.pointerType==='touch'&&nbPen)return;nbCv.setPointerCapture(e.pointerId);if(nbTool==='s'){nbPan={y:e.clientY,t:$('nbw').scrollTop};return}e.preventDefault();const[x,y]=nbPt(e);nbHist.push(nbStr.slice());if(nbHist.length>60)nbHist.shift();if(nbTool==='e'){nbDraw='e';nbErase(x,y)}else{nbDraw={k:nbTool,c:nbCol,w:nbTool==='h'?nbWd*5:nbWd,p:[x,y]};nbStr.push(nbDraw);nbSeg(nbDraw,x,y,x+.1,y)}};
+ nbCv.onpointermove=e=>{if(nbPan){$('nbw').scrollTop=nbPan.t-(e.clientY-nbPan.y);return}if(!nbDraw)return;const[x,y]=nbPt(e);if(nbDraw==='e'){nbErase(x,y);return}const p=nbDraw.p,px=p[p.length-2],py=p[p.length-1];if(Math.abs(x-px)+Math.abs(y-py)<2)return;p.push(x,y);nbSeg(nbDraw,px,py,x,y)};
+ nbCv.onpointerup=nbCv.onpointercancel=()=>{if(nbDraw){nbPaint();nbTouch()}nbDraw=null;nbPan=null}}
+function nbTb(){$('nbtb').innerHTML=[['p','✏️'],['h','🖍'],['e','🧽'],['s','✋']].map(([k,l])=>`<button data-tl="${k}" class="${nbTool===k?'on':''}">${l}</button>`).join('')+COLS.map(c=>`<button class="sw ${nbCol===c?'on':''}" data-cl="${c}" style="background:${c}"></button>`).join('')+[2,4,8].map(w=>`<button data-wd="${w}" class="${nbWd===w?'on':''}">${w===2?'╴':w===4?'─':'━'}</button>`).join('')+'<button data-ac="undo">↶</button><button data-ac="paper">📄</button><button data-ac="ext">＋ Foaie</button><button data-ac="clear">🗑</button>'}
+function nbSize(){const w=Math.min($('nbw').clientWidth||800,900),r=window.devicePixelRatio||1,h=Math.round(w*nbH/1000);nbCv.style.width=w+'px';nbCv.style.height=h+'px';nbCv.width=Math.round(w*r);nbCv.height=Math.round(h*r);nbPaint()}
+function nbPt(e){const r=nbCv.getBoundingClientRect();return[Math.round((e.clientX-r.left)/r.width*1000),Math.round((e.clientY-r.top)/r.height*nbH)]}
+function nbPaint(){const sc=nbCv.width/1000,c=nbCx;c.setTransform(sc,0,0,sc,0,0);c.fillStyle='#fff';c.fillRect(0,0,1000,nbH);
+ if(nbPap){c.strokeStyle='#cfe0f5';c.lineWidth=1;c.beginPath();const st=nbPap===1?44:40;for(let y=nbPap===1?60:st;y<nbH;y+=st){c.moveTo(0,y);c.lineTo(1000,y)}if(nbPap===2)for(let x=st;x<1000;x+=st){c.moveTo(x,0);c.lineTo(x,nbH)}c.stroke()}
+ nbStr.forEach(nbStroke)}
+function nbStroke(s){const p=s.p,c=nbCx;c.lineCap=c.lineJoin='round';c.strokeStyle=s.k==='h'?hexA(s.c,.35):s.c;c.lineWidth=s.w;c.beginPath();c.moveTo(p[0],p[1]);if(p.length<=2)c.lineTo(p[0]+.1,p[1]);for(let i=2;i<p.length-2;i+=2)c.quadraticCurveTo(p[i],p[i+1],(p[i]+p[i+2])/2,(p[i+1]+p[i+3])/2);if(p.length>=4)c.lineTo(p[p.length-2],p[p.length-1]);c.stroke()}
+function nbSeg(s,x0,y0,x1,y1){const c=nbCx;c.lineCap='round';c.strokeStyle=s.k==='h'?hexA(s.c,.35):s.c;c.lineWidth=s.w;c.beginPath();c.moveTo(x0,y0);c.lineTo(x1,y1);c.stroke()}
+function nbErase(x,y){const n=nbStr.length;nbStr=nbStr.filter(s=>!s.p.some((v,i)=>i%2===0&&Math.abs(v-x)<16&&Math.abs(s.p[i+1]-y)<16));if(nbStr.length!==n)nbPaint()}
+window.addEventListener('resize',()=>{if(nbCv&&nbCur&&nbCur.kind==='draw'&&!$('nbe').classList.contains('hide'))nbSize()});
+$('nbtb').addEventListener('pointerdown',e=>e.preventDefault());
+document.addEventListener('click',async e=>{const g=k=>e.target.closest('['+k+']');let b;
+ if(b=g('data-nsb')){nbSubj=nbSubs[+b.dataset.nsb];nbRender();return}
+ if(e.target.id==='nbb'){nbSubj=null;nbRender();return}
+ if(b=g('data-ndl')){e.stopPropagation();const x=nbNotes.find(y=>y.id===b.dataset.ndl);if(x&&confirm('Ștergi lecția „'+x.title+'”? Nu se poate anula.')){deleteDoc(doc(fs,'notes',x.id)).catch(()=>{});deleteDoc(doc(fs,'noteBodies',x.id)).catch(()=>{})}return}
+ if(b=g('data-nn')){const k=b.dataset.nn,d=new Date();nbEdit({id:doc(collection(fs,'notes')).id,subject:nbSubj,kind:k,c:Date.now(),title:'Lecția din '+d.getDate()+'.'+String(d.getMonth()+1).padStart(2,'0')},'');nbDirty=true;return}
+ if(b=g('data-no')){const x=nbNotes.find(y=>y.id===b.dataset.no);if(!x)return;let body='';try{const r=await getDoc(doc(fs,'noteBodies',x.id));body=r.exists()?r.data().body:''}catch(err){alert('Nu am putut deschide lecția ('+(err.code||'eroare')+').');return}nbEdit(x,body);return}
+ if(b=g('data-cm')){const c=b.dataset.cm;if(c==='h3')document.execCommand('formatBlock',false,'H3');else if(c==='mark'){const t=String(getSelection());if(t)document.execCommand('insertHTML',false,'<mark>'+esc(t)+'</mark>')}else document.execCommand(c,false,null);nbTouch();return}
+ if(b=g('data-tl')){nbTool=b.dataset.tl;nbTb();return}
+ if(b=g('data-cl')){nbCol=b.dataset.cl;if(nbTool==='e'||nbTool==='s')nbTool='p';nbTb();return}
+ if(b=g('data-wd')){nbWd=+b.dataset.wd;nbTb();return}
+ if(b=g('data-ac')){const a=b.dataset.ac;if(a==='undo'&&nbHist.length){nbStr=nbHist.pop();nbPaint();nbTouch()}else if(a==='paper'){nbPap=(nbPap+1)%3;nbPaint();nbTouch()}else if(a==='ext'){nbH+=800;nbSize();nbTouch()}else if(a==='clear'&&nbStr.length&&confirm('Ștergi tot de pe foaie?')){nbHist.push(nbStr.slice());nbStr=[];nbPaint();nbTouch()}return}});
+$('nbt').oninput=()=>{if(nbCur)nbTouch()};
+$('nbx').onclick=async()=>{clearTimeout(nbTm);await nbSave();$('nbe').classList.add('hide');nbCur=null;nbCv=null;nbRender()};
+$('nbd').onclick=()=>{if(!nbCur)return;const nm=($('nbt').value||'lectie').replace(/[^\wăâîșțĂÂÎȘȚ -]/g,'').trim().replace(/\s+/g,'_')||'lectie';if(nbCur.kind==='text')dl(new Blob(['<html><head><meta charset="utf-8"></head><body><h2>'+esc($('nbt').value)+'</h2>'+cleanHtml($('nbtx').innerHTML)+'</body></html>'],{type:'application/msword'}),nm+'.doc');else nbCv.toBlob(b=>dl(b,nm+'.png'))};
 function pres(){if(!uid||document.hidden)return;const n=new Date(),o=occ(0).find(o=>start(o)<=n&&n<end(o));setDoc(doc(fs,'presence',uid),{name:myName,g:myGroup,now:o?o.c[3]:'Liber',t:Date.now()}).catch(()=>{})}
 onAuthStateChanged(auth,u=>{un.forEach(f=>f());un=[];clearInterval(hb);
-  if(!u){if(dmUn){dmUn();dmUn=null}dm=null;msgs=[];chats=[];profs={};profLoaded=false;unS();unS=()=>{};curSG=null;sched=null;allSched=[];tkMine=[];tkAll=[];isAdm=false;$('tm').classList.add('hide');uid=null;myName='';all={};mine={};$('ov').classList.remove('hide');$('me').textContent='';render();return}
+  if(!u){nbNotes=[];nbCur=null;nbSubj=null;nbCv=null;$('nbe').classList.add('hide');if(dmUn){dmUn();dmUn=null}dm=null;msgs=[];chats=[];profs={};profLoaded=false;unS();unS=()=>{};curSG=null;sched=null;allSched=[];tkMine=[];tkAll=[];isAdm=false;$('tm').classList.add('hide');uid=null;myName='';all={};mine={};$('ov').classList.remove('hide');$('me').textContent='';render();return}
   uid=u.uid;myName=u.displayName||'';names[uid]=myName;$('pa').textContent='';getDoc(doc(fs,'admins',uid)).then(d=>{isAdm=d.exists();$('tm').classList.toggle('hide',!isAdm);$('pa').textContent=isAdm?'🛡️ Cont de administrator':'';if(isAdm)un.push(onSnapshot(collection(fs,'scheduleEntries'),s=>{allSched=s.docs.map(d=>({id:d.id,...d.data()}));renGroups()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'groups'),s=>{grpDocs=s.docs.map(d=>d.data().groupId).filter(Boolean);renGroups()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'support'),s=>{tkAll=s.docs.map(d=>({id:d.id,...d.data()}));renSup()},()=>{}));renAdm()}).catch(e=>{isAdm=false;$('pa').textContent=''});$('ov').classList.add('hide');showMe();
   un.push(onSnapshot(collection(fs,'attendance'),s=>{all={};s.docs.forEach(d=>{const x=d.data();all[d.id]=x.m||{};grp[d.id]=ng(x.g);if(x.n)names[d.id]=x.n});if(uid&&grp[uid]!==undefined)myGroup=grp[uid];chkSched();fillProf();renAdm();if(!dirty)mine={...(all[uid]||{})};else all[uid]={...mine};if(myName)names[uid]=myName;render()},()=>{}));
   un.push(onSnapshot(query(collection(fs,'support'),where('uid','==',uid)),s=>{tkMine=s.docs.map(d=>({id:d.id,...d.data()}));renSup()},()=>{}));
+  un.push(onSnapshot(query(collection(fs,'notes'),where('uid','==',uid)),s=>{nbNotes=s.docs.map(d=>({id:d.id,...d.data()}));nbRender()},()=>{}));
   un.push(onSnapshot(collection(fs,'profiles'),s=>{profs={};profLoaded=true;s.docs.forEach(d=>profs[d.id]=d.data());peers();renChats();fillProf();renAdm();render()},()=>{}));
   un.push(onSnapshot(query(collection(fs,'chats'),where('members','array-contains',uid)),s=>{chats=s.docs.map(d=>({id:d.id,...d.data()}));renChats()},()=>{}));
   un.push(onSnapshot(collection(fs,'presence'),s=>{for(const k in pr)delete pr[k];s.docs.forEach(d=>pr[d.id]=d.data());peers()},()=>{}));
