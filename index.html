@@ -21,7 +21,27 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 .tag{font-size:11px;border:1px solid var(--bd);border-radius:6px;padding:1px 6px;margin-left:6px;color:var(--mu)}
 .hide{display:none}#sup{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:7;background:var(--ac);color:#fff;border-color:var(--ac);border-radius:999px;padding:10px 14px;box-shadow:0 2px 10px #0006}
 .fi{width:100%;font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:11px;margin-bottom:8px}#ov{display:flex}#ov.hide{display:none}.warn{border-left:5px solid var(--no)}
-</style></head><body><div id="ov" style="position:fixed;inset:0;z-index:9;background:var(--bg);align-items:center;justify-content:center;padding:20px;overflow:auto"><div class="c" style="width:100%;max-width:380px"><div class="b" style="font-size:20px">📚 Nopora</div><div class="mu" style="margin:6px 0 10px">Intră sau creează cont (email + parolă).</div><input id="an" maxlength="24" placeholder="Numele tău (doar la cont nou)" class="fi"><input id="au" type="email" placeholder="Email" autocapitalize="none" autocomplete="email" class="fi"><input id="ap" type="password" placeholder="Parolă (minim 6 caractere)" autocomplete="current-password" class="fi"><div id="er" class="mu" style="color:var(--no);min-height:18px"></div><div class="mu" style="margin:-4px 0 10px"><a href="#" id="fg">Ai uitat parola?</a></div><label class="mu" style="display:flex;gap:8px;align-items:center;margin:0 0 10px"><input type="checkbox" id="rm" checked style="width:auto;margin:0"> Ține-mă minte pe acest dispozitiv</label><div class="r"><button id="lg" class="on">Intră</button><button id="rg">Cont nou</button></div></div></div><main>
+
+:root[data-theme="halloween"]{--bg:#120a1c;--cd:#1e1230;--tx:#f3e8ff;--mu:#a99bc4;--ac:#ff7518;--ok:#8bdc3c;--no:#ff4d6d;--bd:#3b2559;color-scheme:dark}
+[data-theme="halloween"] body{background:radial-gradient(ellipse at 50% -10%,#2b1646 0,#120a1c 60%) fixed}
+[data-theme="halloween"] main{position:relative;z-index:1}
+[data-theme="halloween"] h1{font-family:Chalkduster,'Marker Felt','Comic Sans MS',fantasy;letter-spacing:.5px;color:#ff9a3d;text-shadow:0 0 14px #ff751866}
+[data-theme="halloween"] .c{box-shadow:0 0 0 1px #ff75180d,0 4px 18px #0006}
+[data-theme="halloween"] button.on,[data-theme="halloween"] #sup,[data-theme="halloween"] .ok.on,[data-theme="halloween"] .no.on{color:#1b0f2a;font-weight:700}
+[data-theme="halloween"] a{color:#ffb066}
+#hw{display:none;position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+[data-theme="halloween"] #hw{display:block}
+#hw span{position:absolute;font-size:26px;opacity:.6}
+@keyframes fly{0%{transform:translateX(-12vw) translateY(0)}50%{transform:translateX(50vw) translateY(-18px)}100%{transform:translateX(112vw) translateY(6px)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+#hw .b1{top:12%;left:0;animation:fly 26s linear infinite}
+#hw .b2{top:30%;left:0;font-size:20px;animation:fly 34s linear infinite -12s}
+#hw .b3{top:55%;left:0;font-size:18px;animation:fly 40s linear infinite -25s}
+#hw .g{right:12px;bottom:90px;animation:bob 4s ease-in-out infinite}
+#hw .w{right:6px;top:calc(6px + env(safe-area-inset-top,0px));font-size:34px;opacity:.4}
+@media (prefers-reduced-motion:reduce){#hw span{animation:none!important}#hw .b1,#hw .b2,#hw .b3{display:none}}
+</style></head><body><div id="ov" style="position:fixed;inset:0;z-index:9;background:var(--bg);align-items:center;justify-content:center;padding:20px;overflow:auto"><div class="c" style="width:100%;max-width:380px"><div class="b" style="font-size:20px">📚 Nopora</div><div class="mu" style="margin:6px 0 10px">Intră sau creează cont (email + parolă).</div><input id="an" maxlength="24" placeholder="Numele tău (doar la cont nou)" class="fi"><input id="au" type="email" placeholder="Email" autocapitalize="none" autocomplete="email" class="fi"><input id="ap" type="password" placeholder="Parolă (minim 6 caractere)" autocomplete="current-password" class="fi"><div id="er" class="mu" style="color:var(--no);min-height:18px"></div><div class="mu" style="margin:-4px 0 10px"><a href="#" id="fg">Ai uitat parola?</a></div><label class="mu" style="display:flex;gap:8px;align-items:center;margin:0 0 10px"><input type="checkbox" id="rm" checked style="width:auto;margin:0"> Ține-mă minte pe acest dispozitiv</label><div class="r"><button id="lg" class="on">Intră</button><button id="rg">Cont nou</button></div></div></div><div id="hw" aria-hidden="true"><span class="b1">🦇</span><span class="b2">🦇</span><span class="b3">🦇</span><span class="g">👻</span><span class="w">🕸️</span></div>
+<main>
 <h1>📚 Nopora</h1>
 <div class="mu" id="me">Se conectează…</div>
 <div class="c" id="par" style="margin-top:8px;border-left:5px solid var(--ac)"></div>
@@ -37,6 +57,7 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 <label class="mu">Numele tău</label><input id="pn" maxlength="24" class="fi">
 <label class="mu">Grupa ta</label><input id="pg" maxlength="12" list="gl" placeholder="ex: 1234 (alege sau scrie)" class="fi"><datalist id="gl"></datalist>
 <div class="mu" id="pm" style="min-height:18px;color:var(--ok)"></div>
+<label class="mu" style="display:flex;gap:8px;align-items:center;margin:8px 0"><input type="checkbox" id="hwt" style="width:auto;margin:0"> 🎃 Temă Halloween</label>
 <div class="r"><button id="psv" class="on">Salvează</button><button id="pout">Ieși din cont</button></div></div>
 <div class="mu">Colegii din aceeași grupă apar la „Colegi” și la „Au fost”. Dacă lași grupa goală, vezi pe toată lumea.</div></section>
 <section id="m" class="hide"><div id="st" style="margin-bottom:10px"></div>
@@ -87,6 +108,12 @@ const T=[[1,'8:00','9:50',P,'LAB','JK103',NE,'b'],[1,'10:00','11:50',PM,'SEM','J
 [4,'9:00','11:50',S,'CURS','JA101',VM,'b'],[4,'12:00','13:50',P,'CURS','JA101',NE,'b'],[4,'14:00','15:50',PM,'CURS','JA101',MA,'b'],[4,'16:00','17:50',CH,'CURS','JA101',MA,'b'],
 [5,'10:00','11:50',AL,'CURS','JA101',SE,'b'],[5,'14:00','15:50',LM,'SEM','JA101','','i'],[5,'14:00','15:50',CO,'CURS','JA101',CD,'p'],[5,'16:00','17:50',PS,'SEM','JA101',HS,'b']];
 const DN=['Duminică','Luni','Marți','Miercuri','Joi','Vineri','Sâmbătă'],$=id=>document.getElementById(id);
+function setHw(on){const r=document.documentElement;if(on)r.setAttribute('data-theme','halloween');else r.removeAttribute('data-theme');
+ document.querySelectorAll('h1,#ov .b').forEach(el=>{if(/Nopora$/.test(el.textContent))el.textContent=(on?'🎃 ':'📚 ')+'Nopora'});
+ const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',on?'#120a1c':'#4f46e5')}
+let hw;{const d=new Date(),def=d.getMonth()===9||(d.getMonth()===10&&d.getDate()<=2);try{const v=localStorage.getItem('hw');hw=v===null?def:v==='1'}catch(e){hw=def}}
+setHw(hw);$('hwt').checked=hw;$('hwt').onchange=e=>{hw=e.target.checked;try{localStorage.setItem('hw',hw?'1':'0')}catch(x){}setHw(hw)};
+
 const mn=t=>{const[a,b]=t.split(':');return +a*60+ +b},iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const ANCH=new Date(2026,8,28);let myName=(()=>{try{return localStorage.getItem('nm')||''}catch(e){return''}})(),prof='',dirty=0,swap=0,off=0,mine={},all={},names={},db=null,user=null,uid=null,room=null;
 try{swap=+localStorage.getItem('swap')||0;mine=JSON.parse(localStorage.getItem('mine')||'{}')}catch(e){}
