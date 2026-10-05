@@ -171,7 +171,7 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,updateProfile,sendPasswordResetEmail,sendEmailVerification,GoogleAuthProvider,signInWithPopup,signInWithRedirect,getRedirectResult,setPersistence,browserLocalPersistence,browserSessionPersistence}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import{getFirestore,doc,setDoc,getDoc,deleteDoc,addDoc,updateDoc,writeBatch,query,where,orderBy,limit,collection,onSnapshot}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import{getFirestore,doc,setDoc,getDoc,getDocs,deleteDoc,addDoc,updateDoc,writeBatch,query,where,orderBy,limit,collection,onSnapshot}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 const P='Programarea calculatoarelor și limbaje de programare',S='Știința și ingineria materialelor',PM='Protecția mediului',AL='Algebră liniară, geometrie analitică și diferențială',CH='Chimie',PS='Psihologia educației',CO='Comunicare',LM='Limbi moderne',
 NE='Ș.L. Neacșulescu Alina',VM='Vasilescu Marius',MA='Matei Ecaterina',SE='Semenescu Augustin',HS='Hainagiu Simona',CD='Cotoară D.';
 // zi,start,end,materie,tip,sala,prof,săptămâna (b=ambele,i=impară,p=pară)
@@ -202,7 +202,7 @@ const lab=o=>`<div class="b">${esc(o.c[3])}<span class="tag">${o.c[4]}</span></d
 function who(key){const ids=Object.keys(all).filter(u=>all[u][key]===1&&sameG(u));return ids.length?`<div class="mu" style="margin-top:6px">✅ Au fost (${ids.length}): ${ids.map(u=>esc(u===uid?'tu':names[u]||'coleg')).join(', ')}</div>`:''}
 function setAtt(key,v){mine={...mine};if(mine[key]===v)delete mine[key];else mine[key]=v;try{localStorage.setItem('mine',JSON.stringify(mine))}catch(e){}
   if(uid){dirty++;setDoc(doc(fs,'attendance',uid),{m:{...mine},n:myName,g:myGroup}).catch(()=>{}).finally(()=>{dirty--})}all[uid||'_']={...mine};render()}
-function btns(o){const v=mine[o.key];return`<div class="r"><button class="ok ${v===1?'on':''}" data-k="${o.key}" data-v="1">✔ Am fost</button><button class="no ${v===0?'on':''}" data-k="${o.key}" data-v="0">✖ Lipsă</button></div>`}
+function btns(o){const v=mine[o.key];return`${v===2?'<div class="mu" style="margin-top:6px">♻️ Marcată ca recuperată</div>':''}<div class="r"><button class="ok ${v===1?'on':''}" data-k="${o.key}" data-v="1">✔ Am fost</button><button class="no ${v===0?'on':''}" data-k="${o.key}" data-v="0">✖ Lipsă</button></div>`}
 function render(){migrateMarks();renAnn();renGrp();peers();grBanner();lgBanner();nbRender();
   const pn=par(mon(0)),pt=x=>x==='i'?'IMPARĂ':'PARĂ',sun=addD(mon(0),6),f=d=>d.getDate()+'.'+String(d.getMonth()+1).padStart(2,'0');
   $('par').innerHTML=`<div class="mu">SĂPTĂMÂNA CURENTĂ (${f(mon(0))} – ${f(sun)})</div><div class="b" style="font-size:22px">${pt(pn)}</div><div class="mu">Săptămâna viitoare: ${pt(par(mon(1)))}</div>`;
@@ -213,11 +213,7 @@ function render(){migrateMarks();renAnn();renGrp();peers();grBanner();lgBanner()
   $('today').innerHTML=td.map(o=>`<div class="c">${lab(o)}${btns(o)+who(o.key)}</div>`).join('')||'<div class="mu">Nu ai ore azi.</div>';
   const wo=occ(off),wm=mon(off);$('wl').textContent=`Săptămâna ${par(wm)==='i'?'impară':'pară'} · din ${iso(wm)}`;
   let last=-1;$('wk').innerHTML=wo.map(o=>{const h=o.c[0]!==last?`<h2>${DN[o.c[0]].toUpperCase()} ${o.date.getDate()}.${o.date.getMonth()+1}</h2>`:'';last=o.c[0];return h+`<div class="c">${lab(o)}${btns(o)+who(o.key)}</div>`}).join('');
-  // recuperări: orele ratate + alternative
-  const past=[...occ(-1),...cur].filter(o=>end(o)<=n&&mine[o.key]!==1&&mine[o.key]===0);
-  const fut=[...cur,...occ(1)].filter(o=>start(o)>n);
-  $('rec').innerHTML=past.length?past.map(o=>{const alt=fut.find(f=>f.c[3]===o.c[3]&&f.c[4]===o.c[4]&&f.key.split('|')[1]!==o.key.split('|')[1]);
-    return`<div class="c warn">${lab(o)}<div style="margin-top:6px">${alt?`🔁 Poți recupera la: <b>${DN[alt.c[0]]} ${alt.date.getDate()}.${alt.date.getMonth()+1}, ${alt.c[1]}–${alt.c[2]}</b> în ${alt.c[5]}`:`⚠️ Nu există altă oră a acestei discipline în orar. Cere recuperare de la ${esc(o.c[6])||'profesor'}.`}</div></div>`}).join(''):'<div class="c">Nu ai ore marcate ca „Lipsă”. Marchează cu ✖ orele la care nu ai fost și vezi aici cum le recuperezi.</div>';
+  renRec(n);
 }
 document.addEventListener('click',e=>{if(e.target.id==='chg'){e.preventDefault();signOut(auth);return}const b=e.target.closest('[data-k]');if(b)return setAtt(b.dataset.k,+b.dataset.v);const t=e.target.closest('[data-t]');if(t){document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===t));['a','ann','s','r','nbk','o','grpc','g','p','m'].forEach(i=>$(i).classList.toggle('hide',i!==t.dataset.t))}});
 $('pw').onclick=()=>{off--;render()};$('nw').onclick=()=>{off++;render()};
@@ -232,7 +228,7 @@ function migrateMarks(){if(!uid||!sched||!sched.length)return;const ks=Object.ke
  const nmine={...mine};let ch=0;ks.forEach(k=>{const[d,i]=k.split('|'),c=T[+i];if(!c)return;const id=map[nm(c)];if(!id)return;const nk=d+'|'+id;if(nmine[nk]===undefined)nmine[nk]=mine[k];delete nmine[k];ch++});
  if(!ch)return;mine=nmine;try{localStorage.setItem('mine',JSON.stringify(mine))}catch(e){}
  dirty++;setDoc(doc(fs,'attendance',uid),{m:{...mine},n:myName,g:myGroup}).catch(()=>{}).finally(()=>{dirty--});all[uid]={...mine}}
-function chkSched(){chkGrp();if(curSG===myGroup)return;curSG=myGroup;unS();unS=()=>{};sched=null;if(!myGroup){render();return}unS=onSnapshot(query(collection(fs,'scheduleEntries'),where('groupId','==',myGroup)),s=>{sched=s.docs.map(d=>({id:d.id,...d.data()}));render()},()=>{sched=null;render()})}
+function chkSched(){chkGrp();if(curSG===myGroup)return;curSG=myGroup;xAlt={};xBusy={};unS();unS=()=>{};sched=null;if(!myGroup){render();return}unS=onSnapshot(query(collection(fs,'scheduleEntries'),where('groupId','==',myGroup)),s=>{sched=s.docs.map(d=>({id:d.id,...d.data()}));render()},()=>{sched=null;render()})}
 function renEd(){if(!isAdm)return;renLists();const g=ng($('eg').value);const l=allSched.filter(e=>e.groupId===g).sort((a,b)=>a.day-b.day||mn(a.start)-mn(b.start));
  $('el').innerHTML=g?(l.map(e=>`<div class="c"><div class="b">${esc(e.subject)}<span class="tag">${esc(e.type)}</span>${e.lang?`<span class="tag">${LN[e.lang]||esc(e.lang)}</span>`:''}<span class="tag">${e.weeks==='b'?'ambele':e.weeks==='i'?'impară':'pară'}</span></div><div class="mu">${DN[e.day]} ${esc(e.start)}–${esc(e.end)} · ${esc(e.room)||'—'} · ${esc(e.prof)||'—'}</div><div class="r"><button data-ee="${e.id}">✏️ Modifică</button><button data-ed="${e.id}">🗑 Șterge</button></div></div>`).join('')||'<div class="mu">Nicio oră în această grupă. Importă un fișier sau adaugă manual.</div>'):'<div class="mu">Scrie grupa mai sus.</div>'}
 function renAdm(){if(!isAdm)return;const gs=[...new Set(Object.keys(all).map(u=>grp[u]||''))].sort(),sel=$('mg'),cv=sel.value;sel.innerHTML='<option value="*">Toate grupele</option>'+gs.map(g=>`<option value="${esc(g)}">${g?esc(g):'(fără grupă)'}</option>`).join('');sel.value=[...sel.options].some(o=>o.value===cv)?cv:'*';
@@ -367,7 +363,7 @@ document.addEventListener('click',e=>{if(!isAdm)return;const g=e.target.closest(
  if(d){const u=d.dataset.ad;if(!confirm('Ștergi datele lui '+(names[u]||'elev')+'? Contul rămâne în Firebase Authentication.'))return;deleteDoc(doc(fs,'attendance',u)).catch(()=>{});deleteDoc(doc(fs,'presence',u)).catch(()=>{})}});
 $('mg').onchange=renAdm;
 $('mx').onclick=()=>{const q=x=>'"'+String(x==null?'':x).replace(/^[=+\-@]/,"'$&").replace(/"/g,'""')+'"';const rows=[['Nume','Grupa','Data','Ora','Materie','Tip','Status'].map(q).join(',')];
- const mp={};T.forEach((c,i)=>mp[i]=c);allSched.forEach(e=>mp[e.id]=tup(e));for(const u in all)for(const k in all[u]){const[dt,i]=k.split('|'),c=mp[i];if(!c)continue;rows.push([names[u]||'',grp[u]||'',dt,c[1]+'-'+c[2],c[3],c[4],all[u][k]===1?'Prezent':'Absent'].map(q).join(','))}
+ const mp={};T.forEach((c,i)=>mp[i]=c);allSched.forEach(e=>mp[e.id]=tup(e));for(const u in all)for(const k in all[u]){const[dt,i]=k.split('|'),c=mp[i];if(!c)continue;rows.push([names[u]||'',grp[u]||'',dt,c[1]+'-'+c[2],c[3],c[4],all[u][k]===1?'Prezent':all[u][k]===2?'Recuperat':'Absent'].map(q).join(','))}
  const b=new Blob(['\ufeff'+rows.join('\n')],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='prezente.csv';a.click()};$('ap').onkeydown=e=>{if(e.key==='Enter'){if(regMode)$('ap2').focus();else go(false)}};$('ap2').onkeydown=e=>{if(e.key==='Enter')go(true)};
 function showMe(){$('me').innerHTML=(myName?'Conectat ca <b>'+esc(myName)+'</b>':'Conectat')+' · <a href="#" id="chg">ieși din cont</a>'}
 let colF='all',colQ='';
@@ -549,6 +545,21 @@ $('vfc').onclick=async()=>{vfm('Se verifică…');await vfCheck();if(!$('vf').cl
 $('vfr').onclick=async()=>{const u=auth.currentUser;if(!u)return;if(Date.now()<vfCool)return vfm('Așteaptă încă '+Math.ceil((vfCool-Date.now())/60000)+' min înainte să retrimiți. Apăsarea repetată prelungește blocarea.');try{await sendVerif(u);vfCool=Date.now()+60000;vfm('✓ Email trimis. Verifică și Spam.',1)}catch(e){if(e.code==='auth/too-many-requests'){vfCool=Date.now()+10*60000;vfm('Firebase a blocat temporar trimiterea (prea multe cereri). Nu mai apăsa, așteaptă 10–30 de minute și caută între timp în Spam și Toate mesajele.')}else vfm('Nu s-a trimis ('+(e.code||'eroare')+').')}};
 $('vfo').onclick=()=>{hideVerify();signOut(auth)};
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!$('vf').classList.contains('hide'))vfCheck()});
+
+const RECUP_TYPES=['LAB','SEM','PROIECT'];let xAlt={},xBusy={};
+function renRec(n){const miss=[],done=[];for(let k=-4;k<=0;k++)occ(k).forEach(o=>{if(end(o)<=n){if(mine[o.key]===0)miss.push(o);else if(mine[o.key]===2)done.push(o)}});
+ miss.sort((a,b)=>b.date-a.date);done.sort((a,b)=>b.date-a.date);
+ const tb=document.querySelector('[data-t="r"]');if(tb)tb.textContent='Recuperări'+(miss.length?' ('+miss.length+')':'');
+ const fut=[...occ(0),...occ(1),...occ(2)].filter(o=>start(o)>n&&start(o)-n<14*864e5),raw=o=>(sched||[]).find(e=>e.id===o.key.split('|')[1]),elig=r=>!!r&&RECUP_TYPES.includes(r.type);
+ miss.forEach(o=>{const r=raw(o);if(elig(r)&&xAlt[r.subject]===undefined&&!xBusy[r.subject]){xBusy[r.subject]=1;getDocs(query(collection(fs,'scheduleEntries'),where('subject','==',r.subject))).then(q=>{xAlt[r.subject]=q.docs.map(d=>({id:d.id,...d.data()}));render()}).catch(()=>{xAlt[r.subject]=[];render()})}});
+ const alts=o=>{const r=raw(o);if(!elig(r))return[];const list=(xAlt[r.subject]||[]).filter(e=>e.groupId!==myGroup&&e.type===r.type&&(e.lang||'')===(r.lang||'')),out=[];
+  for(let k=0;k<3;k++){const m=mon(k),w=par(m);list.forEach(e=>{if(e.weeks==='b'||e.weeks===w){const d=addD(m,e.day-1),st=new Date(d);st.setHours(0,mn(e.start),0,0);if(st>n&&st-n<14*864e5)out.push({e,d,st,sp:!!ND(e.prof||'')&&ND(e.prof||'')===ND(r.prof||'')})}})}
+  return out.sort((a,b)=>(b.sp-a.sp)||(a.st-b.st)).slice(0,6)};
+ let h=miss.map(o=>{const r=raw(o),own=fut.find(f=>f.c[3]===o.c[3]&&f.c[4]===o.c[4]&&f.key.split('|')[1]!==o.key.split('|')[1]),al=alts(o),wait=elig(r)&&xAlt[r.subject]===undefined;
+  return`<div class="c warn">${lab(o)}<div style="margin-top:8px">${own?`🔁 În grupa ta: <b>${DN[own.c[0]]} ${own.date.getDate()}.${own.date.getMonth()+1}, ${own.c[1]}–${own.c[2]}</b> în ${esc(own.c[5])}`:''}${al.length?`<div class="b" style="margin-top:6px">🏫 La alte grupe:</div>${al.map(x=>`<div class="mu" style="margin:3px 0">Grupa <b>${esc(x.e.groupId)}</b> · ${DN[x.e.day]} ${x.d.getDate()}.${x.d.getMonth()+1}, ${esc(x.e.start)}–${esc(x.e.end)} · ${esc(x.e.room||'—')} · ${esc(x.e.prof||'—')}${x.sp?' <span class="tag">același profesor</span>':''}</div>`).join('')}<div class="mu" style="margin-top:4px">Cere acordul profesorului înainte să mergi.</div>`:''}${wait?'<div class="mu">Caut la alte grupe…</div>':''}${!own&&!al.length&&!wait?`⚠️ Nu am găsit altă oră în următoarele 2 săptămâni${elig(r)?'':' (cursurile se recuperează, de regulă, singure)'}. Cere recuperare de la ${esc((o.c[6]||'').replace(/\.+$/,''))||'profesor'}.`:''}</div><div class="r"><button class="on" data-k="${o.key}" data-v="2">✅ Am recuperat</button></div></div>`}).join('');
+ if(!miss.length)h='<div class="c">Nu ai ore marcate ca „Lipsă”. Marchează cu ✖ orele la care nu ai fost și vezi aici cum le recuperezi.</div>';
+ if(done.length)h+='<h2>RECUPERATE</h2>'+done.map(o=>`<div class="c" style="opacity:.85">${lab(o)}<div class="r"><button data-k="${o.key}" data-v="0">↩ Marchează din nou ca lipsă</button></div></div>`).join('');
+ $('rec').innerHTML=h}
 function pres(){if(!uid||document.hidden)return;const n=new Date(),o=occ(0).find(o=>start(o)<=n&&n<end(o));setDoc(doc(fs,'presence',uid),{name:myName,g:myGroup,now:o?o.c[3]:'Liber',t:Date.now()}).catch(()=>{})}
 let regBusy=false,attLoaded=false,grbOn=false,vfSent=false,vfTm=null,vfCool=0,vfErr='';
 const onAuth=u=>{if(u&&regBusy)return;un.forEach(f=>f());un=[];clearInterval(hb);
