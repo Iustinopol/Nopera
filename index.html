@@ -77,7 +77,57 @@ a{color:var(--ac)}
 #glb.hide,#gpm.hide{display:none}
 [data-theme="halloween"] .gm.me{color:#1b0f2a}
 .faonly #anc,.faonly #st,.faonly #uf,.faonly #mg,.faonly #mx,.faonly #mc,.faonly #ml{display:none!important}
-</style></head><body><div id="ov" style="position:fixed;inset:0;z-index:9;background:var(--bg);padding:20px;overflow:auto"><div class="c" style="width:100%;max-width:380px;margin:auto"><div class="b" style="font-size:20px">📚 Nopera</div><div class="mu" id="ovt" style="margin:6px 0 10px">Intră sau creează cont (email + parolă).<br>Ai deja cont cu email? Intră cu emailul și parola, apoi apasă „Conectează contul cu Google” în Profil, ca să nu-ți pierzi datele.</div>
+
+/* ===== Redesign v2 ===== */
+:root{--onac:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1016;--cd:#181a24;--tx:#eef0f8;--mu:#9aa0b6;--ac:#8b85ff;--bd:#2a2d3b;--onac:#11121a}}
+:root[data-theme="dark"]{--bg:#0f1016;--cd:#181a24;--tx:#eef0f8;--mu:#9aa0b6;--ac:#8b85ff;--bd:#2a2d3b;--onac:#11121a}
+:root[data-theme="halloween"]{--onac:#1b0f2a}
+body{font-family:'Manrope',system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+h1{font-size:24px;font-weight:800;letter-spacing:-.02em}
+h2{font-size:15px;font-weight:800;color:var(--tx);margin:20px 0 10px}
+.c{border-radius:20px;padding:14px 16px}
+button{border-radius:14px;font-weight:700}
+.r button{min-height:46px;padding:11px 8px}
+button.on{color:var(--onac)}
+#now{border:0;border-radius:24px;padding:20px;background:var(--ac);color:var(--onac)}
+#now .mu,#now .b,#now a{color:inherit}#now .mu{opacity:.85}
+#now button{background:transparent;border:2px solid var(--onac);color:var(--onac);font-weight:800;border-radius:14px}
+#now button.on,#now button.ok.on,#now button.no.on{background:var(--onac);color:var(--ac);border-color:var(--onac)}
+#now .tag{border-color:currentColor;color:inherit}
+.tabs button::before,#moreList button::before{content:"";flex:0 0 auto;width:22px;height:22px;background:currentColor;-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
+[data-t="a"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E")}[data-t="s"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='16' rx='3'/%3E%3Cpath d='M3 10h18M8 3v4M16 3v4'/%3E%3C/svg%3E")}[data-t="grpc"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='8' r='3.5'/%3E%3Cpath d='M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6'/%3E%3Cpath d='M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.4c2 .7 3.5 2.6 3.5 5.6'/%3E%3C/svg%3E")}[data-t="p"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7'/%3E%3C/svg%3E")}[data-t="ann"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10v4h3l6 4V6L7 10z'/%3E%3Cpath d='M17 9a4 4 0 0 1 0 6'/%3E%3C/svg%3E")}[data-t="r"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12a8 8 0 0 1 14-5.3L20 9'/%3E%3Cpath d='M20 4v5h-5'/%3E%3Cpath d='M20 12a8 8 0 0 1-14 5.3L4 15'/%3E%3Cpath d='M4 20v-5h5'/%3E%3C/svg%3E")}[data-t="nbk"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z'/%3E%3Cpath d='M5 17a3 3 0 0 1 3-3h11'/%3E%3C/svg%3E")}[data-t="o"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='12' r='5'/%3E%3Ccircle cx='15' cy='12' r='5'/%3E%3C/svg%3E")}[data-t="g"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 5h16v11H9l-5 4z'/%3E%3C/svg%3E")}[data-t="m"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z'/%3E%3C/svg%3E")}#moreb{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='5' cy='12' r='1.6'/%3E%3Ccircle cx='12' cy='12' r='1.6'/%3E%3Ccircle cx='19' cy='12' r='1.6'/%3E%3C/svg%3E")}
+.bub.me,.gm.me,.nb,#sup{color:var(--onac)}
+#moreb,#more{display:none}
+@media (max-width:899px){
+main{padding-bottom:112px}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;margin:0!important;padding:8px 12px calc(10px + env(safe-area-inset-bottom,0px));gap:4px;background:var(--cd);border-top:1px solid var(--bd);overflow:visible}
+.tabs button{flex:1 1 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:54px;padding:6px 2px;border:0;background:transparent;color:var(--mu);font-size:11px;font-weight:700;border-radius:14px}
+.tabs button.on{background:var(--bd);color:var(--ac)}
+@supports (background:color-mix(in srgb,red 10%,transparent)){.tabs button.on{background:color-mix(in srgb,var(--ac) 18%,transparent)}}
+#moreb{display:flex}
+#more{display:block;position:fixed;inset:0;z-index:7;background:#0009}#more.hide{display:none}
+#moreList{position:absolute;left:12px;right:12px;bottom:calc(88px + env(safe-area-inset-bottom,0px));background:var(--cd);border:1px solid var(--bd);border-radius:22px;padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#moreList button{display:flex;align-items:center;gap:10px;min-height:52px;padding:0 14px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font-size:14px;font-weight:700;text-align:left}
+#moreList button.on{border-color:var(--ac);color:var(--ac)}
+#moreList button.hide{display:none}
+#sup{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+}
+@media (min-width:900px){
+body{padding-left:240px}
+main{max-width:860px;margin:0 auto;padding:30px 40px 60px}
+main>h1{display:none}
+.tabs{position:fixed;left:0;top:0;bottom:0;width:240px;flex-direction:column;align-items:stretch;gap:4px;margin:0!important;padding:84px 14px 20px;background:var(--cd);border-right:1px solid var(--bd);overflow-y:auto;z-index:6}
+.tabs::before{content:"Nopera";position:absolute;top:26px;left:26px;font-size:24px;font-weight:800;letter-spacing:-.02em}
+.tabs button{flex:0 0 auto;display:flex;align-items:center;gap:12px;text-align:left;font-size:15px;font-weight:700;padding:12px 14px;border:0;background:transparent;color:var(--mu);border-radius:14px}
+.tabs button:hover{background:var(--bg)}
+.tabs button.on{background:var(--bd);color:var(--ac)}
+@supports (background:color-mix(in srgb,red 10%,transparent)){.tabs button.on{background:color-mix(in srgb,var(--ac) 18%,transparent)}}
+.tabs button.hide{display:none}
+#moreb{display:none!important}
+#sup{right:24px;bottom:24px}
+}
+</style><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"></head><body><div id="ov" style="position:fixed;inset:0;z-index:9;background:var(--bg);padding:20px;overflow:auto"><div class="c" style="width:100%;max-width:380px;margin:auto"><div class="b" style="font-size:20px">📚 Nopera</div><div class="mu" id="ovt" style="margin:6px 0 10px">Intră sau creează cont (email + parolă).<br>Ai deja cont cu email? Intră cu emailul și parola, apoi apasă „Conectează contul cu Google” în Profil, ca să nu-ți pierzi datele.</div>
 <button id="gg" type="button" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1f1f1f;border:1px solid #dadce0;font-weight:600;margin-bottom:10px"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.5l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.7 6.9l7.3 5.7c4.3-4 6.8-9.9 6.8-17.1z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.4-.8-2.9-.8-4.7s.3-3.3.8-4.7l-7.9-6.1C.9 16.4 0 20.1 0 24s.9 7.6 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.3 0 11.6-2.1 15.5-5.7l-7.3-5.7c-2 1.4-4.7 2.3-8.2 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>Continuă cu Google</button><div class="mu" style="text-align:center;margin:0 0 10px">sau cu email și parolă</div><input id="an" maxlength="24" placeholder="Numele tău" class="fi hide"><input id="au" type="email" placeholder="Email" autocapitalize="none" autocomplete="email" class="fi"><div class="pw"><input id="ap" type="password" placeholder="Parolă (minim 6 caractere)" autocomplete="current-password" class="fi"><button type="button" class="eye" data-eye aria-label="Arată sau ascunde parola">Arată</button></div><div class="pw hide" id="ap2w"><input id="ap2" type="password" placeholder="Repetă parola" autocomplete="new-password" class="fi"></div><div id="er" class="mu" style="color:var(--no);min-height:18px"></div><div class="mu" id="fgd" style="margin:-4px 0 10px"><a href="#" id="fg">Ai uitat parola?</a></div><label class="mu" style="display:flex;gap:8px;align-items:center;margin:0 0 10px"><input type="checkbox" id="rm" checked style="width:auto;margin:0"> Ține-mă minte pe acest dispozitiv</label><div class="r"><button id="lg" class="on">Intră</button><button id="rg">Cont nou</button></div>
 <div style="text-align:center;margin-top:12px"><a href="#" id="lins">📲 Cum pun aplicația pe ecran?</a></div></div></div><div id="hw" aria-hidden="true"><span class="b1">🦇</span><span class="b2">🦇</span><span class="b3">🦇</span><span class="g">👻</span><span class="w">🕸️</span></div>
 <div id="ins" class="hide"><div class="c" style="width:100%;max-width:420px;margin:auto">
@@ -91,7 +141,7 @@ a{color:var(--ac)}
 <h1>📚 Nopera</h1>
 <div class="mu" id="me">Se conectează…</div>
 <div class="c" id="par" style="margin-top:8px;border-left:5px solid var(--ac)"></div>
-<div class="tabs" style="margin-top:8px"><button data-t="a" class="on">Acum</button><button data-t="ann" id="tan">Anunțuri</button><button data-t="s">Săptămâna</button><button data-t="r">Recuperări</button><button data-t="nbk">Caiete</button><button data-t="o">Colegi</button><button data-t="grpc" id="tgr">Grup</button><button data-t="g" id="tg">Mesaje</button><button data-t="p">Profil</button><button data-t="m" id="tm" class="hide">Admin</button></div>
+<div class="tabs" style="margin-top:8px"><button data-t="a" class="on">Acum</button><button data-t="ann" id="tan">Anunțuri</button><button data-t="s">Săptămâna</button><button data-t="r">Recuperări</button><button data-t="nbk">Caiete</button><button data-t="o">Colegi</button><button data-t="grpc" id="tgr">Grup</button><button data-t="g" id="tg">Mesaje</button><button data-t="p">Profil</button><button data-t="m" id="tm" class="hide">Admin</button><button type="button" id="moreb">Mai mult</button></div>
 
 <section id="a"><div id="inb"></div><div id="anp"></div><div id="grb"></div><div id="lgb"></div><div class="c now" id="now"></div><h2>AZI</h2><div id="today"></div></section>
 <section id="s" class="hide"><div class="r" style="margin:0 0 8px"><button id="pw">◀ Săpt. trecută</button><button id="nw">Următoarea ▶</button></div><div class="mu" id="wl"></div><div id="wk"></div>
@@ -205,6 +255,17 @@ a{color:var(--ac)}
 <div id="vf" class="hide"><div class="c" style="width:100%;max-width:380px;margin:auto"><div style="font-size:34px">✉️</div><div class="b" style="font-size:20px">Confirmă adresa de email</div><div class="mu" id="vft" style="margin:8px 0 12px"></div><div class="mu" id="vfm" style="min-height:18px;margin-bottom:8px"></div><div class="r" style="flex-wrap:wrap"><button id="vfc" class="on" style="flex:1 0 100%">Am confirmat</button><button id="vfr" style="flex:1 0 100%">Trimite emailul de confirmare</button><button id="vfo" style="flex:1 0 100%">Ieși din cont</button></div></div></div>
 <p class="mu" id="note"></p>
 </main>
+<div id="more" class="hide"><div id="moreList"></div></div>
+<script>
+(function(){var tabs=document.querySelector('.tabs'),more=document.getElementById('more'),list=document.getElementById('moreList'),mb=document.getElementById('moreb');if(!tabs||!more||!list||!mb)return;
+var orig=Array.prototype.slice.call(tabs.children),SEC=['ann','r','nbk','o','g','m'],mq=window.matchMedia('(max-width:899px)');
+function lay(){if(mq.matches){orig.forEach(function(b){if(b===mb)return;if(SEC.indexOf(b.dataset.t)>-1)list.appendChild(b);else tabs.insertBefore(b,mb)})}else{orig.forEach(function(b){tabs.appendChild(b)});more.classList.add('hide')}}
+lay();if(mq.addEventListener)mq.addEventListener('change',lay);else if(mq.addListener)mq.addListener(lay);
+mb.addEventListener('click',function(){more.classList.toggle('hide')});
+more.addEventListener('click',function(e){if(e.target===more||e.target.closest('[data-t]'))more.classList.add('hide')});
+document.addEventListener('click',function(e){var t=e.target.closest('[data-t]');if(!t)return;setTimeout(function(){var sec=SEC.indexOf(t.dataset.t)>-1;mb.classList.toggle('on',sec);SEC.forEach(function(k){var b=orig.filter(function(x){return x.dataset.t===k})[0];if(b)b.classList.toggle('on',b===t)})},0)});
+})();
+</script>
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,updateProfile,sendPasswordResetEmail,sendEmailVerification,GoogleAuthProvider,linkWithPopup,signInWithPopup,signInWithRedirect,getRedirectResult,setPersistence,browserLocalPersistence,browserSessionPersistence}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
