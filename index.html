@@ -82,7 +82,7 @@ a{color:var(--ac)}
 :root{--onac:#fff}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1016;--cd:#181a24;--tx:#eef0f8;--mu:#9aa0b6;--ac:#8b85ff;--bd:#2a2d3b;--onac:#11121a}}
 :root[data-theme="dark"]{--bg:#0f1016;--cd:#181a24;--tx:#eef0f8;--mu:#9aa0b6;--ac:#8b85ff;--bd:#2a2d3b;--onac:#11121a}
-:root[data-theme="halloween"]{--onac:#1b0f2a}
+:root[data-theme="halloween"]{--bg:#120a1c;--cd:#1e1230;--tx:#f3e8ff;--mu:#a99bc4;--ac:#ff7518;--ok:#8bdc3c;--no:#ff4d6d;--bd:#3b2559;--onac:#1b0f2a}
 body{font-family:'Manrope',system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 h1{font-size:24px;font-weight:800;letter-spacing:-.02em}
 h2{font-size:15px;font-weight:800;color:var(--tx);margin:20px 0 10px}
@@ -116,7 +116,6 @@ main{padding-bottom:112px}
 @media (min-width:900px){
 body{padding-left:240px}
 main{max-width:860px;margin:0 auto;padding:30px 40px 60px}
-main>h1{display:none}
 .tabs{position:fixed;left:0;top:0;bottom:0;width:240px;flex-direction:column;align-items:stretch;gap:4px;margin:0!important;padding:84px 14px 20px;background:var(--cd);border-right:1px solid var(--bd);overflow-y:auto;z-index:6}
 .tabs::before{content:"Nopera";position:absolute;top:26px;left:26px;font-size:24px;font-weight:800;letter-spacing:-.02em}
 .tabs button{flex:0 0 auto;display:flex;align-items:center;gap:12px;text-align:left;font-size:15px;font-weight:700;padding:12px 14px;border:0;background:transparent;color:var(--mu);border-radius:14px}
@@ -126,6 +125,55 @@ main>h1{display:none}
 .tabs button.hide{display:none}
 #moreb{display:none!important}
 #sup{right:24px;bottom:24px}
+}
+
+/* ===== Redesign v3 ===== */
+[data-t="hub"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='8' r='3.5'/%3E%3Cpath d='M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6'/%3E%3Cpath d='M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.4c2 .7 3.5 2.6 3.5 5.6'/%3E%3C/svg%3E")}
+[data-t="grpc"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 5h16v11H9l-5 4z'/%3E%3C/svg%3E")}
+[data-t="g"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 6h18v12H3z'/%3E%3Cpath d='M3 7l9 7 9-7'/%3E%3C/svg%3E")}
+#me{display:none}
+.hd{display:flex;align-items:center;justify-content:space-between;margin:0 0 14px}
+.lg{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;letter-spacing:-.02em}
+.lm{width:36px;height:36px;border-radius:11px;background:var(--ac);color:var(--onac);display:flex;align-items:center;justify-content:center;font-size:19px}
+.chip{border:1px solid var(--bd);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700;color:var(--mu);white-space:nowrap}
+.gt{font-size:28px;margin:0 0 4px}
+#greet{margin:0 0 16px}
+h1.pt{font-size:28px;margin:0 0 14px}
+.sh{display:flex;align-items:center;justify-content:space-between}
+.sh h2{margin:0}
+.lnk{border:0;background:transparent;color:var(--ac);font-size:13px;font-weight:700;padding:12px 0}
+#now{display:flex;flex-direction:column;gap:12px}
+.hk{display:flex;justify-content:space-between;font-size:12px;font-weight:800;letter-spacing:.08em}
+.ht{font-size:22px;line-height:1.25;font-weight:800}
+.pb{height:8px;border-radius:4px;background:#0003}
+.pb i{display:block;height:8px;border-radius:4px;background:var(--onac)}
+.hm{font-size:13px;font-weight:700}
+#now .r{margin-top:0}
+.tl{padding:0}.tr{display:flex;align-items:center;gap:14px;padding:13px 16px}.tr+.tr{border-top:1px solid var(--bd)}
+.tt{width:48px;flex:0 0 auto}.tt b{display:block;font-size:15px}.tt span{font-size:12px;color:var(--mu);font-weight:600}
+.tr i{width:4px;align-self:stretch;border-radius:2px;flex:0 0 auto}
+.dchips{display:flex;gap:8px;margin:12px 0 10px}
+.dc{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;height:62px;padding:0;border-radius:16px;color:var(--mu);font-size:12px}
+.dc b{font-size:17px;color:var(--tx)}
+.dc.on{background:var(--ac);border-color:var(--ac);color:var(--onac)}.dc.on b{color:var(--onac)}
+#wl{font-size:16px;font-weight:800;color:var(--tx);margin:6px 0 10px}
+.wc{border-left:4px solid var(--ac)}
+.seg{background:var(--cd);border:1px solid var(--bd);border-radius:18px;padding:6px;gap:8px}
+.seg button{border:0;background:transparent;color:var(--mu);min-height:44px}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.tile{height:86px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:0 4px;font-size:13px;border-radius:18px;background:var(--cd)}
+.tile::before{content:"";width:24px;height:24px;background:var(--mu);-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
+.tile.hide{display:none}
+.cap{font-size:12px;font-weight:800;letter-spacing:.08em}
+.code{font-size:26px;letter-spacing:.18em;flex:1}
+.on-t{font-size:12px;font-weight:700;color:var(--ok)}
+.cta{width:100%;min-height:46px}
+.sgo{width:100%;min-height:48px;margin-top:12px;color:var(--no);font-weight:800;background:transparent}
+@media (max-width:899px){.tabs .sec{display:none}}
+@media (min-width:900px){
+#thub{display:none!important}
+.lg{display:none}.hd{justify-content:flex-end}
+.tabs [data-t="a"]{order:0}.tabs [data-t="ann"]{order:1}.tabs [data-t="s"]{order:2}.tabs [data-t="r"]{order:3}.tabs [data-t="nbk"]{order:4}.tabs [data-t="o"]{order:5}.tabs [data-t="grpc"]{order:6}.tabs [data-t="g"]{order:7}.tabs [data-t="p"]{order:8}.tabs [data-t="m"]{order:9}
 }
 </style><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"></head><body><div id="ov" style="position:fixed;inset:0;z-index:9;background:var(--bg);padding:20px;overflow:auto"><div class="c" style="width:100%;max-width:380px;margin:auto"><div class="b" style="font-size:20px">📚 Nopera</div><div class="mu" id="ovt" style="margin:6px 0 10px">Intră sau creează cont (email + parolă).<br>Ai deja cont cu email? Intră cu emailul și parola, apoi apasă „Conectează contul cu Google” în Profil, ca să nu-ți pierzi datele.</div>
 <button id="gg" type="button" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1f1f1f;border:1px solid #dadce0;font-weight:600;margin-bottom:10px"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.5l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.7 6.9l7.3 5.7c4.3-4 6.8-9.9 6.8-17.1z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.4-.8-2.9-.8-4.7s.3-3.3.8-4.7l-7.9-6.1C.9 16.4 0 20.1 0 24s.9 7.6 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.3 0 11.6-2.1 15.5-5.7l-7.3-5.7c-2 1.4-4.7 2.3-8.2 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>Continuă cu Google</button><div class="mu" style="text-align:center;margin:0 0 10px">sau cu email și parolă</div><input id="an" maxlength="24" placeholder="Numele tău" class="fi hide"><input id="au" type="email" placeholder="Email" autocapitalize="none" autocomplete="email" class="fi"><div class="pw"><input id="ap" type="password" placeholder="Parolă (minim 6 caractere)" autocomplete="current-password" class="fi"><button type="button" class="eye" data-eye aria-label="Arată sau ascunde parola">Arată</button></div><div class="pw hide" id="ap2w"><input id="ap2" type="password" placeholder="Repetă parola" autocomplete="new-password" class="fi"></div><div id="er" class="mu" style="color:var(--no);min-height:18px"></div><div class="mu" id="fgd" style="margin:-4px 0 10px"><a href="#" id="fg">Ai uitat parola?</a></div><label class="mu" style="display:flex;gap:8px;align-items:center;margin:0 0 10px"><input type="checkbox" id="rm" checked style="width:auto;margin:0"> Ține-mă minte pe acest dispozitiv</label><div class="r"><button id="lg" class="on">Intră</button><button id="rg">Cont nou</button></div>
@@ -138,14 +186,17 @@ main>h1{display:none}
 <div class="mu" style="margin-top:12px">💡 Dacă ai deschis linkul din WhatsApp, Instagram sau Facebook, deschide-l mai întâi în browser (meniul ⋯ sau ⋮ → „Deschide în Safari/Chrome"). Altfel opțiunea de adăugare nu apare.</div>
 </div></div>
 <main>
-<h1>📚 Nopera</h1>
+<div class="hd"><div class="lg"><span class="lm">N</span><span>Nopera</span></div><span id="pchip" class="chip"></span></div>
 <div class="mu" id="me">Se conectează…</div>
-<div class="c" id="par" style="margin-top:8px;border-left:5px solid var(--ac)"></div>
-<div class="tabs" style="margin-top:8px"><button data-t="a" class="on">Acum</button><button data-t="ann" id="tan">Anunțuri</button><button data-t="s">Săptămâna</button><button data-t="r">Recuperări</button><button data-t="nbk">Caiete</button><button data-t="o">Colegi</button><button data-t="grpc" id="tgr">Grup</button><button data-t="g" id="tg">Mesaje</button><button data-t="p">Profil</button><button data-t="m" id="tm" class="hide">Admin</button><button type="button" id="moreb">Mai mult</button></div>
+<div class="c hide" id="par"></div>
+<div class="tabs" style="margin-top:8px"><button data-t="a" class="on">Acum</button><button data-t="s">Săptămâna</button><button data-t="hub" id="thub">Grup</button><button data-t="p">Profil</button><button data-t="ann" id="tan" class="sec">Anunțuri</button><button data-t="r" class="sec">Recuperări</button><button data-t="nbk" class="sec">Caiete</button><button data-t="o" class="sec">Colegi</button><button data-t="grpc" id="tgr" class="sec">Chat grup</button><button data-t="g" id="tg" class="sec">Mesaje</button><button data-t="m" id="tm" class="sec hide">Admin</button></div>
 
-<section id="a"><div id="inb"></div><div id="anp"></div><div id="grb"></div><div id="lgb"></div><div class="c now" id="now"></div><h2>AZI</h2><div id="today"></div></section>
-<section id="s" class="hide"><div class="r" style="margin:0 0 8px"><button id="pw">◀ Săpt. trecută</button><button id="nw">Următoarea ▶</button></div><div class="mu" id="wl"></div><div id="wk"></div>
+<section id="a"><div id="greet"></div><div id="inb"></div><div id="anp"></div><div id="grb"></div><div id="lgb"></div><div class="c now" id="now"></div><div class="sh"><h2>Azi mai urmează</h2><button type="button" class="lnk" data-t="s">Toată săptămâna</button></div><div id="today"></div></section>
+<section id="s" class="hide"><h1 class="pt">Săptămâna</h1><div class="r seg"><button id="pw">◀ Săpt. trecută</button><button id="nw">Următoarea ▶</button></div><div id="sdays" class="dchips"></div><div class="mu" id="wl"></div><div id="wk"></div>
 <div class="r"><button id="sw">Inversează săptămâna pară/impară</button></div></section>
+<section id="hub" class="hide"><h1 class="pt">Grupa mea</h1><div class="mu" id="hubsub" style="margin:-8px 0 14px"></div>
+<div class="c" id="hcd"><div class="mu cap">COD DE INVITAȚIE</div><div class="r" style="align-items:center;margin:4px 0 10px"><b id="hcv" class="code"></b><span id="hon" class="on-t"></span></div><button type="button" id="hcs" class="on cta">Trimite pe WhatsApp</button></div>
+<div class="tiles"><button class="tile" data-t="r"><span>Recuperări</span></button><button class="tile" data-t="nbk"><span>Caiete</span></button><button class="tile" data-t="ann"><span data-mir="tan">Anunțuri</span></button><button class="tile" data-t="o"><span>Colegi</span></button><button class="tile" data-t="grpc"><span data-mir="tgr">Chat grup</span></button><button class="tile" data-t="g"><span data-mir="tg">Mesaje</span></button><button class="tile hide" data-t="m" id="htm"><span>Admin</span></button></div></section>
 <section id="r" class="hide"><div id="rec"></div></section>
 <section id="o" class="hide"><div id="cs1" style="margin:2px 0 10px"></div>
 <div class="r" style="margin:0 0 8px"><button data-cf="all" class="on">Toți</button><button data-cf="on">Online</button></div>
@@ -167,7 +218,7 @@ main>h1{display:none}
 <label class="mu" style="display:flex;gap:8px;align-items:center;margin:8px 0"><input type="checkbox" id="hwt" style="width:auto;margin:0"> 🎃 Temă Halloween</label>
 <div class="r"><button id="psv" class="on">Salvează</button><button id="pout">Ieși din cont</button></div>
 <div class="r" style="margin-top:8px"><button id="pins" type="button">📲 Cum pun aplicația pe ecran</button></div></div>
-<div class="mu">Colegii din aceeași grupă apar la „Colegi” și la „Au fost”. Dacă lași grupa goală, vezi pe toată lumea.</div></section>
+<div class="mu">Colegii din aceeași grupă apar la „Colegi” și la „Au fost”. Dacă lași grupa goală, vezi pe toată lumea.</div><button type="button" id="sgo" class="sgo">Ieși din cont</button></section>
 <section id="m" class="hide"><details class="c" id="anc"><summary class="b">📢 Anunț nou</summary>
 <select id="ant" class="fi" style="margin-top:8px"></select>
 <input id="anh" class="fi" placeholder="Titlu" maxlength="100">
@@ -255,15 +306,12 @@ main>h1{display:none}
 <div id="vf" class="hide"><div class="c" style="width:100%;max-width:380px;margin:auto"><div style="font-size:34px">✉️</div><div class="b" style="font-size:20px">Confirmă adresa de email</div><div class="mu" id="vft" style="margin:8px 0 12px"></div><div class="mu" id="vfm" style="min-height:18px;margin-bottom:8px"></div><div class="r" style="flex-wrap:wrap"><button id="vfc" class="on" style="flex:1 0 100%">Am confirmat</button><button id="vfr" style="flex:1 0 100%">Trimite emailul de confirmare</button><button id="vfo" style="flex:1 0 100%">Ieși din cont</button></div></div></div>
 <p class="mu" id="note"></p>
 </main>
-<div id="more" class="hide"><div id="moreList"></div></div>
 <script>
-(function(){var tabs=document.querySelector('.tabs'),more=document.getElementById('more'),list=document.getElementById('moreList'),mb=document.getElementById('moreb');if(!tabs||!more||!list||!mb)return;
-var orig=Array.prototype.slice.call(tabs.children),SEC=['ann','r','nbk','o','g','m'],mq=window.matchMedia('(max-width:899px)');
-function lay(){if(mq.matches){orig.forEach(function(b){if(b===mb)return;if(SEC.indexOf(b.dataset.t)>-1)list.appendChild(b);else tabs.insertBefore(b,mb)})}else{orig.forEach(function(b){tabs.appendChild(b)});more.classList.add('hide')}}
-lay();if(mq.addEventListener)mq.addEventListener('change',lay);else if(mq.addListener)mq.addListener(lay);
-mb.addEventListener('click',function(){more.classList.toggle('hide')});
-more.addEventListener('click',function(e){if(e.target===more||e.target.closest('[data-t]'))more.classList.add('hide')});
-document.addEventListener('click',function(e){var t=e.target.closest('[data-t]');if(!t)return;setTimeout(function(){var sec=SEC.indexOf(t.dataset.t)>-1;mb.classList.toggle('on',sec);SEC.forEach(function(k){var b=orig.filter(function(x){return x.dataset.t===k})[0];if(b)b.classList.toggle('on',b===t)})},0)});
+(function(){var thub=document.getElementById('thub'),SEC=['ann','r','nbk','o','grpc','g','m','hub'];
+document.addEventListener('click',function(e){var t=e.target.closest('[data-t]');if(!t)return;setTimeout(function(){if(thub)thub.classList.toggle('on',SEC.indexOf(t.dataset.t)>-1)},0)});
+var sg=document.getElementById('sgo');if(sg)sg.addEventListener('click',function(){var c=document.getElementById('chg');if(c)c.click()});
+Array.prototype.forEach.call(document.querySelectorAll('[data-mir]'),function(sp){var src=document.getElementById(sp.getAttribute('data-mir'));if(!src)return;var cp=function(){sp.textContent=src.textContent};cp();new MutationObserver(cp).observe(src,{childList:true,characterData:true,subtree:true})});
+var tm=document.getElementById('tm'),htm=document.getElementById('htm');if(tm&&htm){var cc=function(){htm.classList.toggle('hide',tm.classList.contains('hide'))};cc();new MutationObserver(cc).observe(tm,{attributes:true,attributeFilter:['class']})}
 })();
 </script>
 <script type="module">
@@ -296,24 +344,34 @@ function occ(o){const m=mon(o),w=par(m);return TT().map((e,i)=>({c:e.c,i:e.id,w}
 const start=o=>{const d=new Date(o.date);const t=mn(o.c[1]);d.setHours(0,t,0,0);return d},end=o=>{const d=new Date(o.date);d.setHours(0,mn(o.c[2]),0,0);return d};
 const esc=s=>{const d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML};
 const fmt=m=>m>=1440?Math.round(m/1440)+' zile':m>=60?Math.floor(m/60)+' h '+(m%60)+' min':m+' min';
+const tcol=o=>{const t=String(o.c[4]||'').toUpperCase();return t.startsWith('CUR')?'var(--ac)':t.startsWith('SEM')?'var(--ok)':t.startsWith('LAB')?'var(--no)':t.startsWith('PRO')?'#fbbf24':'var(--mu)'};let selDay=null,selOff=null;
 const lab=o=>`<div class="b">${esc(o.c[3])}<span class="tag">${o.c[4]}</span></div><div class="mu">${DN[o.c[0]]} ${o.c[1]}–${o.c[2]} · ${o.c[5]} · ${esc(o.c[6])||'—'}</div>`;
 function who(key){const ids=Object.keys(all).filter(u=>all[u][key]===1&&sameG(u));return ids.length?`<div class="mu" style="margin-top:6px">✅ Au fost (${ids.length}): ${ids.map(u=>esc(u===uid?'tu':names[u]||'coleg')).join(', ')}</div>`:''}
 function setAtt(key,v){mine={...mine};if(mine[key]===v)delete mine[key];else mine[key]=v;try{localStorage.setItem('mine',JSON.stringify(mine))}catch(e){}
   if(uid){dirty++;setDoc(doc(fs,'attendance',uid),{m:{...mine},n:myName,g:myGroup}).catch(()=>{}).finally(()=>{dirty--})}all[uid||'_']={...mine};render()}
-function btns(o){const v=mine[o.key];return`${v===2?'<div class="mu" style="margin-top:6px">♻️ Marcată ca recuperată</div>':''}<div class="r"><button class="ok ${v===1?'on':''}" data-k="${o.key}" data-v="1">✔ Am fost</button><button class="no ${v===0?'on':''}" data-k="${o.key}" data-v="0">✖ Lipsă</button></div>`}
+function btns(o){const v=mine[o.key];return`${v===2?'<div class="mu" style="margin-top:6px">♻️ Marcată ca recuperată</div>':''}<div class="r"><button class="ok ${v===1?'on':''}" data-k="${o.key}" data-v="1">Prezent</button><button class="no ${v===0?'on':''}" data-k="${o.key}" data-v="0">Absent</button></div>`}
+function hubFill(){const t=$('hubsub');if(t)t.textContent=myGroup?gDisp(myGroup):'Alege-ți grupa din Profil';const v=$('hcv');if(v){v.textContent=myCode||'';$('hcd').classList.toggle('hide',!myCode)}const o=$('hon');if(o){const k=Object.keys(pr||{}).filter(u=>Date.now()-((pr[u]&&pr[u].t)||0)<150000).length;o.textContent=k+' online'}}
 function render(){migrateMarks();renIn();renAnn();renGrp();peers();grBanner();lgBanner();nbRender();
   const pn=par(mon(0)),pt=x=>x==='i'?'IMPARĂ':'PARĂ',sun=addD(mon(0),6),f=d=>d.getDate()+'.'+String(d.getMonth()+1).padStart(2,'0');
   $('par').innerHTML=`<div class="mu">SĂPTĂMÂNA CURENTĂ (${f(mon(0))} – ${f(sun)})</div><div class="b" style="font-size:22px">${pt(pn)}</div><div class="mu">Săptămâna viitoare: ${pt(par(mon(1)))}</div>`;
   const n=new Date(),cur=occ(0),nowO=cur.find(o=>start(o)<=n&&n<end(o));
   const nxt=[...cur,...occ(1)].find(o=>start(o)>n);
-  $('now').innerHTML=(sched&&!sched.length)?'<div class="b">Orarul grupei '+esc(gDisp(myGroup))+' nu e încărcat încă.</div><div class="mu">Cere administratorului să-l adauge.</div>':nowO?`<div class="mu">ACUM · mai sunt ${fmt(Math.round((end(nowO)-n)/6e4))}</div>${lab(nowO)}${btns(nowO)}${who(nowO.key)}`:'<div class="b">Nicio oră acum 🎉</div>'+(nxt?`<div class="mu" style="margin-top:6px">Următoarea, peste ${fmt(Math.round((start(nxt)-n)/6e4))}:</div>${lab(nxt)}`:'');
-  const td=cur.filter(o=>iso(o.date)===iso(n));
-  $('today').innerHTML=td.map(o=>`<div class="c">${lab(o)}${btns(o)+who(o.key)}</div>`).join('')||'<div class="mu">Nu ai ore azi.</div>';
-  const wo=occ(off),wm=mon(off);$('wl').textContent=`Săptămâna ${par(wm)==='i'?'impară':'pară'} · din ${iso(wm)}`;
-  let last=-1;$('wk').innerHTML=wo.map(o=>{const h=o.c[0]!==last?`<h2>${DN[o.c[0]].toUpperCase()} ${o.date.getDate()}.${o.date.getMonth()+1}</h2>`:'';last=o.c[0];return h+`<div class="c">${lab(o)}${btns(o)+who(o.key)}</div>`}).join('');
+  $('now').innerHTML=(sched&&!sched.length)?'<div class="b">Orarul grupei '+esc(gDisp(myGroup))+' nu e încărcat încă.</div><div class="mu">Cere administratorului să-l adauge.</div>':nowO?`<div class="hk"><span>ACUM · ${esc(String(nowO.c[4]))}</span><span>${nowO.c[1]} – ${nowO.c[2]}</span></div><div class="ht">${esc(nowO.c[3])}</div><div class="pb"><i style="width:${Math.max(0,Math.min(100,Math.round((n-start(nowO))/(end(nowO)-start(nowO))*100)))}%"></i></div><div class="hm">Mai sunt ${fmt(Math.round((end(nowO)-n)/6e4))} · ${nowO.c[5]} · ${esc(nowO.c[6])||'—'}</div>${btns(nowO)}${who(nowO.key)}`:'<div class="b">Nicio oră acum 🎉</div>'+(nxt?`<div class="mu" style="margin-top:6px">Următoarea, peste ${fmt(Math.round((start(nxt)-n)/6e4))}:</div>${lab(nxt)}`:'');
+  const td=cur.filter(o=>iso(o.date)===iso(n)),rest=td.filter(o=>o!==nowO&&end(o)>n);
+  $('today').innerHTML=rest.length?`<div class="c tl">${rest.map(o=>`<div class="tr"><div class="tt"><b>${o.c[1]}</b><span>${o.c[2]}</span></div><i style="background:${tcol(o)}"></i><div><div class="b">${esc(o.c[3])}</div><div class="mu">${esc(String(o.c[4]))} · ${o.c[5]}</div></div></div>`).join('')}</div>`:'<div class="mu">Nu mai ai ore azi.</div>';
+  const wo=occ(off),wm=mon(off);if(selOff!==off){selOff=off;selDay=null}
+  const DS=['Lun','Mar','Mie','Joi','Vin','Sâm','Dum'],ML=['ianuarie','februarie','martie','aprilie','mai','iunie','iulie','august','septembrie','octombrie','noiembrie','decembrie'],tdw=((n.getDay()+6)%7)+1,has={};wo.forEach(o=>has[o.c[0]]=1);
+  if(!selDay)selDay=off===0?tdw:(Object.keys(has).map(Number).sort((x,y)=>x-y)[0]||1);
+  const maxd=Math.max(5,selDay,...Object.keys(has).map(Number));
+  $('sdays').innerHTML=Array.from({length:maxd},(_,i)=>{const d=i+1,dt=addD(wm,i);return`<button type="button" class="dc ${d===selDay?'on':''}" data-sd="${d}" aria-pressed="${d===selDay}"><span>${DS[i]}</span><b>${dt.getDate()}</b></button>`}).join('');
+  const sdt=addD(wm,selDay-1);$('wl').textContent=`${DN[selDay]}, ${sdt.getDate()} ${ML[sdt.getMonth()]} · săptămâna ${par(wm)==='i'?'impară':'pară'}`;
+  const dl=wo.filter(o=>o.c[0]===selDay);
+  $('wk').innerHTML=dl.length?dl.map(o=>`<div class="c wc" style="border-left-color:${tcol(o)}">${lab(o)}${btns(o)+who(o.key)}</div>`).join(''):'<div class="mu">Nicio oră în această zi.</div>';
   renRec(n);
+  {const MS=['ian','feb','mar','apr','mai','iun','iul','aug','sep','oct','nov','dec'],m0=mon(0);$('pchip').textContent='Săpt. '+pt(pn)+' · '+(m0.getMonth()===sun.getMonth()?m0.getDate()+'–'+sun.getDate()+' '+MS[sun.getMonth()]:m0.getDate()+' '+MS[m0.getMonth()]+'–'+sun.getDate()+' '+MS[sun.getMonth()]);
+  $('greet').innerHTML=`<h1 class="gt">Bună, ${esc(myName||'')}</h1><div class="mu">${myGroup?'Grupa '+esc(gDisp(myGroup)):'Alege-ți grupa din Profil'}</div>`;hubFill()}
 }
-document.addEventListener('click',e=>{if(e.target.id==='chg'){e.preventDefault();signOut(auth);return}const b=e.target.closest('[data-k]');if(b)return setAtt(b.dataset.k,+b.dataset.v);const t=e.target.closest('[data-t]');if(t){document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===t));['a','ann','s','r','nbk','o','grpc','g','p','m'].forEach(i=>$(i).classList.toggle('hide',i!==t.dataset.t))}});
+document.addEventListener('click',e=>{if(e.target.id==='chg'){e.preventDefault();signOut(auth);return}const b=e.target.closest('[data-k]');if(b)return setAtt(b.dataset.k,+b.dataset.v);const sd=e.target.closest('[data-sd]');if(sd){selDay=+sd.dataset.sd;render();return}const t=e.target.closest('[data-t]');if(t){document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===t));['a','ann','s','r','nbk','o','grpc','g','p','m','hub'].forEach(i=>$(i).classList.toggle('hide',i!==t.dataset.t))}});
 $('pw').onclick=()=>{off--;render()};$('nw').onclick=()=>{off++;render()};
 $('sw').onclick=()=>{swap=1-swap;try{localStorage.setItem('swap',swap)}catch(e){}render()};
 const CFG={apiKey:"AIzaSyDLnd7BAqNvM6ZsgmvpMg3ZBsZmtVEYTn4",authDomain:"orar-upb.firebaseapp.com",projectId:"orar-upb",storageBucket:"orar-upb.firebasestorage.app",messagingSenderId:"970129347906",appId:"1:970129347906:web:71da2aee9c7424dc08a4db"};
@@ -340,7 +398,7 @@ function joinKey(g){if(!uid||!g)return;myGroup=g;grp[uid]=g;profEdit=false;dirty
 async function joinCode(raw,msgEl){const c=String(raw||'').toUpperCase().replace(/[^A-Z0-9]/g,'');const say=(t,ok)=>{if(msgEl){msgEl.style.color=ok?'var(--ok)':'var(--no)';msgEl.textContent=t}};if(c.length<4)return say('Scrie codul grupei.');say('Caut…',1);
  try{const q=await getDocs(query(collection(fs,'groups'),where('code','==',c)));if(q.empty)return say('Cod necunoscut. Verifică-l cu șeful grupei.');const d=q.docs[0],g=KRX.test(d.id)?d.id:fullG(d.data().groupId);if(!g)return say('Cod invalid.');joinKey(g);say('✓ Ai intrat în grupa '+gDisp(g),1)}catch(e){say('Nu s-a putut ('+(e.code||'eroare')+').')}}
 function loadMyCode(){myCode='';renCode();if(!uid||!myGroup)return;const g=myGroup;getDoc(doc(fs,'groups',g)).then(d=>{if(g===myGroup){myCode=d.exists()&&d.data().code||'';renCode()}}).catch(()=>{})}
-function renCode(){const w=$('pcd');if(!w)return;w.classList.toggle('hide',!myCode);$('pcv').textContent=myCode}
+function renCode(){const w=$('pcd');if(!w)return;w.classList.toggle('hide',!myCode);$('pcv').textContent=myCode;hubFill()}
 function glkUpd(){const cu=auth.currentUser,w=$('glkw');if(!w)return;const g=cu&&cu.providerData.find(p=>p.providerId==='google.com');w.classList.toggle('hide',!cu);$('glk').classList.toggle('hide',!!g);$('glok').classList.toggle('hide',!g);if(g)$('glot').textContent='Conectat cu Google'+(g.email?' · '+g.email:'')}
 $('glk').onclick=async()=>{const m=$('glm');m.style.color='var(--ok)';m.textContent='';const p=new GoogleAuthProvider();p.setCustomParameters({prompt:'select_account'});try{await linkWithPopup(auth.currentUser,p);m.textContent='✓ Contul tău e conectat cu Google. Datele tale au rămas.';glkUpd()}catch(e){const c=e.code||'';m.style.color='var(--no)';m.textContent=(c==='auth/credential-already-in-use'||c==='auth/email-already-in-use')?'Acest cont Google există deja în Nopera, ca alt cont. Folosește alt cont Google sau scrie la Suport ca să le unim.':(c==='auth/popup-closed-by-user'||c==='auth/cancelled-popup-request')?'':c==='auth/popup-blocked'?'Permite ferestrele pop-up și încearcă din nou.':'Nu s-a conectat ('+(c||'eroare')+').'}};
 function glFill(){const u=(facs.find(x=>x.id===glFid)||{}).universityId,l=[...new Set((glU[u]||[]).filter(k=>fcOf(k)===glFid&&(!glPc||pgOf(k)===glPc)).map(gName))].sort(),el=$('gl');if(el)el.innerHTML=l.map(g=>`<option value="${esc(g)}">`).join('')}
@@ -405,7 +463,7 @@ function setMode(r){regMode=r;er('');$('an').classList.toggle('hide',!r);$('ap2w
 $('lg').onclick=()=>regMode?setMode(false):go(false);$('rg').onclick=()=>regMode?go(true):setMode(true);try{$('au').value=localStorage.getItem('em')||''}catch(e){}
 $('psv').onclick=async()=>{if(!uid)return;const n=$('pn').value.trim().slice(0,24)||myName;myName=n;const gn=ng($('pg').value),pc=$('pp').value;myGroup=gn?($('pf').value||'upb_sim')+(pc?'_'+pc:'')+'_'+gn:'';profEdit=false;names[uid]=n;grp[uid]=myGroup;dirty++;setDoc(doc(fs,'attendance',uid),{m:{...mine},n:myName,g:myGroup}).catch(()=>{}).finally(()=>{dirty--});chkSched();try{await updateProfile(auth.currentUser,{displayName:n})}catch(e){}pres();showMe();render();peers();$('pn').value=myName;$('pg').value=gName(myGroup);$('pm').textContent='✓ Salvat'}
 $('jcb').onclick=()=>joinCode($('jcd').value,$('jcm'));
-$('pcs').onclick=()=>{const t='Intră în Nopera și folosește codul grupei '+myCode+': '+location.origin+location.pathname;window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank')};
+$('hcs').onclick=()=>$('pcs').onclick();$('pcs').onclick=()=>{const t='Intră în Nopera și folosește codul grupei '+myCode+': '+location.origin+location.pathname;window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank')};
 $('pu').onchange=()=>{fillF($('pu'),$('pf'),'',$('pp'));profEdit=true;glLoad($('pf').value,$('pp').value)};$('pf').onchange=()=>{fillP($('pf'),$('pp'));profEdit=true;glLoad($('pf').value,$('pp').value)};$('pp').onchange=()=>{profEdit=true;glLoad($('pf').value,$('pp').value)};$('pg').oninput=()=>{profEdit=true};;
 $('pout').onclick=()=>signOut(auth);
 $('sup').onclick=()=>{$('sm').textContent='';$('sp').classList.remove('hide')};$('sx').onclick=()=>$('sp').classList.add('hide');
@@ -655,7 +713,7 @@ function chkGrp(){if(gCur===myGroup)return;gUn.forEach(f=>f());gUn=[];gCur=myGro
 function renGrp(){if(!$('gms'))return;const mc=Object.keys(all).filter(u=>u!=='_'&&grp[u]===myGroup).length;const open=!$('grpc').classList.contains('hide');$('gtl').textContent=myGroup?'Grupa '+gDisp(myGroup):'Grup';
  $('gsub').textContent=myGroup?(mc+' membri · '+gMsgs.length+' mesaje'+(canMod()?' · ești șef/admin: poți fixa mesaje':'')):'Alege grupa în Profil ca să intri în grup.';
  const seen=gSeen();if(open&&gMsgs.length){try{localStorage.setItem(gSeenK(),String(Math.max(...gMsgs.map(m=>m.t))))}catch(e){}}
- const nu=open?0:gMsgs.filter(m=>m.t>seen&&m.uid!==uid).length;$('tgr').textContent='Grup'+(nu?' ('+nu+')':'');
+ const nu=open?0:gMsgs.filter(m=>m.t>seen&&m.uid!==uid).length;$('tgr').textContent='Chat grup'+(nu?' ('+nu+')':'');
  const pins=gMsgs.filter(m=>m.pin).slice(-3).reverse();
  $('gpin').innerHTML=pins.map(m=>`<div class="c now" style="padding:8px 12px"><div class="mu">📌 Fixat · ${esc(m.name||'')}</div><div style="white-space:pre-wrap;word-break:break-word">${m.ph?'📸 '+esc(m.ph.subj)+(m.ph.title?' · '+esc(m.ph.title):''):linkify(String(m.text||'').slice(0,300))}</div></div>`).join('');
  const el=$('gms'),near=el.scrollHeight-el.scrollTop-el.clientHeight<80||!el.dataset.init;
