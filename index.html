@@ -188,6 +188,20 @@ h1.pt{font-size:28px;margin:0 0 14px}
 .at.hot{background:var(--ac);border-color:var(--ac);color:var(--onac)}.at.hot span{color:var(--onac);opacity:.85}
 #fau{display:none}
 .faonly #ah,.faonly #bk,.faonly #anc,.faonly #adv,.faonly #uf,.faonly #stv{display:none!important}
+
+/* ===== Chat v2 ===== */
+.chs{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;margin-top:10px;-webkit-overflow-scrolling:touch}
+.chs button{flex:0 0 auto;min-height:0!important;padding:8px 14px!important;border-radius:999px;font-size:13px;white-space:nowrap}
+.chs button i{font-style:normal;margin-left:6px;background:var(--no);color:#fff;border-radius:999px;padding:1px 7px;font-size:11px}
+.chs button.on i{background:var(--onac);color:var(--ac)}
+#grb{display:flex}#grb.hide{display:none}
+.rq{border-left:3px solid currentColor;padding:2px 8px;margin:0 0 6px;font-size:12px;opacity:.8;white-space:normal;overflow:hidden;max-height:40px}
+.rxs{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.rxs button{min-height:0!important;padding:2px 8px!important;font-size:13px;border-radius:999px;background:var(--bg);color:var(--tx);border:1px solid var(--bd)}
+.rxs button.on{border-color:var(--ac);color:var(--ac);font-weight:800}
+.gm.me .rxs button{background:transparent;color:inherit;border-color:currentColor}
+.gm.me .rxs button.on{background:var(--onac);color:var(--ac)}
+.gx button{background:transparent}
 </style><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"></head><body><div id="ov" style="position:fixed;inset:0;z-index:9;background:var(--bg);padding:20px;overflow:auto"><div class="c" style="width:100%;max-width:380px;margin:auto"><div class="b" style="font-size:20px">📚 Nopera</div><div class="mu" id="ovt" style="margin:6px 0 10px">Intră sau creează cont (email + parolă).<br>Ai deja cont cu email? Intră cu emailul și parola, apoi apasă „Conectează contul cu Google” în Profil, ca să nu-ți pierzi datele.</div>
 <button id="gg" type="button" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1f1f1f;border:1px solid #dadce0;font-weight:600;margin-bottom:10px"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.5l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.7 6.9l7.3 5.7c4.3-4 6.8-9.9 6.8-17.1z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.4-.8-2.9-.8-4.7s.3-3.3.8-4.7l-7.9-6.1C.9 16.4 0 20.1 0 24s.9 7.6 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.3 0 11.6-2.1 15.5-5.7l-7.3-5.7c-2 1.4-4.7 2.3-8.2 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>Continuă cu Google</button><div class="mu" style="text-align:center;margin:0 0 10px">sau cu email și parolă</div><input id="an" maxlength="24" placeholder="Numele tău" class="fi hide"><input id="au" type="email" placeholder="Email" autocapitalize="none" autocomplete="email" class="fi"><div class="pw"><input id="ap" type="password" placeholder="Parolă (minim 6 caractere)" autocomplete="current-password" class="fi"><button type="button" class="eye" data-eye aria-label="Arată sau ascunde parola">Arată</button></div><div class="pw hide" id="ap2w"><input id="ap2" type="password" placeholder="Repetă parola" autocomplete="new-password" class="fi"></div><div id="er" class="mu" style="color:var(--no);min-height:18px"></div><div class="mu" id="fgd" style="margin:-4px 0 10px"><a href="#" id="fg">Ai uitat parola?</a></div><label class="mu" style="display:flex;gap:8px;align-items:center;margin:0 0 10px"><input type="checkbox" id="rm" checked style="width:auto;margin:0"> Ține-mă minte pe acest dispozitiv</label><div class="r"><button id="lg" class="on">Intră</button><button id="rg">Cont nou</button></div>
 <div style="text-align:center;margin-top:12px"><a href="#" id="lins">📲 Cum pun aplicația pe ecran?</a></div></div></div><div id="hw" aria-hidden="true"><span class="b1">🦇</span><span class="b2">🦇</span><span class="b3">🦇</span><span class="g">👻</span><span class="w">🕸️</span></div>
@@ -328,8 +342,10 @@ h1.pt{font-size:28px;margin:0 0 14px}
 <section id="grpc" class="hide">
 <div class="c" style="display:flex;align-items:center;gap:10px"><div style="font-size:24px">👥</div><div style="flex:1"><div class="b" id="gtl">Grupa</div><div class="mu" id="gsub"></div></div><button id="gmb" style="flex:0 0 auto">👥 Membri</button></div>
 <div id="gmem" class="hide" style="margin-top:8px"></div>
+<div id="gch" class="chs"></div>
 <div id="gpin"></div>
 <div id="gms" style="display:flex;flex-direction:column;gap:6px;max-height:52vh;overflow:auto;padding:4px 0"></div>
+<div id="grb" class="hide c" style="margin-top:8px;padding:8px 12px;align-items:center;gap:8px"><div style="flex:1;min-width:0"><div class="mu" id="grn"></div><div id="grt" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div></div><button id="grx" style="flex:0 0 auto;min-height:0;padding:4px 10px">✕</button></div>
 <div class="r" style="margin-top:8px;align-items:center"><button id="gph" style="flex:0 0 auto" title="Trimite o poză">📷</button><input id="gin" class="fi" placeholder="Scrie în grup…" maxlength="2000" style="margin:0"><button id="gsd" class="on" style="flex:0 0 auto">Trimite</button></div>
 <input type="file" id="gfi" accept="image/*" class="hide">
 </section>
@@ -755,20 +771,34 @@ let gMsgs=[],gAdmins=[],gUn=[],gCur,gPhUn=null,gPhSubj=null,gPhotos=[],gcDocs={}
 const okImg=x=>String(x||'').startsWith('data:image/')?x:'',canMod=()=>isAdm||gAdmins.includes(uid),
  linkify=t=>esc(t).replace(/(https?:\/\/[^\s<>"']+)/g,'<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'),
  gSeenK=()=>'gs_'+uid+'_'+myGroup,gSeen=()=>{try{return +localStorage.getItem(gSeenK())||0}catch(e){return 0}};
-function chkGrp(){if(gCur===myGroup)return;gUn.forEach(f=>f());gUn=[];gCur=myGroup;gMsgs=[];gAdmins=[];if(!myGroup||!uid){renGrp();return}
- gUn.push(onSnapshot(query(collection(fs,'groupChats',dbG(myGroup),'messages'),orderBy('t','desc'),limit(60)),s=>{gMsgs=s.docs.map(d=>({id:d.id,...d.data()})).reverse();renGrp()},()=>{gMsgs=[];renGrp()}));
+let gRx=[],gCh='general',gRep=null;
+const EMO=['👍','❤️','😂','🙏','🔥'],chOf=m=>m.ch||(m.ph?'s:'+m.ph.subj:'general'),
+ gChans=()=>[{id:'general',n:'💬 General'},{id:'teme',n:'📝 Teme'}].concat(nbSubjects().map(x=>({id:'s:'+x,n:x}))),
+ gSeenAll=()=>{try{return JSON.parse(localStorage.getItem('gs2_'+uid+'_'+myGroup)||'{}')}catch(e){return{}}},
+ gSeenSet=(c,t)=>{try{const o=gSeenAll();o[c]=t;localStorage.setItem('gs2_'+uid+'_'+myGroup,JSON.stringify(o))}catch(e){}};
+function gSplit(docs){const l=docs.map(d=>({id:d.id,...d.data()})).reverse();gRx=l.filter(m=>m.rxOf);gMsgs=l.filter(m=>!m.rxOf)}
+function chkGrp(){if(gCur===myGroup)return;gUn.forEach(f=>f());gUn=[];gCur=myGroup;gMsgs=[];gRx=[];gAdmins=[];gCh='general';gRep=null;if(!myGroup||!uid){renGrp();return}
+ gUn.push(onSnapshot(query(collection(fs,'groupChats',dbG(myGroup),'messages'),orderBy('t','desc'),limit(250)),s=>{gSplit(s.docs);renGrp()},()=>{gMsgs=[];gRx=[];renGrp()}));
  gUn.push(onSnapshot(doc(fs,'groupChats',dbG(myGroup)),s=>{gAdmins=(s.exists()&&s.data().admins)||[];renGrp()},()=>{}))}
 function renGrp(){if(!$('gms'))return;const mc=Object.keys(all).filter(u=>u!=='_'&&grp[u]===myGroup).length;const open=!$('grpc').classList.contains('hide');$('gtl').textContent=myGroup?'Grupa '+gDisp(myGroup):'Grup';
- $('gsub').textContent=myGroup?(mc+' membri · '+gMsgs.length+' mesaje'+(canMod()?' · ești șef/admin: poți fixa mesaje':'')):'Alege grupa în Profil ca să intri în grup.';
- const seen=gSeen();if(open&&gMsgs.length){try{localStorage.setItem(gSeenK(),String(Math.max(...gMsgs.map(m=>m.t))))}catch(e){}}
- const nu=open?0:gMsgs.filter(m=>m.t>seen&&m.uid!==uid).length;$('tgr').textContent='Chat grup'+(nu?' ('+nu+')':'');
- const pins=gMsgs.filter(m=>m.pin).slice(-3).reverse();
+ const chans=gChans();if(!chans.some(c=>c.id===gCh))gCh='general';
+ const cur=chans.find(c=>c.id===gCh),inCh=gMsgs.filter(m=>chOf(m)===gCh);
+ $('gsub').textContent=myGroup?(mc+' membri · '+inCh.length+' mesaje în '+cur.n.replace(/^\S+\s/,'')+(canMod()?' · poți fixa mesaje':'')):'Alege grupa în Profil ca să intri în grup.';
+ const sa=gSeenAll(),legacy=gSeen(),seenOf=c=>sa[c]!==undefined?sa[c]:legacy;
+ if(open&&inCh.length)gSeenSet(gCh,Math.max(...inCh.map(m=>m.t)));
+ const unOf=c=>(open&&c===gCh)?0:gMsgs.filter(m=>chOf(m)===c&&m.t>(c===gCh&&open?0:seenOf(c))&&m.uid!==uid).length,tot=chans.reduce((a,c)=>a+unOf(c.id),0);
+ $('tgr').textContent='Chat grup'+(tot?' ('+tot+')':'');
+ $('gch').innerHTML=myGroup?chans.map(c=>{const u=unOf(c.id);return`<button data-gch="${esc(c.id)}" class="${c.id===gCh?'on':''}">${esc(c.n)}${u?`<i>${u}</i>`:''}</button>`}).join(''):'';
+ $('gin').placeholder=gCh==='teme'?'Scrie tema: materie, termen, ce trebuie făcut…':'Scrie în '+cur.n.replace(/^\S+\s/,'')+'…';
+ $('grb').classList.toggle('hide',!gRep);if(gRep){$('grn').textContent='Răspunzi lui '+gRep.n;$('grt').textContent=gRep.t}
+ const pins=inCh.filter(m=>m.pin).slice(-3).reverse();
  $('gpin').innerHTML=pins.map(m=>`<div class="c now" style="padding:8px 12px"><div class="mu">📌 Fixat · ${esc(m.name||'')}</div><div style="white-space:pre-wrap;word-break:break-word">${m.ph?'📸 '+esc(m.ph.subj)+(m.ph.title?' · '+esc(m.ph.title):''):linkify(String(m.text||'').slice(0,300))}</div></div>`).join('');
- const el=$('gms'),near=el.scrollHeight-el.scrollTop-el.clientHeight<80||!el.dataset.init;
- el.innerHTML=gMsgs.map(m=>{const me=m.uid===uid;return`<div class="gm ${me?'me':''}">${me?'':`<div class="gn">${esc(m.name||'Coleg')}</div>`}${m.ph?`<img class="gi" alt="" data-gph="${esc(m.ph.id)}" src="${okImg(m.ph.th)}"><div class="gs">📚 ${esc(m.ph.subj)}${m.ph.title?' · '+esc(m.ph.title):''}</div>`:''}${m.text?`<div>${linkify(m.text)}</div>`:''}<small>${fmtT(m.t)}${m.pin?' · 📌':''}</small><span class="gx">${canMod()?`<button data-gpin="${m.id}">${m.pin?'Scoate 📌':'📌 Fixează'}</button>`:''}${me||canMod()?`<button data-gdel="${m.id}">🗑</button>`:''}</span></div>`}).join('')||'<div class="mu">Niciun mesaj încă. Scrie primul!</div>';
- if(near){el.scrollTop=el.scrollHeight;el.dataset.init='1'}renMem()}
+ const el=$('gms'),near=el.scrollHeight-el.scrollTop-el.clientHeight<80||el.dataset.init!==gCh;
+ const rxHtml=m=>{const by={};gRx.filter(r=>r.rxOf===m.id).forEach(r=>{(by[r.em]=by[r.em]||[]).push(r.uid)});const ks=Object.keys(by);return ks.length?`<div class="rxs">${ks.map(k=>`<button data-grx="${esc(m.id)}|${EMO.indexOf(k)}" class="${by[k].includes(uid)?'on':''}">${esc(k)} ${by[k].length}</button>`).join('')}</div>`:''};
+ el.innerHTML=inCh.map(m=>{const me=m.uid===uid;return`<div class="gm ${me?'me':''}">${me?'':`<div class="gn">${esc(m.name||'Coleg')}</div>`}${m.re?`<div class="rq"><b>${esc(m.re.n||'')}</b> ${esc(m.re.t||'')}</div>`:''}${m.ph?`<img class="gi" alt="" data-gph="${esc(m.ph.id)}" src="${okImg(m.ph.th)}"><div class="gs">📚 ${esc(m.ph.subj)}${m.ph.title?' · '+esc(m.ph.title):''}</div>`:''}${m.text?`<div>${linkify(m.text)}</div>`:''}<small>${fmtT(m.t)}${m.pin?' · 📌':''}</small>${rxHtml(m)}<span class="gx">${EMO.map((e,i)=>`<button data-grx="${esc(m.id)}|${i}">${e}</button>`).join('')}<button data-grep="${esc(m.id)}">↩ Răspunde</button>${canMod()?`<button data-gpin="${m.id}">${m.pin?'Scoate 📌':'📌 Fixează'}</button>`:''}${me||canMod()?`<button data-gdel="${m.id}">🗑</button>`:''}</span></div>`}).join('')||'<div class="mu">Niciun mesaj în acest canal. Scrie primul!</div>';
+ if(near){el.scrollTop=el.scrollHeight;el.dataset.init=gCh}renMem()}
 const gCol=n=>collection(fs,'groupChats',dbG(myGroup),n);
-$('gsd').onclick=async()=>{const t=$('gin').value.trim().slice(0,2000);if(!t||!uid||!myGroup)return;$('gsd').disabled=true;try{await addDoc(gCol('messages'),{uid,name:myName,text:t,t:Date.now()});$('gin').value=''}catch(e){alert('Nu s-a trimis ('+(e.code||'eroare')+'). Verifică regulile din Firestore.')}$('gsd').disabled=false};
+$('gsd').onclick=async()=>{const t=$('gin').value.trim().slice(0,2000);if(!t||!uid||!myGroup)return;$('gsd').disabled=true;try{const mm={uid,name:myName,text:t,t:Date.now(),ch:gCh};if(gRep)mm.re={id:gRep.id,n:gRep.n,t:gRep.t};await addDoc(gCol('messages'),mm);$('gin').value='';gRep=null;renGrp()}catch(e){alert('Nu s-a trimis ('+(e.code||'eroare')+'). Verifică regulile din Firestore.')}$('gsd').disabled=false};
 $('gin').onkeydown=e=>{if(e.key==='Enter')$('gsd').click()};
 $('gph').onclick=()=>{if(!myGroup)return alert('Alege mai întâi grupa în Profil.');$('gfi').click()};
 async function gShrink(f,max,q){const bm=await createImageBitmap(f),k=Math.min(1,max/Math.max(bm.width,bm.height)),c=document.createElement('canvas');c.width=Math.round(bm.width*k);c.height=Math.round(bm.height*k);c.getContext('2d').drawImage(bm,0,0,c.width,c.height);return c.toDataURL('image/jpeg',q)}
@@ -790,6 +820,11 @@ function renGad(){if(!isAdm||!edG)return;const cur=gcDocs[dbG(edG)]||[],us=Objec
  $('gadl').innerHTML=us.map(u=>`<div class="r" style="align-items:center;margin:4px 0"><div style="flex:1">${esc(names[u]||'Elev')}${cur.includes(u)?' <span class="tag">👑 șef</span>':''}</div><button data-gad="${u}" style="flex:0 0 auto">${cur.includes(u)?'Scoate':'Fă șef'}</button></div>`).join('')||'<div class="mu">Niciun elev în această grupă încă.</div>'}
 document.addEventListener('click',async e=>{const g=k=>e.target.closest('['+k+']');let b;
  if(e.target.closest('[data-t="grpc"]')){setTimeout(renGrp,0);return}
+ if(b=g('data-gch')){gCh=b.dataset.gch;gRep=null;$('gms').dataset.init='';renGrp();return}
+ if(b=g('data-grep')){const m=gMsgs.find(x=>x.id===b.dataset.grep);if(m){gRep={id:m.id,n:m.name||'Coleg',t:String(m.text||(m.ph?'📸 '+m.ph.subj:'')).slice(0,80)};renGrp();$('gin').focus()}return}
+ if(e.target.closest('#grx')){gRep=null;renGrp();return}
+ if(b=g('data-grx')){const [mid,ix]=b.dataset.grx.split('|'),em=EMO[+ix];if(!em||!uid||!myGroup)return;const rid='rx_'+mid+'_'+uid+'_'+ix,ex=gRx.find(r=>r.id===rid);
+  try{if(ex)await deleteDoc(doc(fs,'groupChats',dbG(myGroup),'messages',rid));else await setDoc(doc(fs,'groupChats',dbG(myGroup),'messages',rid),{uid,name:myName,text:'',t:Date.now(),rxOf:mid,em,ch:gCh})}catch(x){alert('Nu s-a salvat reacția ('+(x.code||'eroare')+').')}return}
  if(b=g('data-gph')){const m=gMsgs.find(x=>x.id===b.dataset.gph||(x.ph&&x.ph.id===b.dataset.gph)),p=gPhotos.find(x=>x.id===b.dataset.gph),ph=(m&&m.ph)||p||{};gOpen(b.dataset.gph,ph.th,(ph.subj?ph.subj+' · ':'')+(ph.title||'')+((m&&m.name)||(p&&p.name)?' · '+((m&&m.name)||p.name):''));return}
  if(b=g('data-gpin')){const m=gMsgs.find(x=>x.id===b.dataset.gpin);if(m)updateDoc(doc(fs,'groupChats',dbG(myGroup),'messages',m.id),{pin:!m.pin}).catch(()=>alert('Doar șeful grupei sau adminul poate fixa mesaje.'));return}
  if(b=g('data-gdel')){const m=gMsgs.find(x=>x.id===b.dataset.gdel);if(m&&confirm('Ștergi mesajul?'))deleteDoc(doc(fs,'groupChats',dbG(myGroup),'messages',m.id)).catch(()=>alert('Nu s-a putut șterge.'));return}
@@ -849,7 +884,7 @@ document.addEventListener('click',e=>{if(e.target.id==='ins'){$('ins').classList
 function pres(){if(!uid||document.hidden)return;const n=new Date(),o=occ(0).find(o=>start(o)<=n&&n<end(o));setDoc(doc(fs,'presence',uid),{name:myName,g:myGroup,now:o?o.c[3]:'Liber',t:Date.now()}).catch(()=>{})}
 let regBusy=false,attLoaded=false,grbOn=false,vfSent=false,vfTm=null,vfCool=0,vfErr='';
 const onAuth=u=>{if(u&&regBusy)return;un.forEach(f=>f());un=[];unP.forEach(f=>f());unP=[];pe={};ownM={};profsP={};ownProf=null;profEdit=false;clearInterval(hb);
-  if(!u){hideVerify();gUn.forEach(f=>f());gUn=[];gCur=undefined;gMsgs=[];gAdmins=[];if(gPhUn){gPhUn();gPhUn=null}gPhSubj=null;gPhotos=[];gcDocs={};$('glb').classList.add('hide');$('gpm').classList.add('hide');anns=[];attLoaded=false;grbOn=false;setMode(false);nbNotes=[];nbCur=null;nbSubj=null;nbCv=null;$('nbe').classList.add('hide');if(dmUn){dmUn();dmUn=null}dm=null;msgs=[];chats=[];profs={};profLoaded=false;unS();unS=()=>{};curSG=null;sched=null;allSched=[];tkMine=[];tkAll=[];isAdm=false;isFA=false;myFacs=[];facAdm={};grpMeta={};document.body.classList.remove('faonly');$('tm').classList.add('hide');uid=null;myName='';all={};mine={};$('ov').classList.remove('hide');$('me').textContent='';render();return}
+  if(!u){hideVerify();gUn.forEach(f=>f());gUn=[];gCur=undefined;gMsgs=[];gRx=[];gAdmins=[];if(gPhUn){gPhUn();gPhUn=null}gPhSubj=null;gPhotos=[];gcDocs={};$('glb').classList.add('hide');$('gpm').classList.add('hide');anns=[];attLoaded=false;grbOn=false;setMode(false);nbNotes=[];nbCur=null;nbSubj=null;nbCv=null;$('nbe').classList.add('hide');if(dmUn){dmUn();dmUn=null}dm=null;msgs=[];chats=[];profs={};profLoaded=false;unS();unS=()=>{};curSG=null;sched=null;allSched=[];tkMine=[];tkAll=[];isAdm=false;isFA=false;myFacs=[];facAdm={};grpMeta={};document.body.classList.remove('faonly');$('tm').classList.add('hide');uid=null;myName='';all={};mine={};$('ov').classList.remove('hide');$('me').textContent='';render();return}
   if(REQUIRE_VERIFY&&!u.emailVerified){showVerify(u,vfSent);vfSent=false;return}hideVerify();
   uid=u.uid;myName=u.displayName||'';names[uid]=myName;$('pa').textContent='';getDoc(doc(fs,'attendance',uid)).then(d=>{if(!d.exists())setDoc(doc(fs,'attendance',uid),{m:{},n:myName,g:''}).catch(()=>{})}).catch(()=>{});getDoc(doc(fs,'admins',uid)).then(d=>{isAdm=d.exists();subScope();if(isAdm)renUni();loadFA();$('tm').classList.toggle('hide',!isAdm);$('pa').textContent=isAdm?'🛡️ Cont de administrator':'';if(isAdm)un.push(onSnapshot(collection(fs,'scheduleEntries'),s=>{allSched=s.docs.map(d=>({id:d.id,...d.data()}));renGroups()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'groups'),s=>{grpDocs=s.docs.map(d=>d.data().groupId).filter(Boolean);grpMeta={};s.docs.forEach(d=>{const x=d.data(),k=fullG(x.groupId);if(k)grpMeta[k]={...(grpMeta[k]||{}),...x,...((grpMeta[k]&&grpMeta[k].code&&!x.code)?{code:grpMeta[k].code}:{})}});renGroups();loadMyCode()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'groupChats'),s=>{gcDocs={};s.docs.forEach(d=>gcDocs[d.id]=d.data().admins||[]);renGroups()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'facAdmins'),s=>{facAdm={};s.docs.forEach(d=>facAdm[d.id]=d.data());renFA()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'support'),s=>{tkAll=s.docs.map(d=>({id:d.id,...d.data()}));renSup()},()=>{}));renAdm()}).catch(e=>{isAdm=false;$('pa').textContent=''});$('ov').classList.add('hide');showMe();
   un.push(onSnapshot(doc(fs,'attendance',uid),s=>{attLoaded=true;const x=s.exists()?s.data():{};ownM=x.m||{};const gk=fullG(x.g);grp[uid]=gk;if(x.n)names[uid]=x.n;if(x.g&&x.g!==gk&&!dirty)setDoc(doc(fs,'attendance',uid),{m:x.m||{},n:x.n||myName,g:gk}).catch(()=>{});myGroup=gk;chkSched();fillProf();if(!dirty)mine={...ownM};rebuildAll();renAdm();if(myName)names[uid]=myName;render()},()=>{}));
