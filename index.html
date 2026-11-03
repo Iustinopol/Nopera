@@ -218,6 +218,15 @@ h1.pt{font-size:28px;margin:0 0 14px}
 #ov .r button:not(.on){order:1;background:transparent;border:0;color:var(--mu);font-weight:700;min-height:44px}
 #ov .r button:not(.on):hover{color:var(--tx)}
 #ov #lins{font-weight:700}
+
+/* ===== Profesori ===== */
+[data-t="prf"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 9l10-5 10 5-10 5z'/%3E%3Cpath d='M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5'/%3E%3Cpath d='M22 9v6'/%3E%3C/svg%3E")}
+.chk{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0}
+.chk label{display:flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid var(--bd);border-radius:999px;font-size:13px;font-weight:700;cursor:pointer;background:var(--bg)}
+.chk input{width:auto;margin:0}
+.gm.pp{align-self:stretch;max-width:100%;background:var(--cd);color:var(--tx);border:2px solid var(--ac)}
+.gm.pp .gn{color:var(--ac);opacity:1}
+#m[data-v="tav"]>#tav{display:block}.faonly #tav{display:none!important}
 </style><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"></head><body><div id="ov" style="position:fixed;inset:0;z-index:9;background:var(--bg);padding:20px;overflow:auto"><div class="c" style="width:100%;max-width:380px;margin:auto"><div class="lgo">N</div><div class="lgh">Bun venit la Nopera</div><div class="mu" id="ovt" style="margin:8px 0 18px">Orarul, grupa și colegii tăi, într-un singur loc.</div>
 <button id="gg" type="button" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1f1f1f;border:1px solid #dadce0;font-weight:600;margin-bottom:10px"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.5l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.7 6.9l7.3 5.7c4.3-4 6.8-9.9 6.8-17.1z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.4-.8-2.9-.8-4.7s.3-3.3.8-4.7l-7.9-6.1C.9 16.4 0 20.1 0 24s.9 7.6 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.3 0 11.6-2.1 15.5-5.7l-7.3-5.7c-2 1.4-4.7 2.3-8.2 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>Continuă cu Google</button><div class="mu" style="text-align:center;font-size:12px;margin:-2px 0 14px">Cu Google nu îți pierzi datele, nici dacă schimbi telefonul.</div><div class="dv"><span>sau cu email</span></div><input id="an" maxlength="24" placeholder="Numele tău" class="fi hide"><input id="au" type="email" placeholder="Email" autocapitalize="none" autocomplete="email" class="fi"><div class="pw"><input id="ap" type="password" placeholder="Parolă (minim 6 caractere)" autocomplete="current-password" class="fi"><button type="button" class="eye" data-eye aria-label="Arată sau ascunde parola">Arată</button></div><div class="pw hide" id="ap2w"><input id="ap2" type="password" placeholder="Repetă parola" autocomplete="new-password" class="fi"></div><div id="er" class="mu" style="color:var(--no);min-height:18px"></div><div class="mu" id="fgd" style="margin:-4px 0 10px;text-align:right"><a href="#" id="fg">Ai uitat parola?</a></div><label class="mu" style="display:flex;gap:8px;align-items:center;margin:0 0 10px"><input type="checkbox" id="rm" checked style="width:auto;margin:0"> Ține-mă minte pe acest dispozitiv</label><div class="r"><button id="lg" class="on">Conectează-te</button><button id="rg">Nu ai cont? Creează unul</button></div>
 <div style="text-align:center;margin-top:12px"><a href="#" id="lins">📲 Cum pun aplicația pe ecran?</a></div></div></div><div id="hw" aria-hidden="true"><span class="b1">🦇</span><span class="b2">🦇</span><span class="b3">🦇</span><span class="g">👻</span><span class="w">🕸️</span></div>
@@ -232,7 +241,7 @@ h1.pt{font-size:28px;margin:0 0 14px}
 <div class="hd"><div class="lg"><span class="lm">N</span><span>Nopera</span></div><span id="pchip" class="chip"></span></div>
 <div class="mu" id="me">Se conectează…</div>
 <div class="c hide" id="par"></div>
-<div class="tabs" style="margin-top:8px"><button data-t="a" class="on">Acum</button><button data-t="s">Săptămâna</button><button data-t="hub" id="thub">Grup</button><button data-t="p">Profil</button><button data-t="ann" id="tan" class="sec">Anunțuri</button><button data-t="r" class="sec">Recuperări</button><button data-t="nbk" class="sec">Caiete</button><button data-t="o" class="sec">Colegi</button><button data-t="grpc" id="tgr" class="sec">Chat grup</button><button data-t="g" id="tg" class="sec">Mesaje</button><button data-t="m" id="tm" class="sec hide">Admin</button></div>
+<div class="tabs" style="margin-top:8px"><button data-t="a" class="on">Acum</button><button data-t="s">Săptămâna</button><button data-t="hub" id="thub">Grup</button><button data-t="p">Profil</button><button data-t="ann" id="tan" class="sec">Anunțuri</button><button data-t="r" class="sec">Recuperări</button><button data-t="nbk" class="sec">Caiete</button><button data-t="o" class="sec">Colegi</button><button data-t="grpc" id="tgr" class="sec">Chat grup</button><button data-t="g" id="tg" class="sec">Mesaje</button><button data-t="prf" id="tprf" class="hide">Profesor</button><button data-t="m" id="tm" class="sec hide">Admin</button></div>
 
 <section id="a"><div id="greet"></div><div id="inb"></div><div id="anp"></div><div id="grb"></div><div id="lgb"></div><div class="c now" id="now"></div><div class="sh"><h2>Azi mai urmează</h2><button type="button" class="lnk" data-t="s">Toată săptămâna</button></div><div id="today"></div></section>
 <section id="s" class="hide"><h1 class="pt">Săptămâna</h1><div class="r seg"><button id="pw">◀ Săpt. trecută</button><button id="nw">Următoarea ▶</button></div><div id="sdays" class="dchips"></div><div class="mu" id="wl"></div><div id="wk"></div>
@@ -240,6 +249,15 @@ h1.pt{font-size:28px;margin:0 0 14px}
 <section id="hub" class="hide"><h1 class="pt">Grupa mea</h1><div class="mu" id="hubsub" style="margin:-8px 0 14px"></div>
 <div class="c" id="hcd"><div class="mu cap">COD DE INVITAȚIE</div><div class="r" style="align-items:center;margin:4px 0 10px"><b id="hcv" class="code"></b><span id="hon" class="on-t"></span></div><button type="button" id="hcs" class="on cta">Trimite pe WhatsApp</button></div>
 <div class="tiles"><button class="tile" data-t="r"><span>Recuperări</span></button><button class="tile" data-t="nbk"><span>Caiete</span></button><button class="tile" data-t="ann"><span data-mir="tan">Anunțuri</span></button><button class="tile" data-t="o"><span>Colegi</span></button><button class="tile" data-t="grpc"><span data-mir="tgr">Chat grup</span></button><button class="tile" data-t="g"><span data-mir="tg">Mesaje</span></button><button class="tile hide" data-t="m" id="htm"><span>Admin</span></button></div></section>
+<section id="prf" class="hide"><h1 class="pt">Profesor</h1><div class="mu" id="tpinfo" style="margin:-8px 0 14px"></div>
+<div class="c"><div class="b">📣 Postare nouă</div>
+<label class="mu">Materia</label><select id="tpsubj" class="fi"></select>
+<label class="mu">Grupele care o văd</label><div id="tpg" class="chk"></div>
+<textarea id="tptx" class="fi" rows="4" maxlength="2000" placeholder="Scrie mesajul pentru studenți (teme, anunțuri, materiale)…" style="margin-top:8px;height:auto;padding:12px"></textarea>
+<img id="tppv" class="hide" alt="" style="max-width:100%;max-height:220px;border-radius:12px;margin:0 0 8px">
+<div class="mu" id="tper" style="color:var(--no);min-height:18px"></div>
+<div class="r"><button id="tpph" type="button">📷 Poză</button><button id="tpsend" type="button" class="on">Postează</button></div><input type="file" id="tpfi" accept="image/*" class="hide"></div>
+<h2>POSTĂRILE MELE</h2><div id="tplist"></div></section>
 <section id="r" class="hide"><div id="rec"></div></section>
 <section id="o" class="hide"><div id="cs1" style="margin:2px 0 10px"></div>
 <div class="r" style="margin:0 0 8px"><button data-cf="all" class="on">Toți</button><button data-cf="on">Online</button></div>
@@ -266,6 +284,7 @@ h1.pt{font-size:28px;margin:0 0 14px}
 <button type="button" class="at hot" data-av="ed"><b>📅 Orare</b><span>Încarcă sau corectează orarul unei grupe</span></button>
 <button type="button" class="at" data-av="anc"><b>📢 Anunț nou</b><span>Trimite un mesaj unei grupe, unei facultăți sau tuturor</span></button>
 <button type="button" class="at" data-av="adv"><b>👥 Admini</b><span>Numește admini de facultate</span></button>
+<button type="button" class="at" data-av="tav"><b>🎓 Profesori</b><span>Aprobă profesorii pe materii și grupe</span></button>
 <button type="button" class="at" data-av="uf"><b>🏛 Universități și facultăți</b><span>Adaugă universități, facultăți și specializări</span></button>
 <button type="button" class="at" data-av="st"><b>📊 Statistici și prezențe</b><span>Vezi prezențele și descarcă CSV</span></button></div>
 <div id="bk" class="r" style="align-items:center;margin:0 0 12px"><button type="button" id="bkb" style="flex:0 0 auto">← Admin</button><div class="b" id="bkt" style="flex:1;text-align:center"></div><span style="flex:0 0 74px"></span></div><details class="c adp" id="anc"><summary class="b">📢 Anunț nou</summary>
@@ -333,6 +352,13 @@ h1.pt{font-size:28px;margin:0 0 14px}
 <select id="fau" class="fi"></select><select id="faf" class="fi"></select>
 <button id="faa" class="on" style="width:100%;margin-top:6px">➕ Numește admin de facultate</button>
 </div>
+<div id="tav" class="c adp"><div class="b">🎓 Profesori</div>
+<div class="mu" style="margin:4px 0 10px">Profesorul își face cont în aplicație (email sau Google). Apoi îl alegi aici, scrii materia exact ca în orar și bifezi grupele la care predă. Doar el poate scrie sau pune poze în canalul materiei, studenții citesc și reacționează.</div>
+<input id="tau" class="fi" list="tadl" placeholder="🔎 Scrie numele profesorului…" autocomplete="off"><datalist id="tadl"></datalist>
+<input id="tas" class="fi" list="tasl" placeholder="Materia (ca în orar)" autocomplete="off"><datalist id="tasl"></datalist>
+<input id="tagq" class="fi" placeholder="🔎 Caută grupa…"><div id="tag" class="chk"></div>
+<div class="r" style="margin-top:8px"><button id="taall" type="button">Bifează toate</button><button id="taadd" type="button" class="on">Salvează materia</button></div><div class="mu" id="tam" style="min-height:18px;margin-top:6px"></div>
+<h2>Profesori aprobați</h2><div id="tal"></div></div>
 <div id="stv" class="adp"><div id="st" style="margin-bottom:10px"></div>
 <div class="r" style="margin:0 0 8px"><select id="mg" class="fi" style="margin:0"></select><button id="mx" style="flex:0 0 auto;padding:9px 12px">⬇ CSV</button></div><div class="mu" id="mc" style="margin-bottom:8px"></div><div id="ml"></div>
 </div>
@@ -380,7 +406,7 @@ var tm=document.getElementById('tm'),htm=document.getElementById('htm');if(tm&&h
 </script>
 <script>
 (function(){var m=document.getElementById('m');if(!m)return;
-var T={ed:'📅 Orare',anc:'📢 Anunț nou',adv:'👥 Admini',uf:'🏛 Facultăți',st:'📊 Statistici'},DET={ed:'ed',anc:'anc',uf:'uf'};
+var T={tav:'🎓 Profesori',ed:'📅 Orare',anc:'📢 Anunț nou',adv:'👥 Admini',uf:'🏛 Facultăți',st:'📊 Statistici'},DET={ed:'ed',anc:'anc',uf:'uf'};
 function setV(v){m.setAttribute('data-v',v);var id=DET[v];if(id){var d=document.getElementById(id);if(d)d.open=true}var t=document.getElementById('bkt');if(t)t.textContent=T[v]||'';window.scrollTo(0,0)}
 setV('home');
 document.addEventListener('click',function(e){var a=e.target.closest('[data-av]');if(a){setV(a.getAttribute('data-av'));return}if(e.target.closest('#bkb')){setV('home');return}if(e.target.closest('[data-t="m"]'))setV(document.body.classList.contains('faonly')?'ed':'home')});
@@ -451,7 +477,7 @@ function render(){migrateMarks();renIn();renAnn();renGrp();peers();grBanner();lg
   {const MS=['ian','feb','mar','apr','mai','iun','iul','aug','sep','oct','nov','dec'],m0=mon(0);$('pchip').textContent='Săpt. '+pt(pn)+' · '+(m0.getMonth()===sun.getMonth()?m0.getDate()+'–'+sun.getDate()+' '+MS[sun.getMonth()]:m0.getDate()+' '+MS[m0.getMonth()]+'–'+sun.getDate()+' '+MS[sun.getMonth()]);
   $('greet').innerHTML=`<h1 class="gt">Bună, ${esc(myName||'')}</h1><div class="mu">${myGroup?'Grupa '+esc(gDisp(myGroup)):'Alege-ți grupa din Profil'}</div>`;hubFill()}
 }
-document.addEventListener('click',e=>{if(e.target.id==='chg'){e.preventDefault();signOut(auth);return}const b=e.target.closest('[data-k]');if(b)return setAtt(b.dataset.k,+b.dataset.v);const ob=e.target.closest('[data-opt]');if(ob)return setOpt(ob.dataset.opt);const sd=e.target.closest('[data-sd]');if(sd){selDay=+sd.dataset.sd;render();return}const t=e.target.closest('[data-t]');if(t){document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===t));['a','ann','s','r','nbk','o','grpc','g','p','m','hub'].forEach(i=>$(i).classList.toggle('hide',i!==t.dataset.t))}});
+document.addEventListener('click',e=>{if(e.target.id==='chg'){e.preventDefault();signOut(auth);return}const b=e.target.closest('[data-k]');if(b)return setAtt(b.dataset.k,+b.dataset.v);const ob=e.target.closest('[data-opt]');if(ob)return setOpt(ob.dataset.opt);const sd=e.target.closest('[data-sd]');if(sd){selDay=+sd.dataset.sd;render();return}const t=e.target.closest('[data-t]');if(t){document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===t));['a','ann','s','r','nbk','o','grpc','g','p','m','hub','prf'].forEach(i=>$(i).classList.toggle('hide',i!==t.dataset.t))}});
 $('pw').onclick=()=>{off--;render()};$('nw').onclick=()=>{off++;render()};
 $('sw').onclick=()=>{swap=1-swap;try{localStorage.setItem('swap',swap)}catch(e){}render()};
 const CFG={apiKey:"AIzaSyDLnd7BAqNvM6ZsgmvpMg3ZBsZmtVEYTn4",authDomain:"orar-upb.firebaseapp.com",projectId:"orar-upb",storageBucket:"orar-upb.firebasestorage.app",messagingSenderId:"970129347906",appId:"1:970129347906:web:71da2aee9c7424dc08a4db"};
@@ -787,22 +813,23 @@ let gMsgs=[],gAdmins=[],gUn=[],gCur,gPhUn=null,gPhSubj=null,gPhotos=[],gcDocs={}
 const okImg=x=>String(x||'').startsWith('data:image/')?x:'',canMod=()=>isAdm||gAdmins.includes(uid),
  linkify=t=>esc(t).replace(/(https?:\/\/[^\s<>"']+)/g,'<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'),
  gSeenK=()=>'gs_'+uid+'_'+myGroup,gSeen=()=>{try{return +localStorage.getItem(gSeenK())||0}catch(e){return 0}};
-let gRx=[],gCh='general',gRep=null,presG;
-const EMO=['👍','❤️','😂','🙏','🔥'],chOf=m=>m.ch||(m.ph?'s:'+m.ph.subj:'general'),
+let gRx=[],gCh='general',gRep=null,presG,gProf=[],profDoc=null,profAll={},tpUn=null,tpMine=[],tpOpened=false,tpPend=null,taEdit=null;
+const EMO=['👍','❤️','😂','🙏','🔥'],chAll=c=>gMsgs.filter(m=>chOf(m)===c).concat(c.startsWith('s:')?gProf.filter(p=>'s:'+p.subj===c).map(p=>({...p,_p:1})):[]).sort((a,b)=>a.t-b.t),chOf=m=>m.ch||(m.ph?'s:'+m.ph.subj:'general'),
  gChans=()=>[{id:'general',n:'💬 General'},{id:'teme',n:'📝 Teme'}].concat(nbSubjects().map(x=>({id:'s:'+x,n:x}))),
  gSeenAll=()=>{try{return JSON.parse(localStorage.getItem('gs2_'+uid+'_'+myGroup)||'{}')}catch(e){return{}}},
  gSeenSet=(c,t)=>{try{const o=gSeenAll();o[c]=t;localStorage.setItem('gs2_'+uid+'_'+myGroup,JSON.stringify(o))}catch(e){}};
 function gSplit(docs){const l=docs.map(d=>({id:d.id,...d.data()})).reverse();gRx=l.filter(m=>m.rxOf);gMsgs=l.filter(m=>!m.rxOf)}
-function chkGrp(){if(gCur===myGroup)return;gUn.forEach(f=>f());gUn=[];gCur=myGroup;gMsgs=[];gRx=[];gAdmins=[];gCh='general';gRep=null;if(!myGroup||!uid){renGrp();return}
+function chkGrp(){if(gCur===myGroup)return;gUn.forEach(f=>f());gUn=[];gCur=myGroup;gMsgs=[];gRx=[];gProf=[];gAdmins=[];gCh='general';gRep=null;if(!myGroup||!uid){renGrp();return}
+ gUn.push(onSnapshot(query(collection(fs,'profPosts'),where('gs','array-contains',dbG(myGroup)),limit(100)),s=>{gProf=s.docs.map(d=>({id:d.id,...d.data()}));renGrp()},()=>{gProf=[];renGrp()}));
  gUn.push(onSnapshot(query(collection(fs,'groupChats',dbG(myGroup),'messages'),orderBy('t','desc'),limit(250)),s=>{gSplit(s.docs);renGrp()},()=>{gMsgs=[];gRx=[];renGrp()}));
  gUn.push(onSnapshot(doc(fs,'groupChats',dbG(myGroup)),s=>{gAdmins=(s.exists()&&s.data().admins)||[];renGrp()},()=>{}))}
 function renGrp(){if(!$('gms'))return;const mc=Object.keys(all).filter(u=>u!=='_'&&grp[u]===myGroup).length;const open=!$('grpc').classList.contains('hide');$('gtl').textContent=myGroup?'Grupa '+gDisp(myGroup):'Grup';
  const chans=gChans();if(!chans.some(c=>c.id===gCh))gCh='general';
- const cur=chans.find(c=>c.id===gCh),inCh=gMsgs.filter(m=>chOf(m)===gCh);
+ const cur=chans.find(c=>c.id===gCh),inCh=chAll(gCh);
  $('gsub').textContent=myGroup?(mc+' membri · '+inCh.length+' mesaje în '+cur.n.replace(/^\S+\s/,'')+(canMod()?' · poți fixa mesaje':'')):'Alege grupa în Profil ca să intri în grup.';
  const sa=gSeenAll(),legacy=gSeen(),seenOf=c=>sa[c]!==undefined?sa[c]:legacy;
  if(open&&inCh.length)gSeenSet(gCh,Math.max(...inCh.map(m=>m.t)));
- const unOf=c=>(open&&c===gCh)?0:gMsgs.filter(m=>chOf(m)===c&&m.t>(c===gCh&&open?0:seenOf(c))&&m.uid!==uid).length,tot=chans.reduce((a,c)=>a+unOf(c.id),0);
+ const unOf=c=>(open&&c===gCh)?0:chAll(c).filter(m=>m.t>(c===gCh&&open?0:seenOf(c))&&m.uid!==uid).length,tot=chans.reduce((a,c)=>a+unOf(c.id),0);
  $('tgr').textContent='Chat grup'+(tot?' ('+tot+')':'');
  $('gch').innerHTML=myGroup?chans.map(c=>{const u=unOf(c.id);return`<button data-gch="${esc(c.id)}" class="${c.id===gCh?'on':''}">${esc(c.n)}${u?`<i>${u}</i>`:''}</button>`}).join(''):'';
  $('gin').placeholder=gCh==='teme'?'Scrie tema: materie, termen, ce trebuie făcut…':'Scrie în '+cur.n.replace(/^\S+\s/,'')+'…';
@@ -811,7 +838,7 @@ function renGrp(){if(!$('gms'))return;const mc=Object.keys(all).filter(u=>u!=='_
  $('gpin').innerHTML=pins.map(m=>`<div class="c now" style="padding:8px 12px"><div class="mu">📌 Fixat · ${esc(m.name||'')}</div><div style="white-space:pre-wrap;word-break:break-word">${m.ph?'📸 '+esc(m.ph.subj)+(m.ph.title?' · '+esc(m.ph.title):''):linkify(String(m.text||'').slice(0,300))}</div></div>`).join('');
  const el=$('gms'),near=el.scrollHeight-el.scrollTop-el.clientHeight<80||el.dataset.init!==gCh;
  const rxHtml=m=>{const by={};gRx.filter(r=>r.rxOf===m.id).forEach(r=>{(by[r.em]=by[r.em]||[]).push(r.uid)});const ks=Object.keys(by);return ks.length?`<div class="rxs">${ks.map(k=>`<button data-grx="${esc(m.id)}|${EMO.indexOf(k)}" class="${by[k].includes(uid)?'on':''}">${esc(k)} ${by[k].length}</button>`).join('')}</div>`:''};
- el.innerHTML=inCh.map(m=>{const me=m.uid===uid;return`<div class="gm ${me?'me':''}">${me?'':`<div class="gn">${esc(m.name||'Coleg')}</div>`}${m.re?`<div class="rq"><b>${esc(m.re.n||'')}</b> ${esc(m.re.t||'')}</div>`:''}${m.ph?`<img class="gi" alt="" data-gph="${esc(m.ph.id)}" src="${okImg(m.ph.th)}"><div class="gs">📚 ${esc(m.ph.subj)}${m.ph.title?' · '+esc(m.ph.title):''}</div>`:''}${m.text?`<div>${linkify(m.text)}</div>`:''}<small>${fmtT(m.t)}${m.pin?' · 📌':''}</small>${rxHtml(m)}<span class="gx">${EMO.map((e,i)=>`<button data-grx="${esc(m.id)}|${i}">${e}</button>`).join('')}<button data-grep="${esc(m.id)}">↩ Răspunde</button>${canMod()?`<button data-gpin="${m.id}">${m.pin?'Scoate 📌':'📌 Fixează'}</button>`:''}${me||canMod()?`<button data-gdel="${m.id}">🗑</button>`:''}</span></div>`}).join('')||'<div class="mu">Niciun mesaj în acest canal. Scrie primul!</div>';
+ el.innerHTML=inCh.map(m=>{if(m._p)return`<div class="gm pp"><div class="gn">🎓 ${esc(m.name||'Profesor')} · Profesor</div>${m.th?`<img class="gi" alt="" data-pph="${esc(m.id)}" src="${okImg(m.th)}">`:''}${m.text?`<div>${linkify(m.text)}</div>`:''}<small>${fmtT(m.t)}</small>${rxHtml(m)}<span class="gx">${EMO.map((e,i)=>`<button data-grx="${esc(m.id)}|${i}">${e}</button>`).join('')}${m.uid===uid||isAdm?`<button data-pdel="${esc(m.id)}">🗑</button>`:''}</span></div>`;const me=m.uid===uid;return`<div class="gm ${me?'me':''}">${me?'':`<div class="gn">${esc(m.name||'Coleg')}</div>`}${m.re?`<div class="rq"><b>${esc(m.re.n||'')}</b> ${esc(m.re.t||'')}</div>`:''}${m.ph?`<img class="gi" alt="" data-gph="${esc(m.ph.id)}" src="${okImg(m.ph.th)}"><div class="gs">📚 ${esc(m.ph.subj)}${m.ph.title?' · '+esc(m.ph.title):''}</div>`:''}${m.text?`<div>${linkify(m.text)}</div>`:''}<small>${fmtT(m.t)}${m.pin?' · 📌':''}</small>${rxHtml(m)}<span class="gx">${EMO.map((e,i)=>`<button data-grx="${esc(m.id)}|${i}">${e}</button>`).join('')}<button data-grep="${esc(m.id)}">↩ Răspunde</button>${canMod()?`<button data-gpin="${m.id}">${m.pin?'Scoate 📌':'📌 Fixează'}</button>`:''}${me||canMod()?`<button data-gdel="${m.id}">🗑</button>`:''}</span></div>`}).join('')||'<div class="mu">Niciun mesaj în acest canal. Scrie primul!</div>';
  if(near){el.scrollTop=el.scrollHeight;el.dataset.init=gCh}renMem()}
 const gCol=n=>collection(fs,'groupChats',dbG(myGroup),n);
 $('gsd').onclick=async()=>{const t=$('gin').value.trim().slice(0,2000);if(!t||!uid||!myGroup)return;$('gsd').disabled=true;try{const mm={uid,name:myName,text:t,t:Date.now(),ch:gCh};if(gRep)mm.re={id:gRep.id,n:gRep.n,t:gRep.t};await addDoc(gCol('messages'),mm);$('gin').value='';gRep=null;renGrp()}catch(e){alert('Nu s-a trimis ('+(e.code||'eroare')+'). Verifică regulile din Firestore.')}$('gsd').disabled=false};
@@ -836,6 +863,10 @@ function renGad(){if(!isAdm||!edG)return;const cur=gcDocs[dbG(edG)]||[],us=Objec
  $('gadl').innerHTML=us.map(u=>`<div class="r" style="align-items:center;margin:4px 0"><div style="flex:1">${esc(names[u]||'Elev')}${cur.includes(u)?' <span class="tag">👑 șef</span>':''}</div><button data-gad="${u}" style="flex:0 0 auto">${cur.includes(u)?'Scoate':'Fă șef'}</button></div>`).join('')||'<div class="mu">Niciun elev în această grupă încă.</div>'}
 document.addEventListener('click',async e=>{const g=k=>e.target.closest('['+k+']');let b;
  if(e.target.closest('[data-t="grpc"]')){setTimeout(renGrp,0);return}
+ if(b=g('data-pdel')){const id=b.dataset.pdel;if(confirm('Ștergi postarea?')){deleteDoc(doc(fs,'profPosts',id)).catch(()=>alert('Nu s-a putut șterge.'));deleteDoc(doc(fs,'profPostData',id)).catch(()=>{})}return}
+ if(b=g('data-pph')){const p=gProf.find(x=>x.id===b.dataset.pph)||tpMine.find(x=>x.id===b.dataset.pph)||{};gLb=null;$('glbi').src=okImg(p.th);$('glbc').textContent=(p.subj?p.subj+' · ':'')+(p.name||'');$('glb').classList.remove('hide');
+  try{const r=await getDoc(doc(fs,'profPostData',b.dataset.pph));if(r.exists()&&okImg(r.data().data)){$('glbi').src=r.data().data;gLb=r.data().data}}catch(x){}return}
+ if(b=g('data-tpdel')){return}
  if(b=g('data-gch')){gCh=b.dataset.gch;gRep=null;$('gms').dataset.init='';renGrp();return}
  if(b=g('data-grep')){const m=gMsgs.find(x=>x.id===b.dataset.grep);if(m){gRep={id:m.id,n:m.name||'Coleg',t:String(m.text||(m.ph?'📸 '+m.ph.subj:'')).slice(0,80)};renGrp();$('gin').focus()}return}
  if(e.target.closest('#grx')){gRep=null;renGrp();return}
@@ -846,6 +877,46 @@ document.addEventListener('click',async e=>{const g=k=>e.target.closest('['+k+']
  if(b=g('data-gdel')){const m=gMsgs.find(x=>x.id===b.dataset.gdel);if(m&&confirm('Ștergi mesajul?'))deleteDoc(doc(fs,'groupChats',dbG(myGroup),'messages',m.id)).catch(()=>alert('Nu s-a putut șterge.'));return}
  if(b=g('data-gad')){if(!isAdm||!edG)return;const cur=gcDocs[dbG(edG)]||[],u=b.dataset.gad,nx=cur.includes(u)?cur.filter(x=>x!==u):[...cur,u];setDoc(doc(fs,'groupChats',dbG(edG)),{admins:nx},{merge:true}).catch(()=>alert('Nu s-a salvat.'))}});
 
+
+/* ===== Profesori ===== */
+const tpSubs=()=>(profDoc&&profDoc.subs)||{},isProf=()=>Object.keys(tpSubs()).length>0,gLab=k=>gDisp(fullG(k))||k;
+function renTP(){const on=isProf();$('tprf').classList.toggle('hide',!on);if(!$('tpsubj'))return;
+ if(on&&!tpOpened&&!myGroup){tpOpened=true;$('tprf').click()}
+ if(!on){$('tpinfo').textContent='Contul tău nu este încă aprobat ca profesor. Cere unui administrator să te adauge.';$('tpsubj').innerHTML='';$('tpg').innerHTML='';$('tplist').innerHTML='';return}
+ $('tpinfo').textContent='Postările tale apar în canalul materiei, la grupele alese. Studenții citesc și reacționează.';
+ const subs=Object.keys(tpSubs()).sort(),cv=$('tpsubj').value;$('tpsubj').innerHTML=subs.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('');if(subs.includes(cv))$('tpsubj').value=cv;
+ const cur=$('tpsubj').value,gs=tpSubs()[cur]||[],chk=new Set([...document.querySelectorAll('#tpg input:checked')].map(i=>i.value)),same=$('tpg').dataset.s===cur;
+ $('tpg').innerHTML=gs.map(g=>`<label><input type="checkbox" value="${esc(g)}" ${(!same||chk.has(g))?'checked':''}>${esc(gLab(g))}</label>`).join('')||'<span class="mu">Nicio grupă.</span>';$('tpg').dataset.s=cur;
+ $('tplist').innerHTML=tpMine.length?tpMine.map(p=>`<div class="c"><div class="b">${esc(p.subj)} <span class="tag">${(p.gs||[]).map(g=>esc(gLab(g))).join(', ')}</span></div>${p.th?`<img class="gi" alt="" data-pph="${esc(p.id)}" src="${okImg(p.th)}" style="margin-top:6px">`:''}<div style="white-space:pre-wrap;word-break:break-word;margin-top:6px">${linkify(p.text||'')}</div><div class="mu" style="margin-top:4px">${fmtT(p.t)}</div><div class="r"><button data-pdel="${esc(p.id)}">🗑 Șterge</button></div></div>`).join(''):'<div class="c mu">Nu ai postat încă nimic.</div>'}
+function subTP(){if(tpUn){tpUn();tpUn=null}if(!uid)return;tpUn=onSnapshot(query(collection(fs,'profPosts'),where('uid','==',uid),limit(50)),s=>{tpMine=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.t-a.t);renTP()},()=>{tpMine=[];renTP()})}
+$('tpsubj').onchange=()=>renTP();
+$('tpph').onclick=()=>$('tpfi').click();
+$('tpfi').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;try{let full=await gShrink(f,1280,.62);for(const q of[.5,.4,.3])if(full.length>650000)full=await gShrink(f,1280,q);if(full.length>650000){$('tper').textContent='Poza e prea mare.';return}
+  tpPend={full,th:await gShrink(f,320,.55)};$('tppv').src=tpPend.th;$('tppv').classList.remove('hide');$('tper').textContent=''}catch(x){$('tper').textContent='Nu am putut citi poza.'}};
+$('tpsend').onclick=async()=>{if(!uid||!isProf())return;const subj=$('tpsubj').value,gs=[...document.querySelectorAll('#tpg input:checked')].map(i=>i.value),text=$('tptx').value.trim().slice(0,2000);
+ if(!subj)return $('tper').textContent='Alege materia.';if(!gs.length)return $('tper').textContent='Alege cel puțin o grupă.';if(!text&&!tpPend)return $('tper').textContent='Scrie un mesaj sau adaugă o poză.';
+ $('tpsend').disabled=true;$('tper').style.color='var(--no)';$('tper').textContent='';
+ try{const id=doc(collection(fs,'profPosts')).id,t=Date.now(),b=writeBatch(fs),p={uid,name:myName||(profDoc&&profDoc.name)||'Profesor',subj,gs,text,t};if(tpPend)p.th=tpPend.th;
+  if(tpPend)b.set(doc(fs,'profPostData',id),{uid,data:tpPend.full,t});b.set(doc(fs,'profPosts',id),p);await b.commit();$('tptx').value='';tpPend=null;$('tppv').classList.add('hide');$('tper').style.color='var(--ok)';$('tper').textContent='✓ Postat.'}
+ catch(x){$('tper').textContent='Nu s-a postat ('+(x.code||'eroare')+'). Verifică dacă regulile pentru profesori sunt publicate în Firestore.'}$('tpsend').disabled=false};
+// admin view
+const taGroups=()=>[...new Set([...grpDocs,...allSched.map(x=>x.groupId)].filter(Boolean))].sort((a,b)=>gLab(a).localeCompare(gLab(b),'ro',{numeric:true}));
+function taUid(){const v=$('tau').value.trim();if(!v)return'';return($('tadl')._m||{})[v]||''}
+function renTA(){if(!isAdm||!$('tau'))return;const a=document.activeElement;
+ const us=Object.keys(all).filter(u=>u!=='_'&&names[u]),cnt={};us.forEach(u=>cnt[names[u]]=(cnt[names[u]]||0)+1);const m={};
+ $('tadl').innerHTML=us.sort((x,y)=>String(names[x]).localeCompare(String(names[y]))).map(u=>{const v=cnt[names[u]]>1?names[u]+' · '+u.slice(0,4):names[u];m[v]=u;return`<option value="${esc(v)}">`}).join('');$('tadl')._m=m;
+ $('tasl').innerHTML=[...new Set(allSched.map(x=>x.subject).filter(Boolean))].sort().map(x=>`<option value="${esc(x)}">`).join('');
+ const q=($('tagq').value||'').toLowerCase(),chk=new Set([...document.querySelectorAll('#tag input:checked')].map(i=>i.value));
+ if(!(a&&a.id==='tagq')||true)$('tag').innerHTML=taGroups().filter(g=>!q||gLab(g).toLowerCase().includes(q)||chk.has(g)).map(g=>`<label><input type="checkbox" value="${esc(g)}" ${chk.has(g)?'checked':''}>${esc(gLab(g))}</label>`).join('')||'<span class="mu">Nicio grupă încă.</span>';
+ const ids=Object.keys(profAll).sort((x,y)=>String(profAll[x].name||names[x]||'').localeCompare(String(profAll[y].name||names[y]||'')));
+ $('tal').innerHTML=ids.map(u=>{const p=profAll[u],subs=p.subs||{};return`<div class="c"><div class="b">🎓 ${esc(p.name||names[u]||'Profesor')}</div>${Object.keys(subs).sort().map(sj=>`<div class="r" style="align-items:center;margin:6px 0"><div style="flex:1;min-width:0"><b>${esc(sj)}</b><div class="mu">${(subs[sj]||[]).map(g=>esc(gLab(g))).join(', ')||'—'}</div></div><button data-taed="${esc(u)}|${esc(sj)}" style="flex:0 0 auto">Editează</button><button data-tadel="${esc(u)}|${esc(sj)}" style="flex:0 0 auto">Scoate</button></div>`).join('')||'<div class="mu">Fără materii.</div>'}</div>`}).join('')||'<div class="mu">Niciun profesor aprobat încă.</div>'}
+$('tagq').oninput=renTA;
+$('taall').onclick=()=>{const bs=[...document.querySelectorAll('#tag input')],all2=bs.every(i=>i.checked);bs.forEach(i=>i.checked=!all2)};
+$('taadd').onclick=async()=>{const u=taUid(),sj=$('tas').value.trim(),gs=[...document.querySelectorAll('#tag input:checked')].map(i=>i.value),msg=x=>$('tam').textContent=x;
+ if(!u)return msg('Alege profesorul din listă (trebuie să aibă deja cont).');if(!sj)return msg('Scrie materia.');if(!gs.length)return msg('Bifează cel puțin o grupă.');
+ const cur=(profAll[u]&&profAll[u].subs)||{};try{await setDoc(doc(fs,'professors',u),{name:names[u]||(profAll[u]&&profAll[u].name)||'Profesor',subs:{...cur,[sj]:gs}});msg('✓ Salvat. Profesorul vede acum tabul „Profesor".');$('tas').value=''}catch(e){msg('Nu s-a salvat ('+(e.code||'eroare')+'). Publică întâi regulile pentru profesori în Firestore.')}};
+document.addEventListener('click',async e=>{let b=e.target.closest('[data-taed]');if(b){const [u,sj]=b.dataset.taed.split('|');const v=Object.keys($('tadl')._m||{}).find(k=>$('tadl')._m[k]===u);$('tau').value=v||names[u]||'';$('tas').value=sj;const gs=new Set((profAll[u]&&profAll[u].subs&&profAll[u].subs[sj])||[]);renTA();document.querySelectorAll('#tag input').forEach(i=>i.checked=gs.has(i.value));window.scrollTo(0,0);return}
+ b=e.target.closest('[data-tadel]');if(b){const [u,sj]=b.dataset.tadel.split('|');if(!confirm('Scoți materia „'+sj+'" de la acest profesor?'))return;const cur={...((profAll[u]&&profAll[u].subs)||{})};delete cur[sj];try{await setDoc(doc(fs,'professors',u),{name:(profAll[u]&&profAll[u].name)||names[u]||'Profesor',subs:cur})}catch(x){alert('Nu s-a salvat.')}}});
 let gMemOn=false;
 function renMem(){const el=$('gmem');if(!el)return;el.classList.toggle('hide',!gMemOn);$('gmb').textContent=gMemOn?'Ascunde':'👥 Membri';if(!gMemOn)return;
  const t=Date.now(),us=Object.keys(all).filter(u=>u!=='_'&&grp[u]===myGroup).map(u=>{const p=pr[u];return{u,n:names[u]||'Coleg',adm:gAdmins.includes(u),on:!!p&&t-(p.t||0)<200000}});
@@ -900,9 +971,9 @@ document.addEventListener('click',e=>{if(e.target.id==='ins'){$('ins').classList
 function pres(){if(!uid||document.hidden)return;const n=new Date(),o=occ(0).find(o=>start(o)<=n&&n<end(o));setDoc(doc(fs,'presence',uid),{name:myName,g:myGroup,now:o?o.c[3]:'Liber',t:Date.now()}).catch(()=>{})}
 let regBusy=false,attLoaded=false,grbOn=false,vfSent=false,vfTm=null,vfCool=0,vfErr='';
 const onAuth=u=>{if(u&&regBusy)return;un.forEach(f=>f());un=[];unP.forEach(f=>f());unP=[];pe={};ownM={};profsP={};ownProf=null;profEdit=false;clearInterval(hb);
-  if(!u){hideVerify();gUn.forEach(f=>f());gUn=[];gCur=undefined;gMsgs=[];gRx=[];gAdmins=[];if(gPhUn){gPhUn();gPhUn=null}gPhSubj=null;gPhotos=[];gcDocs={};$('glb').classList.add('hide');$('gpm').classList.add('hide');anns=[];attLoaded=false;grbOn=false;setMode(false);nbNotes=[];nbCur=null;nbSubj=null;nbCv=null;$('nbe').classList.add('hide');if(dmUn){dmUn();dmUn=null}dm=null;msgs=[];chats=[];profs={};profLoaded=false;unS();unS=()=>{};curSG=null;sched=null;allSched=[];tkMine=[];tkAll=[];isAdm=false;isFA=false;myFacs=[];facAdm={};grpMeta={};document.body.classList.remove('faonly');$('tm').classList.add('hide');uid=null;myName='';all={};mine={};$('ov').classList.remove('hide');$('me').textContent='';render();return}
+  if(!u){hideVerify();gUn.forEach(f=>f());gUn=[];gCur=undefined;gMsgs=[];gRx=[];gProf=[];profDoc=null;profAll={};tpMine=[];tpOpened=false;if(tpUn){tpUn();tpUn=null}$('tprf').classList.add('hide');gAdmins=[];if(gPhUn){gPhUn();gPhUn=null}gPhSubj=null;gPhotos=[];gcDocs={};$('glb').classList.add('hide');$('gpm').classList.add('hide');anns=[];attLoaded=false;grbOn=false;setMode(false);nbNotes=[];nbCur=null;nbSubj=null;nbCv=null;$('nbe').classList.add('hide');if(dmUn){dmUn();dmUn=null}dm=null;msgs=[];chats=[];profs={};profLoaded=false;unS();unS=()=>{};curSG=null;sched=null;allSched=[];tkMine=[];tkAll=[];isAdm=false;isFA=false;myFacs=[];facAdm={};grpMeta={};document.body.classList.remove('faonly');$('tm').classList.add('hide');uid=null;myName='';all={};mine={};$('ov').classList.remove('hide');$('me').textContent='';render();return}
   if(REQUIRE_VERIFY&&!u.emailVerified){showVerify(u,vfSent);vfSent=false;return}hideVerify();
-  uid=u.uid;myName=u.displayName||'';names[uid]=myName;$('pa').textContent='';getDoc(doc(fs,'attendance',uid)).then(d=>{if(!d.exists())setDoc(doc(fs,'attendance',uid),{m:{},n:myName,g:''}).catch(()=>{})}).catch(()=>{});getDoc(doc(fs,'admins',uid)).then(d=>{isAdm=d.exists();subScope();if(isAdm)renUni();loadFA();$('tm').classList.toggle('hide',!isAdm);$('pa').textContent=isAdm?'🛡️ Cont de administrator':'';if(isAdm)un.push(onSnapshot(collection(fs,'scheduleEntries'),s=>{allSched=s.docs.map(d=>({id:d.id,...d.data()}));renGroups()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'groups'),s=>{grpDocs=s.docs.map(d=>d.data().groupId).filter(Boolean);grpMeta={};s.docs.forEach(d=>{const x=d.data(),k=fullG(x.groupId);if(k)grpMeta[k]={...(grpMeta[k]||{}),...x,...((grpMeta[k]&&grpMeta[k].code&&!x.code)?{code:grpMeta[k].code}:{})}});renGroups();loadMyCode()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'groupChats'),s=>{gcDocs={};s.docs.forEach(d=>gcDocs[d.id]=d.data().admins||[]);renGroups()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'facAdmins'),s=>{facAdm={};s.docs.forEach(d=>facAdm[d.id]=d.data());renFA()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'support'),s=>{tkAll=s.docs.map(d=>({id:d.id,...d.data()}));renSup()},()=>{}));renAdm()}).catch(e=>{isAdm=false;$('pa').textContent=''});$('ov').classList.add('hide');showMe();
+  uid=u.uid;myName=u.displayName||'';names[uid]=myName;$('pa').textContent='';getDoc(doc(fs,'attendance',uid)).then(d=>{if(!d.exists())setDoc(doc(fs,'attendance',uid),{m:{},n:myName,g:''}).catch(()=>{})}).catch(()=>{});getDoc(doc(fs,'admins',uid)).then(d=>{isAdm=d.exists();subScope();if(isAdm)renUni();loadFA();$('tm').classList.toggle('hide',!isAdm);$('pa').textContent=isAdm?'🛡️ Cont de administrator':'';if(isAdm)un.push(onSnapshot(collection(fs,'scheduleEntries'),s=>{allSched=s.docs.map(d=>({id:d.id,...d.data()}));renGroups()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'groups'),s=>{grpDocs=s.docs.map(d=>d.data().groupId).filter(Boolean);grpMeta={};s.docs.forEach(d=>{const x=d.data(),k=fullG(x.groupId);if(k)grpMeta[k]={...(grpMeta[k]||{}),...x,...((grpMeta[k]&&grpMeta[k].code&&!x.code)?{code:grpMeta[k].code}:{})}});renGroups();loadMyCode()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'groupChats'),s=>{gcDocs={};s.docs.forEach(d=>gcDocs[d.id]=d.data().admins||[]);renGroups()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'professors'),s=>{profAll={};s.docs.forEach(d=>profAll[d.id]=d.data());renTA()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'facAdmins'),s=>{facAdm={};s.docs.forEach(d=>facAdm[d.id]=d.data());renFA()},()=>{}));if(isAdm)un.push(onSnapshot(collection(fs,'support'),s=>{tkAll=s.docs.map(d=>({id:d.id,...d.data()}));renSup()},()=>{}));renAdm()}).catch(e=>{isAdm=false;$('pa').textContent=''});un.push(onSnapshot(doc(fs,'professors',uid),s=>{profDoc=s.exists()?s.data():null;if(isProf())subTP();else{if(tpUn){tpUn();tpUn=null}tpMine=[]}renTP()},()=>{}));$('ov').classList.add('hide');showMe();
   un.push(onSnapshot(doc(fs,'attendance',uid),s=>{attLoaded=true;const x=s.exists()?s.data():{};ownM=x.m||{};const gk=fullG(x.g);grp[uid]=gk;if(x.n)names[uid]=x.n;if(x.g&&x.g!==gk&&!dirty)setDoc(doc(fs,'attendance',uid),{m:x.m||{},n:x.n||myName,g:gk}).catch(()=>{});myGroup=gk;chkSched();if(gk!==presG){presG=gk;pres()}fillProf();if(!dirty)mine={...ownM};rebuildAll();renAdm();if(myName)names[uid]=myName;render()},()=>{}));
   un.push(onSnapshot(collection(fs,'universities'),s=>{unis=mergeBy(DEF_UNIS,s.docs.map(d=>({id:d.id,...d.data()})));facChg()},()=>{}));
   un.push(onSnapshot(collection(fs,'faculties'),s=>{facs=mergeBy(DEF_FACS,s.docs.map(d=>({id:d.id,...d.data()})));facChg()},()=>{}));
