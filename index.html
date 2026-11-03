@@ -175,6 +175,19 @@ h1.pt{font-size:28px;margin:0 0 14px}
 .lg{display:none}.hd{justify-content:flex-end}
 .tabs [data-t="a"]{order:0}.tabs [data-t="ann"]{order:1}.tabs [data-t="s"]{order:2}.tabs [data-t="r"]{order:3}.tabs [data-t="nbk"]{order:4}.tabs [data-t="o"]{order:5}.tabs [data-t="grpc"]{order:6}.tabs [data-t="g"]{order:7}.tabs [data-t="p"]{order:8}.tabs [data-t="m"]{order:9}
 }
+
+/* ===== Admin v2 ===== */
+#m .adp{display:none}
+#m[data-v="ed"]>#ed,#m[data-v="anc"]>#anc,#m[data-v="uf"]>#uf,#m[data-v="adv"]>#adv,#m[data-v="st"]>#stv{display:block}
+#m[data-v="home"]>#bk,#m:not([data-v="home"])>#ah{display:none}
+#m>#ufm{display:none}#m[data-v="uf"]>#ufm,#m[data-v="adv"]>#ufm{display:block}
+#m[data-v]:not([data-v="home"])>details>summary{display:none}
+#m[data-v]:not([data-v="home"])>details.adp{border:0;background:transparent;padding:0}
+.at{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;text-align:left;padding:16px;margin-bottom:10px;border-radius:20px;background:var(--cd)}
+.at b{font-size:16px}.at span{font-size:13px;font-weight:600;color:var(--mu)}
+.at.hot{background:var(--ac);border-color:var(--ac);color:var(--onac)}.at.hot span{color:var(--onac);opacity:.85}
+#fau{display:none}
+.faonly #ah,.faonly #bk,.faonly #anc,.faonly #adv,.faonly #uf,.faonly #stv{display:none!important}
 </style><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"></head><body><div id="ov" style="position:fixed;inset:0;z-index:9;background:var(--bg);padding:20px;overflow:auto"><div class="c" style="width:100%;max-width:380px;margin:auto"><div class="b" style="font-size:20px">📚 Nopera</div><div class="mu" id="ovt" style="margin:6px 0 10px">Intră sau creează cont (email + parolă).<br>Ai deja cont cu email? Intră cu emailul și parola, apoi apasă „Conectează contul cu Google” în Profil, ca să nu-ți pierzi datele.</div>
 <button id="gg" type="button" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1f1f1f;border:1px solid #dadce0;font-weight:600;margin-bottom:10px"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.5l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.7 6.9l7.3 5.7c4.3-4 6.8-9.9 6.8-17.1z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.4-.8-2.9-.8-4.7s.3-3.3.8-4.7l-7.9-6.1C.9 16.4 0 20.1 0 24s.9 7.6 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.3 0 11.6-2.1 15.5-5.7l-7.3-5.7c-2 1.4-4.7 2.3-8.2 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>Continuă cu Google</button><div class="mu" style="text-align:center;margin:0 0 10px">sau cu email și parolă</div><input id="an" maxlength="24" placeholder="Numele tău" class="fi hide"><input id="au" type="email" placeholder="Email" autocapitalize="none" autocomplete="email" class="fi"><div class="pw"><input id="ap" type="password" placeholder="Parolă (minim 6 caractere)" autocomplete="current-password" class="fi"><button type="button" class="eye" data-eye aria-label="Arată sau ascunde parola">Arată</button></div><div class="pw hide" id="ap2w"><input id="ap2" type="password" placeholder="Repetă parola" autocomplete="new-password" class="fi"></div><div id="er" class="mu" style="color:var(--no);min-height:18px"></div><div class="mu" id="fgd" style="margin:-4px 0 10px"><a href="#" id="fg">Ai uitat parola?</a></div><label class="mu" style="display:flex;gap:8px;align-items:center;margin:0 0 10px"><input type="checkbox" id="rm" checked style="width:auto;margin:0"> Ține-mă minte pe acest dispozitiv</label><div class="r"><button id="lg" class="on">Intră</button><button id="rg">Cont nou</button></div>
 <div style="text-align:center;margin-top:12px"><a href="#" id="lins">📲 Cum pun aplicația pe ecran?</a></div></div></div><div id="hw" aria-hidden="true"><span class="b1">🦇</span><span class="b2">🦇</span><span class="b3">🦇</span><span class="g">👻</span><span class="w">🕸️</span></div>
@@ -219,15 +232,20 @@ h1.pt{font-size:28px;margin:0 0 14px}
 <div class="r"><button id="psv" class="on">Salvează</button><button id="pout">Ieși din cont</button></div>
 <div class="r" style="margin-top:8px"><button id="pins" type="button">📲 Cum pun aplicația pe ecran</button></div></div>
 <div class="mu">Colegii din aceeași grupă apar la „Colegi” și la „Au fost”. Dacă lași grupa goală, vezi pe toată lumea.</div><button type="button" id="sgo" class="sgo">Ieși din cont</button></section>
-<section id="m" class="hide"><details class="c" id="anc"><summary class="b">📢 Anunț nou</summary>
+<section id="m" class="hide" data-v="home"><div id="ah"><h1 class="pt">Admin</h1><div class="mu" style="margin:-8px 0 14px">Alege ce vrei să faci</div>
+<button type="button" class="at hot" data-av="ed"><b>📅 Orare</b><span>Încarcă sau corectează orarul unei grupe</span></button>
+<button type="button" class="at" data-av="anc"><b>📢 Anunț nou</b><span>Trimite un mesaj unei grupe, unei facultăți sau tuturor</span></button>
+<button type="button" class="at" data-av="adv"><b>👥 Admini</b><span>Numește admini de facultate</span></button>
+<button type="button" class="at" data-av="uf"><b>🏛 Universități și facultăți</b><span>Adaugă universități, facultăți și specializări</span></button>
+<button type="button" class="at" data-av="st"><b>📊 Statistici și prezențe</b><span>Vezi prezențele și descarcă CSV</span></button></div>
+<div id="bk" class="r" style="align-items:center;margin:0 0 12px"><button type="button" id="bkb" style="flex:0 0 auto">← Admin</button><div class="b" id="bkt" style="flex:1;text-align:center"></div><span style="flex:0 0 74px"></span></div><details class="c adp" id="anc"><summary class="b">📢 Anunț nou</summary>
 <select id="ant" class="fi" style="margin-top:8px"></select>
 <input id="anh" class="fi" placeholder="Titlu" maxlength="100">
 <textarea id="anb" rows="4" class="fi" placeholder="Textul anunțului…" maxlength="1500" style="resize:vertical"></textarea>
 <label class="mu" style="display:flex;gap:8px;align-items:center;margin:4px 0 10px"><input type="checkbox" id="anf" style="width:auto;margin:0"> 📌 Fixat (rămâne primul)</label>
 <div class="mu" id="ans" style="min-height:18px"></div>
 <button id="anq" class="on" style="width:100%">Publică anunțul</button></details>
-<div id="st" style="margin-bottom:10px"></div>
-<details id="uf" class="c"><summary class="b">🏛 Universități și facultăți</summary>
+<details id="uf" class="c adp"><summary class="b">🏛 Universități și facultăți</summary>
 <div id="ufl" style="margin-top:8px"></div>
 <div class="mu" style="margin-top:12px">Adaugă universitate</div>
 <div class="r"><input id="nui" class="fi" placeholder="Cod scurt (ex: ase)" maxlength="10" style="margin:0"><input id="nun" class="fi" placeholder="Nume complet" maxlength="80" style="margin:0"></div>
@@ -240,33 +258,33 @@ h1.pt{font-size:28px;margin:0 0 14px}
 <select id="npf" class="fi"></select>
 <div class="r"><input id="npc" class="fi" placeholder="Cod scurt (ex: cti)" maxlength="8" style="margin:0"><input id="npn" class="fi" placeholder="Nume specializare" maxlength="100" style="margin:0"></div>
 <button id="npa" class="on" style="width:100%;margin-top:6px">➕ Adaugă specializarea</button>
-<div class="mu" style="margin-top:12px">Admini de facultate (editează orarele doar la facultatea lor)</div>
-<div id="fal"></div>
-<select id="fau" class="fi"></select><select id="faf" class="fi"></select>
-<button id="faa" class="on" style="width:100%;margin-top:6px">➕ Numește admin de facultate</button>
-<div class="mu" id="ufm" style="min-height:18px;margin-top:6px"></div></details>
-<details id="ed" class="c" open><summary class="b">📅 Orare pe grupe</summary>
+</details>
+<details id="ed" class="c adp" open><summary class="b">📅 Orare pe grupe</summary>
 <div id="edl">
+<input id="egs" class="fi" placeholder="🔎 Caută grupa (ex: 1011B)" style="margin-top:8px">
+<div id="egl" style="margin-top:6px"></div>
+<details class="c" id="ngw"><summary class="b">➕ Grupă nouă și coduri de invitație</summary>
 <select id="ngf" class="fi" style="margin-top:8px"></select><select id="ngp" class="fi" style="margin-top:6px"></select><div class="r" style="margin-top:8px"><input id="ngi" class="fi" placeholder="Grupă nouă (ex: 1012B)" maxlength="12" style="margin:0"><button id="nga" class="on" style="flex:0 0 auto">➕ Adaugă grupă</button></div>
 <button id="gcb" type="button" style="width:100%;margin-top:10px">🔑 Generează coduri de invitație pentru grupele fără cod</button><div class="mu" id="gcm" style="min-height:16px;margin:4px 0"></div>
-<div id="egl" style="margin-top:10px"></div>
+</details>
 </div>
 <div id="edg" class="hide">
 <div class="r" style="margin-top:8px;align-items:center"><button id="egb" style="flex:0 0 auto">← Grupe</button><div class="b" id="egt" style="flex:1;text-align:center"></div><button id="egd" style="flex:0 0 auto;color:var(--no)">🗑 Șterge</button></div>
 <input type="hidden" id="eg"><div class="mu" id="egc" style="margin:6px 0"></div>
-<details class="c" style="margin-top:10px"><summary class="b">👑 Șefii grupei (pot fixa mesaje în grup)</summary><div id="gadl" style="margin-top:8px"></div></details>
-<div class="c" style="margin-top:10px"><div class="b">📥 Import PDF sau Excel</div>
-<div class="mu" style="margin:4px 0 8px">Excel (.xlsx, .xls) și CSV se citesc automat. PDF merge doar pentru tabele simple, cu o oră pe rând. Vezi lista înainte să salvezi.</div>
+<div class="c" style="margin-top:10px"><div class="b">📥 Încarcă orarul</div>
+<div class="mu" style="margin:4px 0 8px">1. Alege fișierul (Excel, CSV sau PDF) · 2. Verifică lista de mai jos · 3. Salvează. Excel și CSV se citesc automat; PDF merge doar pentru tabele simple.</div>
 <button id="ei" class="on" style="width:100%">Alege fișier</button><input type="file" id="ef" accept=".pdf,.xlsx,.xls,.csv,text/csv" class="hide">
 <div class="mu" style="margin-top:6px"><a href="#" id="et">Șablon Excel/CSV</a></div>
 <div class="mu" id="ims" style="margin:8px 0;min-height:18px;white-space:pre-line"></div><div id="ipv"></div></div>
+<div id="el" style="margin-top:10px"></div>
 <details class="c"><summary class="b">⚡ Lipește din Excel</summary>
 <div class="mu" style="margin-top:6px">Coloane: zi, start, end, materie, tip, sală, profesor, săptămână.</div>
 <textarea id="ep" rows="4" class="fi" placeholder="Luni, 08:00, 09:50, Programare, LAB, JK103, Ion Popescu, ambele" style="margin:6px 0"></textarea>
 <button id="epb" class="on" style="width:100%">Citește orele lipite</button></details>
+<details class="c"><summary class="b">📋 Copiază orarul de la altă grupă</summary>
 <div class="r" style="margin-top:8px"><select id="ecp" class="fi" style="margin:0"></select><button id="ecb" style="flex:0 0 auto">Copiază</button></div>
+</details>
 <datalist id="dls"></datalist><datalist id="dlp"></datalist>
-<div id="el" style="margin-top:10px"></div>
 <details class="c" id="efm"><summary class="b">➕ Adaugă / modifică o oră</summary><input type="hidden" id="fid">
 <div class="r" style="margin-top:8px"><select id="fd" class="fi"><option value="1">Luni</option><option value="2">Marți</option><option value="3">Miercuri</option><option value="4">Joi</option><option value="5">Vineri</option><option value="6">Sâmbătă</option></select><select id="fw" class="fi"><option value="b">Ambele săptămâni</option><option value="i">Doar impară</option><option value="p">Doar pară</option></select></div>
 <div class="mu" style="margin-bottom:4px">Alege intervalul:</div><div id="esl" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px"></div>
@@ -275,7 +293,21 @@ h1.pt{font-size:28px;margin:0 0 14px}
 <div class="r"><select id="ft" class="fi"><option>CURS</option><option>SEM</option><option>LAB</option><option>PROIECT</option></select><input id="fr" class="fi" placeholder="Sală" maxlength="20"></div>
 <select id="flg" class="fi"><option value="">Limbă: toți studenții</option><option value="en">Doar Engleză</option><option value="es">Doar Spaniolă</option><option value="fr">Doar Franceză</option><option value="de">Doar Germană</option></select>
 <input id="fp" class="fi" list="dlp" placeholder="Profesor" maxlength="60"><button id="fa" class="on" style="width:100%">Salvează ora</button></details>
-</div></details><div class="r" style="margin:0 0 8px"><select id="mg" class="fi" style="margin:0"></select><button id="mx" style="flex:0 0 auto;padding:9px 12px">⬇ CSV</button></div><div class="mu" id="mc" style="margin-bottom:8px"></div><div id="ml"></div></section>
+<details class="c" style="margin-top:10px"><summary class="b">👑 Șefii grupei (pot fixa mesaje în grup)</summary><div id="gadl" style="margin-top:8px"></div></details>
+</div></details>
+<div id="adv" class="c adp"><div class="b">👥 Admini</div>
+<div class="mu" style="margin:4px 0 10px">Adminii de facultate pot încărca și corecta orarele doar la facultatea lor. Șefii de grupă se numesc din Orare → grupa respectivă → „Șefii grupei".</div>
+<div id="fal"></div>
+<div class="mu" style="margin-top:12px">Adaugă un admin de facultate</div>
+<input id="fas" class="fi" list="fadl" placeholder="🔎 Scrie numele studentului…" autocomplete="off"><datalist id="fadl"></datalist>
+<select id="fau" class="fi"></select><select id="faf" class="fi"></select>
+<button id="faa" class="on" style="width:100%;margin-top:6px">➕ Numește admin de facultate</button>
+</div>
+<div id="stv" class="adp"><div id="st" style="margin-bottom:10px"></div>
+<div class="r" style="margin:0 0 8px"><select id="mg" class="fi" style="margin:0"></select><button id="mx" style="flex:0 0 auto;padding:9px 12px">⬇ CSV</button></div><div class="mu" id="mc" style="margin-bottom:8px"></div><div id="ml"></div>
+</div>
+<div class="mu" id="ufm" style="min-height:18px;margin:8px 0"></div>
+</section>
 <button id="sup">💬 Suport</button>
 <div id="sp" class="hide" style="position:fixed;inset:0;z-index:8;background:var(--bg);overflow:auto;padding:calc(14px + env(safe-area-inset-top,0px)) 14px 30px"><div style="max-width:600px;margin:0 auto"><div class="r" style="margin:0 0 10px;align-items:center"><div class="b" style="font-size:18px">💬 Suport</div><button id="sx" style="flex:0 0 auto">Închide</button></div>
 <div class="c"><textarea id="stx" maxlength="1000" rows="4" placeholder="Descrie problema…" class="fi" style="margin:0;resize:vertical"></textarea><div class="mu" id="sm" style="min-height:18px;margin:6px 0"></div><button id="sb" class="on" style="width:100%">Trimite</button></div>
@@ -312,6 +344,19 @@ document.addEventListener('click',function(e){var t=e.target.closest('[data-t]')
 var sg=document.getElementById('sgo');if(sg)sg.addEventListener('click',function(){var c=document.getElementById('chg');if(c)c.click()});
 Array.prototype.forEach.call(document.querySelectorAll('[data-mir]'),function(sp){var src=document.getElementById(sp.getAttribute('data-mir'));if(!src)return;var cp=function(){sp.textContent=src.textContent};cp();new MutationObserver(cp).observe(src,{childList:true,characterData:true,subtree:true})});
 var tm=document.getElementById('tm'),htm=document.getElementById('htm');if(tm&&htm){var cc=function(){htm.classList.toggle('hide',tm.classList.contains('hide'))};cc();new MutationObserver(cc).observe(tm,{attributes:true,attributeFilter:['class']})}
+})();
+</script>
+<script>
+(function(){var m=document.getElementById('m');if(!m)return;
+var T={ed:'📅 Orare',anc:'📢 Anunț nou',adv:'👥 Admini',uf:'🏛 Facultăți',st:'📊 Statistici'},DET={ed:'ed',anc:'anc',uf:'uf'};
+function setV(v){m.setAttribute('data-v',v);var id=DET[v];if(id){var d=document.getElementById(id);if(d)d.open=true}var t=document.getElementById('bkt');if(t)t.textContent=T[v]||'';window.scrollTo(0,0)}
+setV('home');
+document.addEventListener('click',function(e){var a=e.target.closest('[data-av]');if(a){setV(a.getAttribute('data-av'));return}if(e.target.closest('#bkb')){setV('home');return}if(e.target.closest('[data-t="m"]'))setV(document.body.classList.contains('faonly')?'ed':'home')});
+var fau=document.getElementById('fau'),fas=document.getElementById('fas'),dl=document.getElementById('fadl');
+if(fau&&fas&&dl){var sync=function(){dl.innerHTML='';Array.prototype.forEach.call(fau.options,function(o){if(!o.value)return;var x=document.createElement('option');x.value=o.textContent;dl.appendChild(x)})};new MutationObserver(sync).observe(fau,{childList:true});sync();
+fas.addEventListener('input',function(){Array.prototype.forEach.call(fau.options,function(o){if(o.textContent===fas.value)fau.value=o.value})})}
+var egs=document.getElementById('egs'),egl=document.getElementById('egl');
+if(egs&&egl){var flt=function(){var q=(egs.value||'').toLowerCase();Array.prototype.forEach.call(egl.children,function(c){c.style.display=(!q||c.textContent.toLowerCase().indexOf(q)>-1)?'':'none'})};egs.addEventListener('input',flt);new MutationObserver(flt).observe(egl,{childList:true})}
 })();
 </script>
 <script type="module">
