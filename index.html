@@ -19,7 +19,7 @@ button{font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--
 .ok.on{background:var(--ok);border-color:var(--ok)}.no.on{background:var(--no);border-color:var(--no)}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--ok);margin-right:7px}
 .tag{font-size:11px;border:1px solid var(--bd);border-radius:6px;padding:1px 6px;margin-left:6px;color:var(--mu)}
-.hide{display:none}#sup{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:7;background:var(--ac);color:#fff;border-color:var(--ac);border-radius:999px;padding:10px 14px;box-shadow:0 2px 10px #0006}
+.hide{display:none}#glok{display:flex}#glok.hide{display:none}#sup{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:7;background:var(--ac);color:#fff;border-color:var(--ac);border-radius:999px;padding:10px 14px;box-shadow:0 2px 10px #0006}
 .fi{width:100%;font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:11px;margin-bottom:8px}#ov{display:flex}#ov.hide{display:none}.warn{border-left:5px solid var(--no)}
 
 :root[data-theme="halloween"]{--bg:#120a1c;--cd:#1e1230;--tx:#f3e8ff;--mu:#a99bc4;--ac:#ff7518;--ok:#8bdc3c;--no:#ff4d6d;--bd:#3b2559;color-scheme:dark}
@@ -102,7 +102,7 @@ a{color:var(--ac)}
 <input id="cq" class="fi" placeholder="Caută un coleg…" style="margin:0 0 10px">
 <div id="peers"></div></section>
 <section id="p" class="hide"><div class="c"><div class="b">👤 Profilul meu</div><div class="mu" id="pe" style="margin:4px 0 10px"></div>
-<div id="glkw" style="margin:0 0 10px"><button id="glk" type="button">🔗 Conectează contul cu Google</button><div class="mu" id="glm" style="margin-top:6px"></div></div>
+<div id="glkw" style="margin:0 0 10px"><div id="glok" class="hide" style="align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--ok);border-radius:10px;color:var(--ok);font-weight:600"><span style="font-size:18px">✅</span><span id="glot">Conectat cu Google</span></div><button id="glk" type="button">🔗 Conectează contul cu Google</button><div class="mu" id="glm" style="margin-top:6px"></div></div>
 <div class="mu" id="pa" style="margin:0 0 10px"></div>
 <div style="display:flex;gap:14px;align-items:center;margin:4px 0 12px"><div id="pav" class="av" style="width:72px;height:72px;font-size:24px;filter:none"></div><div><button id="pfb">📷 Schimbă poza</button> <button id="pfd" class="hide">Șterge</button></div><input type="file" id="pfi" accept="image/*" class="hide"></div>
 <label class="mu">Numele tău</label><input id="pn" maxlength="24" class="fi">
@@ -280,7 +280,7 @@ async function joinCode(raw,msgEl){const c=String(raw||'').toUpperCase().replace
  try{const q=await getDocs(query(collection(fs,'groups'),where('code','==',c)));if(q.empty)return say('Cod necunoscut. Verifică-l cu șeful grupei.');const d=q.docs[0],g=KRX.test(d.id)?d.id:fullG(d.data().groupId);if(!g)return say('Cod invalid.');joinKey(g);say('✓ Ai intrat în grupa '+gDisp(g),1)}catch(e){say('Nu s-a putut ('+(e.code||'eroare')+').')}}
 function loadMyCode(){myCode='';renCode();if(!uid||!myGroup)return;const g=myGroup;getDoc(doc(fs,'groups',g)).then(d=>{if(g===myGroup){myCode=d.exists()&&d.data().code||'';renCode()}}).catch(()=>{})}
 function renCode(){const w=$('pcd');if(!w)return;w.classList.toggle('hide',!myCode);$('pcv').textContent=myCode}
-function glkUpd(){const cu=auth.currentUser,w=$('glkw');if(w)w.classList.toggle('hide',!cu||cu.providerData.some(p=>p.providerId==='google.com'))}
+function glkUpd(){const cu=auth.currentUser,w=$('glkw');if(!w)return;const g=cu&&cu.providerData.find(p=>p.providerId==='google.com');w.classList.toggle('hide',!cu);$('glk').classList.toggle('hide',!!g);$('glok').classList.toggle('hide',!g);if(g)$('glot').textContent='Conectat cu Google'+(g.email?' · '+g.email:'')}
 $('glk').onclick=async()=>{const m=$('glm');m.style.color='var(--ok)';m.textContent='';const p=new GoogleAuthProvider();p.setCustomParameters({prompt:'select_account'});try{await linkWithPopup(auth.currentUser,p);m.textContent='✓ Contul tău e conectat cu Google. Datele tale au rămas.';glkUpd()}catch(e){const c=e.code||'';m.style.color='var(--no)';m.textContent=(c==='auth/credential-already-in-use'||c==='auth/email-already-in-use')?'Acest cont Google există deja în Nopera, ca alt cont. Folosește alt cont Google sau scrie la Suport ca să le unim.':(c==='auth/popup-closed-by-user'||c==='auth/cancelled-popup-request')?'':c==='auth/popup-blocked'?'Permite ferestrele pop-up și încearcă din nou.':'Nu s-a conectat ('+(c||'eroare')+').'}};
 function glFill(){const u=(facs.find(x=>x.id===glFid)||{}).universityId,l=[...new Set((glU[u]||[]).filter(k=>fcOf(k)===glFid&&(!glPc||pgOf(k)===glPc)).map(gName))].sort(),el=$('gl');if(el)el.innerHTML=l.map(g=>`<option value="${esc(g)}">`).join('')}
 function rebuildAll(){all={...pe};if(uid)all[uid]=dirty?{...mine}:{...ownM}}
