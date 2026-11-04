@@ -187,7 +187,7 @@ h1.pt{font-size:28px;margin:0 0 14px}
 .at b{font-size:16px}.at span{font-size:13px;font-weight:600;color:var(--mu)}
 .at.hot{background:var(--ac);border-color:var(--ac);color:var(--onac)}.at.hot span{color:var(--onac);opacity:.85}
 #fau{display:none}
-.faonly #mvw,.faonly #ah,.faonly #bk,.faonly #anc,.faonly #adv,.faonly #uf,.faonly #stv{display:none!important}
+.faonly #mvw,.faonly #fxw,.faonly #ah,.faonly #bk,.faonly #anc,.faonly #adv,.faonly #uf,.faonly #stv{display:none!important}
 
 /* ===== Chat v2 ===== */
 .chs{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;margin-top:10px;-webkit-overflow-scrolling:touch}
@@ -349,6 +349,9 @@ body.pf .tabs [data-t="prf"]{order:-1}
 <details class="c" id="mvw"><summary class="b">🔀 Mută la specializare</summary>
 <div class="mu" style="margin:8px 0">Alegi specializarea și bifezi grupele. Orele, studenții, prezențele și codul de invitație rămân. Chatul vechi nu se șterge, dar nu apare la grupa nouă.</div>
 <select id="mvf" class="fi" aria-label="Facultatea"></select><select id="mvp" class="fi" aria-label="Specializarea"></select><div id="mvl" class="chk"></div><div class="mu" id="mvm" style="min-height:18px;margin:6px 0;white-space:pre-line"></div><button id="mvb" type="button" class="on cta" disabled></button></details>
+<details class="c" id="fxw"><summary class="b">✏️ Corectează numele materiilor</summary>
+<div class="mu" style="margin:8px 0">Unește materiile scrise diferit. Prezențele rămân. Debifează ce nu e aceeași materie.</div>
+<div id="fxl"></div><div class="mu" id="fxm" style="min-height:18px;margin:6px 0"></div><button id="fxb" type="button" class="on cta hide"></button></details>
 <input id="egs" class="fi" placeholder="🔎 Caută grupa (ex: 1011B)" style="margin-top:8px">
 <div id="egl" style="margin-top:6px"></div>
 <details class="c" id="ngw"><summary class="b">➕ Grupă nouă și coduri de invitație</summary>
@@ -684,7 +687,7 @@ document.addEventListener('click',async e=>{if(!canEd())return;const r=e.target.
  if(e.target.id==='ips'){const g=$('eg').value,l=pend;if(!g||!l.length)return;e.target.disabled=true;
   try{for(let i=0;i<l.length;i+=400){const b=writeBatch(fs);l.slice(i,i+400).forEach(x=>b.set(doc(collection(fs,'scheduleEntries')),x));await b.commit()}try{await setDoc(doc(fs,'groups',g),{universityId:uniOf(g),facultyId:fcOf(g)||'upb_sim',groupId:dbG(g),...(grpMeta[g]&&grpMeta[g].code?{}:{code:genCode()})},{merge:true})}catch(x){}ims('✓ Salvate '+l.length+' ore în '+g);pend=[];pvErr=[];pvDup=0;renPv()}catch(x){e.target.disabled=false;ims('Nu s-a salvat ('+(x.code||'eroare')+'). Verifică regulile din Firestore.')}}});
 const canEd=()=>isAdm||isFA,facOk=g=>isAdm||myFacs.includes(fcOf(fullG(g))||'upb_sim'),uf=u=>facs.filter(f=>f.universityId===u.id);
-function fillNgf(){const sel=$('ngf');if(!sel)return;const cv=sel.value;sel.innerHTML=facs.filter(f=>isAdm||myFacs.includes(f.id)).map(f=>`<option value="${esc(f.id)}">${esc(uShort(unis.find(u=>u.id===f.universityId)))} · ${esc(f.name)}</option>`).join('');if([...sel.options].some(o=>o.value===cv))sel.value=cv;const pp=$('ngp'),pv=pp.value;fillP(sel,pp,pv);blkFill();mvFill()}
+function fillNgf(){const sel=$('ngf');if(!sel)return;const cv=sel.value;sel.innerHTML=facs.filter(f=>isAdm||myFacs.includes(f.id)).map(f=>`<option value="${esc(f.id)}">${esc(uShort(unis.find(u=>u.id===f.universityId)))} · ${esc(f.name)}</option>`).join('');if([...sel.options].some(o=>o.value===cv))sel.value=cv;const pp=$('ngp'),pv=pp.value;fillP(sel,pp,pv);blkFill();mvFill();fxRen()}
 function renUni(){if(!isAdm||!$('ufl'))return;const a=document.activeElement;if(a&&a.dataset&&a.dataset.fad)return;fillNgf();$('npf').innerHTML=facs.map(f=>`<option value="${esc(f.id)}">${esc(uShort(unis.find(u=>u.id===f.universityId)))} · ${esc(f.name)}</option>`).join('');$('nfu').innerHTML=unis.map(u=>`<option value="${esc(u.id)}">${esc(u.name)}</option>`).join('');
  $('ufl').innerHTML=unis.map(u=>`<div class="c"><div class="b">${esc(u.name)}<span class="tag">${esc(u.id)}</span></div>${uf(u).map(f=>`<div style="margin-top:10px"><div class="b">${esc(f.name)}<span class="tag">${esc(fShort(f))}</span></div><div class="mu" style="margin:4px 0">Specializări: ${esc(progs.filter(p=>p.facultyId===f.id).map(p=>p.name).join(' · ')||'— niciuna încă')}</div><div class="mu" style="margin:4px 0">Prima zi (luni) a unei săptămâni IMPARE din semestrul curent:</div><div class="r"><input type="date" class="fi" data-fad="${esc(f.id)}" value="${esc(f.anchor||'2026-09-28')}" style="margin:0"><button data-fas="${esc(f.id)}" style="flex:0 0 auto">Salvează</button></div></div>`).join('')||'<div class="mu">Nicio facultate încă.</div>'}</div>`).join('')}
 const lc=x=>String(x||'').toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,10);
@@ -720,6 +723,15 @@ $('blks').onclick=async()=>{if(!canEd()||blkBusy)return;blkCalc();const l=blk.fi
   for(let i=0;i<w.length;i+=400){const b=writeBatch(fs);w.slice(i,i+400).forEach(([r,d,mg])=>mg?b.set(r,d,{merge:true}):b.set(r,d));await b.commit()}
   const n=l.reduce((a,x)=>a+x.nw.length,0);blk=[];$('blkb').textContent='Alege fișierele';m.textContent='✓ Gata: '+n+' ore în '+l.length+' '+(l.length===1?'grupă':'grupe')+'.'}catch(x){m.textContent='Nu s-a salvat tot ('+(x.code||'eroare')+'). Apasă din nou, orele deja salvate sunt sărite.'}
  blkBusy=false;blkRen()};
+/* ===== Corectarea numelor de materii ===== */
+const fxOff=new Set(),fxN=x=>ND(x).replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim(),fxNum=x=>fxN(x).split(' ').filter(w=>/^(i|ii|iii|iv|v|vi|\d+)$/.test(w)).join(),
+ fxLev=(a,b)=>{let p=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){const c=[i];for(let j=1;j<=b.length;j++)c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));p=c}return p[b.length]},
+ fxSame=(a,b)=>{const x=fxN(a),y=fxN(b),k=z=>z.split(' ').sort().join(' ');return fxNum(a)===fxNum(b)&&(k(x)===k(y)||(Math.min(x.length,y.length)>=12&&fxLev(x,y)<=2))};
+function fxList(){const c={};allSched.forEach(e=>{if(e.subject)c[e.subject]=(c[e.subject]||0)+1});const ns=Object.keys(c).sort((a,b)=>c[b]-c[a]||a.localeCompare(b)),heads=[],out=[];ns.forEach(n=>{const h=heads.find(x=>fxSame(x,n));if(h)out.push({from:n,to:h,n:c[n]});else heads.push(n)});return out}
+function fxRen(){if(!isAdm||!$('fxl'))return;const l=fxList(),on=l.filter(x=>!fxOff.has(x.from)),b=$('fxb');$('fxl').innerHTML=l.map(x=>`<label style="display:flex;gap:8px;align-items:flex-start;margin:0 0 10px;font-size:14px"><input type="checkbox" data-fxs="${esc(x.from)}" style="width:auto;margin:3px 0 0" ${fxOff.has(x.from)?'':'checked'}><span><span style="color:var(--no)">${esc(x.from)}</span> <span class="mu">(${x.n} ${x.n===1?'oră':'ore'})</span><br>→ <b>${esc(x.to)}</b></span></label>`).join('')||'<div class="mu">Nu am găsit nume scrise diferit.</div>';b.classList.toggle('hide',!l.length);b.disabled=!on.length;b.textContent=on.length?`Corectează ${on.length} nume`:'Nimic bifat'}
+document.addEventListener('change',e=>{const c=e.target.closest&&e.target.closest('[data-fxs]');if(c){if(c.checked)fxOff.delete(c.dataset.fxs);else fxOff.add(c.dataset.fxs);fxRen()}});
+$('fxb').onclick=async()=>{if(!isAdm)return;const l=fxList().filter(x=>!fxOff.has(x.from)),m=$('fxm'),b0=$('fxb');if(!l.length)return;const to={};l.forEach(x=>to[x.from]=x.to);const es=allSched.filter(e=>to[e.subject]);if(!confirm('Corectezi '+es.length+' ore?'))return;b0.disabled=true;m.textContent='Se corectează…';
+ try{for(let i=0;i<es.length;i+=400){const b=writeBatch(fs);es.slice(i,i+400).forEach(e=>b.update(doc(fs,'scheduleEntries',e.id),{subject:to[e.subject]}));await b.commit()}m.textContent='✓ Gata: '+es.length+' ore corectate.'}catch(x){m.textContent='Nu s-a corectat tot ('+(x.code||'eroare')+'). Încearcă din nou.'}fxRen()};
 /* ===== Mutarea grupelor la specializare ===== */
 const mvSel=new Set();
 const mvGs=()=>[...new Set([...grpDocs,...allSched.map(x=>x.groupId)].map(fullG))].filter(g=>g&&!pgOf(g)&&fcOf(g)===$('mvf').value).sort(),mvN=g=>Object.keys(all).filter(u=>u!=='_'&&grp[u]===g).length;
