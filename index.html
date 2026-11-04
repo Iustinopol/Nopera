@@ -589,9 +589,9 @@ function rebuildAll(){all={...pe};if(uid)all[uid]=dirty?{...mine}:{...ownM}}
 function rebuildProfs(){profs={...profsP};if(ownProf)profs[uid]=ownProf;peers();renChats();fillProf();renAdm();render()}
 function peersCb(s){pe={};s.docs.forEach(d=>{if(d.id===uid)return;const x=d.data();pe[d.id]=x.m||{};grp[d.id]=fullG(x.g);if(x.n)names[d.id]=x.n});rebuildAll();renAdm();render()}
 const prVis=()=>['o','hub'].some(i=>!$(i).classList.contains('hide'))||gMemOn;
-function presLoad(){const k=gKeys(myGroup);if(!uid||!k.length||document.hidden||Date.now()-prAt<120000)return;prAt=Date.now();getDocs(query(collection(fs,'presence'),where('g','in',k))).then(s=>{for(const x in pr)delete pr[x];s.docs.forEach(d=>pr[d.id]=d.data());peers();renMem();hubFill()}).catch(()=>{})}
+function presLoad(){const k=gKeys(myGroup);if(!uid||!k.length||document.hidden||Date.now()-prAt<120000)return;prAt=Date.now();getDocs(query(collection(fs,'presence'),where('g','==',myGroup))).then(s=>{for(const x in pr)delete pr[x];s.docs.forEach(d=>pr[d.id]=d.data());peers();renMem();hubFill()}).catch(()=>{})}
 function subScope(){unP.forEach(f=>f());unP=[];if(!uid)return;const k=gKeys(myGroup),er=()=>{};
- if(isAdm&&admFull)unP.push(onSnapshot(collection(fs,'attendance'),peersCb,er));else if(k.length)unP.push(onSnapshot(query(collection(fs,'attendance'),where('g','in',k)),peersCb,er));else{pe={};rebuildAll()}
+ if(isAdm&&admFull)unP.push(onSnapshot(collection(fs,'attendance'),peersCb,er));else if(k.length)unP.push(onSnapshot(query(collection(fs,'attendance'),where('g','==',myGroup)),peersCb,er));else{pe={};rebuildAll()}
  const pcb=s=>{profsP={};s.docs.forEach(d=>profsP[d.id]=d.data());rebuildProfs()};
  if(isAdm&&admFull)unP.push(onSnapshot(collection(fs,'profiles'),pcb,er));else if(k.length)unP.push(onSnapshot(query(collection(fs,'profiles'),where('g','in',k)),pcb,er));else{profsP={};rebuildProfs()}
  for(const x in pr)delete pr[x];prAt=0;if(prVis())presLoad()
