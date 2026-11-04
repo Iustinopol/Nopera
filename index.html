@@ -305,6 +305,7 @@ body.pf .tabs [data-t="prf"]{order:-1}
 <div id="pcd" class="hide" style="margin:8px 0"><div class="mu">Codul grupei tale (dă-l colegilor):</div><div class="r" style="align-items:center"><b id="pcv" style="font-size:22px;letter-spacing:3px;flex:1"></b><button id="pcs" type="button" style="flex:0 0 auto">Trimite pe WhatsApp</button></div></div>
 <label class="mu">Ai un cod de grupă?</label><div class="r"><input id="jcd" class="fi" maxlength="8" placeholder="COD" style="margin:0;text-transform:uppercase"><button id="jcb" type="button" style="flex:0 0 auto">Intră</button></div><div class="mu" id="jcm" style="min-height:18px;margin-bottom:6px"></div>
 <label class="mu">Limba modernă</label><select id="plg" class="fi"><option value="">— alege —</option><option value="en">Engleză</option><option value="es">Spaniolă</option><option value="fr">Franceză</option><option value="de">Germană</option></select>
+<div id="ppw" class="hide"><label class="mu" style="display:flex;gap:8px;align-items:center;margin:0 0 8px"><input type="checkbox" id="pped" style="width:auto;margin:0"> 🎓 Fac modulul de pedagogie</label></div>
 <div class="mu" id="pm" style="min-height:18px;color:var(--ok)"></div>
 <label class="mu" style="display:flex;gap:8px;align-items:center;margin:8px 0"><input type="checkbox" id="hwt" style="width:auto;margin:0"> 🎃 Temă Halloween</label>
 <div class="r"><button id="psv" class="on">Salvează</button><button id="pout">Ieși din cont</button></div>
@@ -572,7 +573,8 @@ document.addEventListener('click',async e=>{const b=e.target.closest('[data-far]
 function facChg(){setFac();fillProf();renUni();if($('gru')&&$('grf'))fillUF($('gru'),$('grf'),$('grf').value,$('grq'),$('grq').value);render()}
 function healProf(){if(!uid||!myGroup)return;setDoc(doc(fs,'profiles',uid),{g:myGroup},{merge:true}).catch(()=>{})}
 const LN={en:'Engleză',es:'Spaniolă',fr:'Franceză',de:'Germană'},LGM={'':'',engleza:'en',en:'en',spaniola:'es',es:'es',franceza:'fr',fr:'fr',germana:'de',de:'de'},myLang=()=>(profs[uid]&&profs[uid].lang)||'',tup=e=>[e.day,e.start,e.end,e.subject+(e.lang&&LN[e.lang]?' – '+LN[e.lang]:''),e.type,e.room||'',e.prof||'',e.weeks||'b'];
-const TT=()=>sched&&sched.length?sched.filter(e=>!e.lang||e.lang===myLang()).map(e=>({id:e.id,c:tup(e)})):[];
+const isPed=x=>/psiholo\w*\s+educa|pedagog/.test(ND(x)),myPed=()=>profs[uid]&&profs[uid].ped;
+const TT=()=>sched&&sched.length?sched.filter(e=>(!e.lang||e.lang===myLang())&&!(myPed()===false&&isPed(e.subject))).map(e=>({id:e.id,c:tup(e)})):[];
 function migrateMarks(){if(!uid||!sched||!sched.length)return;const ks=Object.keys(mine).filter(k=>/^\d{4}-\d{2}-\d{2}\|\d+$/.test(k));if(!ks.length)return;
  const nm=x=>[+x[0],p2(String(x[1])),p2(String(x[2])),String(x[3]).toLowerCase().trim(),x[4],x[7]||'b'].join('|'),map={};sched.forEach(e=>{map[nm(tup(e))]=e.id});
  const nmine={...mine};let ch=0;ks.forEach(k=>{const[d,i]=k.split('|'),c=T[+i];if(!c)return;const id=map[nm(c)];if(!id)return;const nk=d+'|'+id;if(nmine[nk]===undefined)nmine[nk]=mine[k];delete nmine[k];ch++});
@@ -799,12 +801,16 @@ $('pfb').onclick=()=>$('pfi').click();
 $('pfi').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f||!uid)return;try{const bm=await createImageBitmap(f),c=document.createElement('canvas');c.width=c.height=128;const z=Math.min(bm.width,bm.height);c.getContext('2d').drawImage(bm,(bm.width-z)/2,(bm.height-z)/2,z,z,0,0,128,128);await setDoc(doc(fs,'profiles',uid),{pic:c.toDataURL('image/jpeg',.72),name:myName,t:Date.now()},{merge:true});$('pm').textContent='✓ Poza a fost salvată'}catch(err){$('pm').textContent='Nu am putut salva poza ('+(err.code||err.message||'eroare')+')'}};
 $('pfd').onclick=async()=>{if(!uid||!confirm('Ștergi poza de profil?'))return;try{await setDoc(doc(fs,'profiles',uid),{pic:''},{merge:true});$('pm').textContent='✓ Poza a fost ștearsă'}catch(e){$('pm').textContent='Nu s-a șters ('+(e.code||'eroare')+')'}};
 
-function lgBanner(){const el=$('lgb');if(!el)return;if(!uid||isAdm||!profLoaded||myLang()){el.innerHTML='';return}
- el.innerHTML=`<div class="c warn"><div class="b">🌍 Alege limba modernă</div><div class="mu" style="margin:4px 0 8px">Fiecare student e repartizat la o limbă. Alege-o ca să vezi orele tale de Limbi moderne.</div><div class="r" style="flex-wrap:wrap">${Object.keys(LN).map(k=>`<button data-lg="${k}" style="flex:1 0 40%">${LN[k]}</button>`).join('')}</div></div>`}
+function lgBanner(){const el=$('lgb');if(!el)return;const hp=!!sched&&sched.some(e=>isPed(e.subject)),w=$('ppw'),c=$('pped');if(w)w.classList.toggle('hide',!hp&&typeof myPed()!=='boolean');if(c&&document.activeElement!==c)c.checked=myPed()===true;if(!uid||!profLoaded){el.innerHTML='';return}
+ const pb=hp&&typeof myPed()!=='boolean'?`<div class="c warn"><div class="b">🎓 Faci modulul de pedagogie?</div><div class="mu" style="margin:4px 0 8px">Psihologia educației apare doar celor înscriși. Dacă nu îl faci, o scoatem din orarul tău.</div><div class="r"><button class="on" data-ped="1">Da, îl fac</button><button data-ped="0">Nu îl fac</button></div></div>`:'';
+ if(isAdm||myLang()){el.innerHTML=pb;return}
+ el.innerHTML=pb+`<div class="c warn"><div class="b">🌍 Alege limba modernă</div><div class="mu" style="margin:4px 0 8px">Fiecare student e repartizat la o limbă. Alege-o ca să vezi orele tale de Limbi moderne.</div><div class="r" style="flex-wrap:wrap">${Object.keys(LN).map(k=>`<button data-lg="${k}" style="flex:1 0 40%">${LN[k]}</button>`).join('')}</div></div>`}
+async function savePed(v){if(!uid)return;const old=myPed();profs[uid]={...(profs[uid]||{}),ped:v};render();try{await setDoc(doc(fs,'profiles',uid),{ped:v,name:myName,t:Date.now()},{merge:true})}catch(e){profs[uid]={...(profs[uid]||{}),ped:old};render();alert(denyMsg(e,'Nu s-a salvat alegerea'))}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-ped]');if(b)savePed(b.dataset.ped==='1')});
 async function saveLang(l){if(!uid)return;const old=myLang();profs[uid]={...(profs[uid]||{}),lang:l};render();fillProf();
  try{await setDoc(doc(fs,'profiles',uid),{lang:l,name:myName,t:Date.now()},{merge:true})}catch(e){profs[uid]={...(profs[uid]||{}),lang:old};render();fillProf();alert(denyMsg(e,'Nu s-a salvat limba'))}}
 document.addEventListener('click',e=>{const g=e.target.closest('[data-lg]');if(g)saveLang(g.dataset.lg)});
-$('plg').onchange=e=>saveLang(e.target.value);
+$('plg').onchange=e=>saveLang(e.target.value);$('pped').onchange=e=>savePed(e.target.checked);
 
 let nbNotes=[],nbSubj=null,nbSubs=[],nbCur=null,nbDirty=false,nbTm=0,nbStr=[],nbHist=[],nbH=1400,nbTool='p',nbCol='#1b1d29',nbWd=4,nbPap=2,nbCv=null,nbCx=null,nbDraw=null,nbPan=null,nbPen=false,nbRedo=[],nbMv=null,nbSel=null,gSh=[],nbImgs={};
 const hexA=(h,a)=>{const n=parseInt(h.slice(1),16);return`rgba(${n>>16},${n>>8&255},${n&255},${a})`},
