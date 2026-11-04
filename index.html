@@ -187,7 +187,7 @@ h1.pt{font-size:28px;margin:0 0 14px}
 .at b{font-size:16px}.at span{font-size:13px;font-weight:600;color:var(--mu)}
 .at.hot{background:var(--ac);border-color:var(--ac);color:var(--onac)}.at.hot span{color:var(--onac);opacity:.85}
 #fau{display:none}
-.faonly #ah,.faonly #bk,.faonly #anc,.faonly #adv,.faonly #uf,.faonly #stv{display:none!important}
+.faonly #mvw,.faonly #ah,.faonly #bk,.faonly #anc,.faonly #adv,.faonly #uf,.faonly #stv{display:none!important}
 
 /* ===== Chat v2 ===== */
 .chs{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;margin-top:10px;-webkit-overflow-scrolling:touch}
@@ -334,6 +334,9 @@ body.pf .tabs [data-t="prf"]{order:-1}
 <label class="mu" for="blkp" style="display:block">2. Specializarea</label><select id="blkp" class="fi"></select><div class="mu" id="blkn" style="color:var(--no);margin:-4px 0 8px"></div>
 <label class="mu" style="display:block;margin-bottom:6px">3. Fișierele (poți selecta mai multe deodată)</label><button id="blkb" type="button" class="on cta">Alege fișierele</button><input type="file" id="blki" multiple accept=".pdf,.xlsx,.xls,.csv,text/csv" class="hide">
 <div class="mu" id="blkm" style="min-height:18px;margin-top:8px;white-space:pre-line"></div><div id="blkl"></div><button id="blks" type="button" class="on cta hide"></button></div>
+<details class="c" id="mvw"><summary class="b">🔀 Mută la specializare</summary>
+<div class="mu" style="margin:8px 0">Alegi specializarea și bifezi grupele. Orele, studenții, prezențele și codul de invitație rămân. Chatul vechi nu se șterge, dar nu apare la grupa nouă.</div>
+<select id="mvf" class="fi" aria-label="Facultatea"></select><select id="mvp" class="fi" aria-label="Specializarea"></select><div id="mvl" class="chk"></div><div class="mu" id="mvm" style="min-height:18px;margin:6px 0;white-space:pre-line"></div><button id="mvb" type="button" class="on cta" disabled></button></details>
 <input id="egs" class="fi" placeholder="🔎 Caută grupa (ex: 1011B)" style="margin-top:8px">
 <div id="egl" style="margin-top:6px"></div>
 <details class="c" id="ngw"><summary class="b">➕ Grupă nouă și coduri de invitație</summary>
@@ -668,7 +671,7 @@ document.addEventListener('click',async e=>{if(!canEd())return;const r=e.target.
  if(e.target.id==='ips'){const g=$('eg').value,l=pend;if(!g||!l.length)return;e.target.disabled=true;
   try{for(let i=0;i<l.length;i+=400){const b=writeBatch(fs);l.slice(i,i+400).forEach(x=>b.set(doc(collection(fs,'scheduleEntries')),x));await b.commit()}try{await setDoc(doc(fs,'groups',g),{universityId:uniOf(g),facultyId:fcOf(g)||'upb_sim',groupId:dbG(g),...(grpMeta[g]&&grpMeta[g].code?{}:{code:genCode()})},{merge:true})}catch(x){}ims('✓ Salvate '+l.length+' ore în '+g);pend=[];pvErr=[];pvDup=0;renPv()}catch(x){e.target.disabled=false;ims('Nu s-a salvat ('+(x.code||'eroare')+'). Verifică regulile din Firestore.')}}});
 const canEd=()=>isAdm||isFA,facOk=g=>isAdm||myFacs.includes(fcOf(fullG(g))||'upb_sim'),uf=u=>facs.filter(f=>f.universityId===u.id);
-function fillNgf(){const sel=$('ngf');if(!sel)return;const cv=sel.value;sel.innerHTML=facs.filter(f=>isAdm||myFacs.includes(f.id)).map(f=>`<option value="${esc(f.id)}">${esc(uShort(unis.find(u=>u.id===f.universityId)))} · ${esc(f.name)}</option>`).join('');if([...sel.options].some(o=>o.value===cv))sel.value=cv;const pp=$('ngp'),pv=pp.value;fillP(sel,pp,pv);blkFill()}
+function fillNgf(){const sel=$('ngf');if(!sel)return;const cv=sel.value;sel.innerHTML=facs.filter(f=>isAdm||myFacs.includes(f.id)).map(f=>`<option value="${esc(f.id)}">${esc(uShort(unis.find(u=>u.id===f.universityId)))} · ${esc(f.name)}</option>`).join('');if([...sel.options].some(o=>o.value===cv))sel.value=cv;const pp=$('ngp'),pv=pp.value;fillP(sel,pp,pv);blkFill();mvFill()}
 function renUni(){if(!isAdm||!$('ufl'))return;const a=document.activeElement;if(a&&a.dataset&&a.dataset.fad)return;fillNgf();$('npf').innerHTML=facs.map(f=>`<option value="${esc(f.id)}">${esc(uShort(unis.find(u=>u.id===f.universityId)))} · ${esc(f.name)}</option>`).join('');$('nfu').innerHTML=unis.map(u=>`<option value="${esc(u.id)}">${esc(u.name)}</option>`).join('');
  $('ufl').innerHTML=unis.map(u=>`<div class="c"><div class="b">${esc(u.name)}<span class="tag">${esc(u.id)}</span></div>${uf(u).map(f=>`<div style="margin-top:10px"><div class="b">${esc(f.name)}<span class="tag">${esc(fShort(f))}</span></div><div class="mu" style="margin:4px 0">Specializări: ${esc(progs.filter(p=>p.facultyId===f.id).map(p=>p.name).join(' · ')||'— niciuna încă')}</div><div class="mu" style="margin:4px 0">Prima zi (luni) a unei săptămâni IMPARE din semestrul curent:</div><div class="r"><input type="date" class="fi" data-fad="${esc(f.id)}" value="${esc(f.anchor||'2026-09-28')}" style="margin:0"><button data-fas="${esc(f.id)}" style="flex:0 0 auto">Salvează</button></div></div>`).join('')||'<div class="mu">Nicio facultate încă.</div>'}</div>`).join('')}
 const lc=x=>String(x||'').toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,10);
@@ -704,6 +707,19 @@ $('blks').onclick=async()=>{if(!canEd()||blkBusy)return;blkCalc();const l=blk.fi
   for(let i=0;i<w.length;i+=400){const b=writeBatch(fs);w.slice(i,i+400).forEach(([r,d,mg])=>mg?b.set(r,d,{merge:true}):b.set(r,d));await b.commit()}
   const n=l.reduce((a,x)=>a+x.nw.length,0);blk=[];$('blkb').textContent='Alege fișierele';m.textContent='✓ Gata: '+n+' ore în '+l.length+' '+(l.length===1?'grupă':'grupe')+'.'}catch(x){m.textContent='Nu s-a salvat tot ('+(x.code||'eroare')+'). Apasă din nou, orele deja salvate sunt sărite.'}
  blkBusy=false;blkRen()};
+/* ===== Mutarea grupelor la specializare ===== */
+const mvSel=new Set();
+const mvGs=()=>[...new Set([...grpDocs,...allSched.map(x=>x.groupId)].map(fullG))].filter(g=>g&&!pgOf(g)&&fcOf(g)===$('mvf').value).sort(),mvN=g=>Object.keys(all).filter(u=>u!=='_'&&grp[u]===g).length;
+function mvFill(){if(!isAdm||!$('mvf'))return;const a=document.activeElement,f=$('mvf'),p=$('mvp');if(a===f||a===p)return mvRen();const fv=f.value||'upb_sim',pv=p.value;f.innerHTML=facs.map(x=>`<option value="${esc(x.id)}">${esc(uShort(unis.find(u=>u.id===x.universityId)))} · ${esc(x.name)}</option>`).join('');f.value=facs.some(x=>x.id===fv)?fv:(facs[0]&&facs[0].id)||'';mvProg(pv)}
+function mvProg(pv){const f=$('mvf').value,p=$('mvp'),l=progs.filter(x=>x.facultyId===f).sort((a,b)=>a.name.localeCompare(b.name));p.innerHTML='<option value="">— alege specializarea —</option>'+l.map(x=>`<option value="${esc(x.code)}">${esc(x.name)}</option>`).join('');p.value=l.some(x=>x.code===pv)?pv:'';mvRen()}
+function mvRen(){const gs=mvGs(),pc=$('mvp').value,el=$('mvl');[...mvSel].forEach(g=>{if(!gs.includes(g))mvSel.delete(g)});el.innerHTML=gs.map(g=>{const h=allSched.filter(e=>fullG(e.groupId)===g).length,n=mvN(g);return`<label><input type="checkbox" data-mvg="${esc(g)}" ${mvSel.has(g)?'checked':''}>${esc(gName(g))} · ${h} ${h===1?'oră':'ore'} · ${n} ${n===1?'student':'studenți'}</label>`}).join('')||'<span class="mu">Toate grupele au specializare.</span>';const b=$('mvb'),k=mvSel.size;b.disabled=!pc||!k;b.textContent=!pc?'Alege specializarea':!k?'Bifează grupele':`Mută ${k} ${k===1?'grupă':'grupe'}`}
+$('mvf').onchange=()=>{mvSel.clear();mvProg('')};$('mvp').onchange=mvRen;
+document.addEventListener('change',e=>{const c=e.target.closest&&e.target.closest('[data-mvg]');if(c){if(c.checked)mvSel.add(c.dataset.mvg);else mvSel.delete(c.dataset.mvg);mvRen()}});
+$('mvb').onclick=async()=>{if(!isAdm)return;const f=$('mvf').value,pc=$('mvp').value,l=[...mvSel],m=$('mvm'),pn=(progs.find(x=>x.facultyId===f&&x.code===pc)||{}).name||pc;if(!pc||!l.length)return;const nk=g=>f+'_'+pc+'_'+gName(g),on=new Set([...grpDocs,...allSched.map(x=>x.groupId)].map(fullG)),clash=l.filter(g=>on.has(nk(g)));if(clash.length){m.textContent='Există deja la această specializare: '+clash.map(gName).join(', ')+'. Debifează-le.';return}
+ if(!confirm('Muți '+l.length+' '+(l.length===1?'grupă':'grupe')+' la '+pn+'?\n'+l.map(gName).join(', ')))return;const b0=$('mvb');b0.disabled=true;m.textContent='Se mută…';
+ try{const w=[];l.forEach(g=>{const k=nk(g),code=(grpMeta[g]&&grpMeta[g].code)||genCode();allSched.filter(e=>fullG(e.groupId)===g).forEach(e=>w.push(b=>b.update(doc(fs,'scheduleEntries',e.id),{groupId:k})));Object.keys(all).filter(u=>u!=='_'&&grp[u]===g).forEach(u=>w.push(b=>b.update(doc(fs,'attendance',u),{g:k})));w.push(b=>b.set(doc(fs,'groups',k),{universityId:uniOf(k),facultyId:f,programId:pc,groupId:k,code}));w.push(b=>b.delete(doc(fs,'groups',g)));if(f==='upb_sim')w.push(b=>b.delete(doc(fs,'groups','upb_'+gName(g))))});
+  for(let i=0;i<w.length;i+=400){const b=writeBatch(fs);w.slice(i,i+400).forEach(x=>x(b));await b.commit()}
+  mvSel.clear();m.textContent='✓ Gata: '+l.map(gName).join(', ')+' '+(l.length===1?'e':'sunt')+' acum la '+pn+'.'}catch(x){m.textContent='Nu s-a mutat tot ('+(x.code||'eroare')+'). Verifică lista și încearcă din nou.'}mvRen()};
 $('ef').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(f)impFile(f)};
 $('epb').onclick=()=>{const t=$('ep').value;if(!t.trim())return ims('Lipește mai întâi orele.');runImp(t)};
 function renLists(){const o=a=>[...new Set(a.filter(Boolean))].sort().map(v=>`<option value="${esc(v).replace(/"/g,'&quot;')}">`).join('');$('dls').innerHTML=o(allSched.map(x=>x.subject));$('dlp').innerHTML=o(allSched.map(x=>x.prof));
