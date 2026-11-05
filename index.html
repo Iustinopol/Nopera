@@ -83,6 +83,36 @@ a{color:var(--ac)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1016;--cd:#181a24;--tx:#eef0f8;--mu:#9aa0b6;--ac:#8b85ff;--bd:#2a2d3b;--onac:#11121a}}
 :root[data-theme="dark"]{--bg:#0f1016;--cd:#181a24;--tx:#eef0f8;--mu:#9aa0b6;--ac:#8b85ff;--bd:#2a2d3b;--onac:#11121a}
 :root[data-theme="halloween"]{--bg:#120a1c;--cd:#1e1230;--tx:#f3e8ff;--mu:#a99bc4;--ac:#ff7518;--ok:#8bdc3c;--no:#ff4d6d;--bd:#3b2559;--onac:#1b0f2a}
+:root[data-theme="oled"]{--bg:#000;--cd:#0d0e12;--tx:#f1f2f7;--mu:#9498ab;--ac:#8b85ff;--ok:#4ade80;--no:#f87171;--bd:#23242e;--onac:#11121a;color-scheme:dark}
+:root[data-theme="sesiune"]{--bg:#17181b;--cd:#202226;--tx:#d9dade;--mu:#8d9097;--ac:#9aa4b8;--ok:#7fc29b;--no:#d98b8b;--bd:#2f3238;--onac:#14151a;color-scheme:dark}
+:root[data-theme="biblioteca"]{--bg:#f4ecdf;--cd:#fbf6ec;--tx:#3a2c20;--mu:#7d6a58;--ac:#8a5a2b;--ok:#4f7d3a;--no:#b3402e;--bd:#e0d3bd;--onac:#fff;color-scheme:light}
+:root[data-theme="padure"]{--bg:#0f1a14;--cd:#17261d;--tx:#e6efe8;--mu:#93a89a;--ac:#6fcf97;--ok:#6fcf97;--no:#f28b82;--bd:#25382c;--onac:#0c1610;color-scheme:dark}
+:root[data-theme="ocean"]{--bg:#0b1620;--cd:#12222e;--tx:#e4f0f5;--mu:#8aa5b3;--ac:#3fd0c9;--ok:#5fd3a2;--no:#f28b82;--bd:#1f3644;--onac:#06141a;color-scheme:dark}
+:root[data-theme="apus"]{--bg:#1c1228;--cd:#281a38;--tx:#f5e9ef;--mu:#b19fb8;--ac:#ff9a4d;--ok:#8fd694;--no:#ff7b8a;--bd:#3a2750;--onac:#21120a;color-scheme:dark}
+:root[data-theme="neon"]{--bg:#07080d;--cd:#10121b;--tx:#f0fff4;--mu:#8f9bb0;--ac:#39ff9c;--ok:#39ff9c;--no:#ff4fa3;--bd:#22283a;--onac:#04120b;color-scheme:dark}
+[data-theme="neon"] h1{color:#ff4fa3}
+:root[data-theme="noapte"]{--bg:#0b1730;--cd:#142a4d;--tx:#eef4ff;--mu:#9db0cc;--ac:#dfe9f7;--ok:#7fe0b0;--no:#ff9a9a;--bd:#26406b;--onac:#0b1730;color-scheme:dark}
+[data-theme="noapte"] body{background:radial-gradient(120% 70% at 50% -10%,#1b3564 0,#0b1730 62%,#091327 100%) fixed}
+:root[data-theme="palat"]{--bg:#e3f0fc;--cd:#f8fbff;--tx:#17345c;--mu:#55749c;--ac:#2b73cc;--ok:#15803d;--no:#c8323c;--bd:#cfe2f6;--onac:#fff;color-scheme:light}
+[data-theme="palat"] body{background:radial-gradient(90% 45% at 50% 22%,#fff 0,#e3f0fc 55%,#c4def7 100%) fixed}
+[data-theme="noapte"] main,[data-theme="palat"] main{position:relative;z-index:1}
+#iw{display:none;position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+[data-theme="noapte"] #iw,[data-theme="palat"] #iw{display:block}
+#iw i{position:absolute;top:-30px;font-style:normal;color:#fff;animation:ifall linear infinite}
+[data-theme="palat"] #iw i:nth-child(3n){color:#f0c26a;text-shadow:0 0 8px #f0c26a}
+@keyframes ifall{to{transform:translate3d(24px,110vh,0)}}
+#iice{display:none;position:absolute;left:0;right:0;top:0;height:84px;background:repeating-linear-gradient(90deg,#ffffffd9 0 2px,transparent 2px 7px);-webkit-mask:linear-gradient(#000,transparent);mask:linear-gradient(#000,transparent)}
+[data-theme="palat"] #iice{display:block}
+#ihill{position:absolute;left:-10%;right:-10%;bottom:58px;height:86px;border-radius:50% 50% 0 0/100% 100% 0 0;background:#dfe9f7;opacity:.16}
+[data-theme="palat"] #ihill{background:#fff;opacity:.85}
+.itree{position:absolute;bottom:64px;width:0;height:0;border-left:26px solid transparent;border-right:26px solid transparent;border-bottom:66px solid #17345c}
+[data-theme="palat"] .itree{border-bottom-color:#fff;filter:drop-shadow(0 0 6px #f0c26a)}
+#iwt1{left:10px}#iwt2{right:12px;transform:scale(.8);transform-origin:bottom}
+@media (min-width:900px){#ihill{bottom:0}.itree{bottom:6px}}
+@media (prefers-reduced-motion:reduce){#iw i{animation:none;top:auto}}
+.thg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:6px 0 12px}.tc{height:62px;padding:8px;border-radius:14px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;font-size:12px;font-weight:700;border:2px solid var(--bd)}.tc.sel{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac)}.tc i{width:18px;height:18px;border-radius:50%;display:block}
+.acg{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 14px}.acb{width:34px;height:34px;min-height:0;padding:0;border-radius:50%;border:2px solid var(--bd);font-size:11px;font-weight:800}.acb.sel{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--tx)}
+
 body{font-family:'Manrope',system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 h1{font-size:24px;font-weight:800;letter-spacing:-.02em}
 h2{font-size:15px;font-weight:800;color:var(--tx);margin:20px 0 10px}
@@ -265,7 +295,7 @@ body.pf .tabs [data-t="prf"]{order:-1}
 .tcls .tt small{display:block;color:var(--mu);font-weight:600}
 </style><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"></head><body><div id="ov" style="position:fixed;inset:0;z-index:9;background:var(--bg);padding:20px;overflow:auto"><div class="c" style="width:100%;max-width:380px;margin:auto"><div class="lgo" role="img" aria-label="Nopera"></div><div class="lgh">Bun venit la Nopera</div><div id="iab" class="c warn hide" style="margin-top:12px"><div class="b">Deschide în Chrome sau Safari</div><div class="mu" style="margin:6px 0 10px">Google nu permite conectarea din WhatsApp, TikTok sau Instagram. Apasă meniul ⋯ sau ⋮ și alege „Deschide în browser”, sau copiază linkul și lipește-l în Chrome ori Safari.</div><button type="button" id="iabc" class="on" style="width:100%">Copiază linkul</button><div class="mu" id="iabm" style="min-height:16px;margin-top:6px"></div></div><div class="mu" id="ovt" style="margin:8px 0 18px">Orarul, grupa și colegii tăi, într-un singur loc.</div>
 <button id="gg" type="button" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1f1f1f;border:1px solid #dadce0;font-weight:600;margin-bottom:10px"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.5l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.7 6.9l7.3 5.7c4.3-4 6.8-9.9 6.8-17.1z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.4-.8-2.9-.8-4.7s.3-3.3.8-4.7l-7.9-6.1C.9 16.4 0 20.1 0 24s.9 7.6 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.3 0 11.6-2.1 15.5-5.7l-7.3-5.7c-2 1.4-4.7 2.3-8.2 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>Continuă cu Google</button><div class="mu" style="text-align:center;font-size:12px;margin:-2px 0 14px">Cu Google nu îți pierzi datele, nici dacă schimbi telefonul.</div><div id="er" class="mu" style="color:var(--no);min-height:18px"></div><div style="text-align:center;margin-bottom:6px"><a href="#" id="olda" class="mu">Ai cont vechi cu email?</a></div><div id="oldm" class="hide"><div class="dv"><span>cont vechi</span></div><input id="an" maxlength="24" placeholder="Numele tău" class="fi hide"><input id="au" type="email" placeholder="Email" autocapitalize="none" autocomplete="email" class="fi"><div class="pw"><input id="ap" type="password" placeholder="Parolă (minim 6 caractere)" autocomplete="current-password" class="fi"><button type="button" class="eye" data-eye aria-label="Arată sau ascunde parola">Arată</button></div><div class="pw hide" id="ap2w"><input id="ap2" type="password" placeholder="Repetă parola" autocomplete="new-password" class="fi"></div><div class="mu" id="fgd" style="margin:-4px 0 10px;text-align:right"><a href="#" id="fg">Ai uitat parola?</a></div><label class="mu" style="display:flex;gap:8px;align-items:center;margin:0 0 10px"><input type="checkbox" id="rm" checked style="width:auto;margin:0"> Ține-mă minte pe acest dispozitiv</label><div class="r"><button id="lg" class="on">Conectează-te</button><button id="rg" class="hide">Nu ai cont? Creează unul</button></div></div>
-<div style="text-align:center;margin-top:12px"><a href="#" id="lins">📲 Cum pun aplicația pe ecran?</a></div></div></div><div id="hw" aria-hidden="true"><span class="b1">🦇</span><span class="b2">🦇</span><span class="b3">🦇</span><span class="g">👻</span><span class="w">🕸️</span></div>
+<div style="text-align:center;margin-top:12px"><a href="#" id="lins">📲 Cum pun aplicația pe ecran?</a></div></div></div><div id="iw" aria-hidden="true"><div id="iice"></div><div id="ihill"></div><div class="itree" id="iwt1"></div><div class="itree" id="iwt2"></div></div><div id="hw" aria-hidden="true"><span class="b1">🦇</span><span class="b2">🦇</span><span class="b3">🦇</span><span class="g">👻</span><span class="w">🕸️</span></div>
 <div id="ins" class="hide"><div class="c" style="width:100%;max-width:420px;margin:auto">
 <div class="r" style="align-items:center;margin:0 0 8px"><div class="b" style="font-size:18px;flex:1">📲 Pune Nopera pe ecran</div><button id="insx" style="flex:0 0 auto">✕</button></div>
 <div class="mu" style="margin-bottom:10px">Așa o deschizi dintr-o atingere, ca pe o aplicație, fără bara browserului.</div>
@@ -316,7 +346,7 @@ body.pf .tabs [data-t="prf"]{order:-1}
 <label class="mu">Limba modernă</label><select id="plg" class="fi"><option value="">— alege —</option><option value="en">Engleză</option><option value="es">Spaniolă</option><option value="fr">Franceză</option><option value="de">Germană</option></select>
 <div id="ppw" class="hide"><label class="mu" style="display:flex;gap:8px;align-items:center;margin:0 0 8px"><input type="checkbox" id="pped" style="width:auto;margin:0"> 🎓 Fac modulul de pedagogie</label></div>
 <div class="mu" id="pm" style="min-height:18px;color:var(--ok)"></div>
-<label class="mu" style="display:flex;gap:8px;align-items:center;margin:8px 0"><input type="checkbox" id="hwt" style="width:auto;margin:0"> 🎃 Temă Halloween</label>
+<label class="mu">Tema</label><div id="thg" class="thg"></div><label class="mu">Culoare de accent</label><div id="acg" class="acg"></div>
 <div class="r"><button id="psv" class="on">Salvează</button><button id="pout">Ieși din cont</button></div>
 <div class="r" style="margin-top:8px"><button id="pins" type="button">📲 Cum pun aplicația pe ecran</button></div></div>
 <div class="mu">Colegii din aceeași grupă apar la „Colegi” și la „Au fost”. Dacă lași grupa goală, vezi pe toată lumea.</div><button type="button" id="sgo" class="sgo">Ieși din cont</button></section>
@@ -486,11 +516,19 @@ const T=[[1,'8:00','9:50',P,'LAB','JK103',NE,'b'],[1,'10:00','11:50',PM,'SEM','J
 [4,'9:00','11:50',S,'CURS','JA101',VM,'b'],[4,'12:00','13:50',P,'CURS','JA101',NE,'b'],[4,'14:00','15:50',PM,'CURS','JA101',MA,'b'],[4,'16:00','17:50',CH,'CURS','JA101',MA,'b'],
 [5,'10:00','11:50',AL,'CURS','JA101',SE,'b'],[5,'14:00','15:50',LM,'SEM','JA101','','i'],[5,'14:00','15:50',CO,'CURS','JA101',CD,'p'],[5,'16:00','17:50',PS,'SEM','JA101',HS,'b']];
 const DN=['Duminică','Luni','Marți','Miercuri','Joi','Vineri','Sâmbătă'],$=id=>document.getElementById(id);
-function setHw(on){const r=document.documentElement;if(on)r.setAttribute('data-theme','halloween');else r.removeAttribute('data-theme');
- document.querySelectorAll('h1,#ov .b').forEach(el=>{if(/Nopera$/.test(el.textContent))el.textContent=(on?'🎃 ':'📚 ')+'Nopera'});
- const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',on?'#120a1c':'#4f46e5')}
-let hw;{const d=new Date(),def=d.getMonth()===9||(d.getMonth()===10&&d.getDate()<=2);try{const v=localStorage.getItem('hw');hw=v===null?def:v==='1'}catch(e){hw=def}}
-setHw(hw);$('hwt').checked=hw;$('hwt').onchange=e=>{hw=e.target.checked;try{localStorage.setItem('hw',hw?'1':'0')}catch(x){}setHw(hw)};
+const TH=[['auto','Automat','#f6f7fb','#8b85ff','#1b1d29'],['light','Luminoasă','#ffffff','#4f46e5','#1b1d29'],['dark','Întunecată','#181a24','#8b85ff','#eef0f8'],['oled','Noapte OLED','#000000','#8b85ff','#f1f2f7'],['sesiune','Sesiune','#202226','#9aa4b8','#d9dade'],['biblioteca','Bibliotecă','#f4ecdf','#8a5a2b','#3a2c20'],['padure','Pădure','#17261d','#6fcf97','#e6efe8'],['ocean','Ocean','#12222e','#3fd0c9','#e4f0f5'],['apus','Apus','#281a38','#ff9a4d','#f5e9ef'],['neon','Neon','#10121b','#39ff9c','#ff4fa3'],['noapte','Noapte cu zăpadă','#0b1730','#dfe9f7','#eef4ff'],['palat','Palat de gheață','#e3f0fc','#2b73cc','#17345c'],['halloween','Halloween','#1e1230','#ff7518','#f3e8ff']],TACC={violet:['#8b85ff','#4f46e5'],albastru:['#60a5fa','#2563eb'],verde:['#4ade80','#15803d'],roz:['#f472b6','#db2777'],portocaliu:['#fb923c','#ea580c'],rosu:['#f87171','#dc2626']};
+const lsG=k=>{try{return localStorage.getItem(k)}catch(e){return null}},lsS=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+let thCur,acCur=lsG('nac')||'';{const d=new Date(),mo=d.getMonth(),da=d.getDate(),v=lsG('nth'),h=lsG('hw');thCur=v&&TH.some(t=>t[0]===v)?v:h==='1'?'halloween':(mo===9||(mo===10&&da<=2))&&h!=='0'?'halloween':(mo===11||(mo===0&&da<=6))?'palat':'auto'}
+const thLight=t=>t==='light'||t==='biblioteca'||t==='palat'||(t==='auto'&&!(window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches));
+function thApply(){const r=document.documentElement,t=thCur;if(t==='auto')r.removeAttribute('data-theme');else r.setAttribute('data-theme',t);
+ const ic=t==='halloween'?'🎃 ':(t==='noapte'||t==='palat')?'❄️ ':'📚 ';document.querySelectorAll('h1,#ov .b').forEach(el=>{if(/Nopera$/.test(el.textContent))el.textContent=ic+'Nopera'});
+ const a=TACC[acCur];if(a){const L=thLight(t);r.style.setProperty('--ac',a[L?1:0]);r.style.setProperty('--onac',L?'#fff':'#11121a')}else{r.style.removeProperty('--ac');r.style.removeProperty('--onac')}
+ const c=(TH.find(x=>x[0]===t)||TH[2])[2],m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='auto'?'#4f46e5':c);
+ const iw=$('iw');if(iw&&(t==='noapte'||t==='palat')&&!iw.querySelector('i')){for(let i=0;i<22;i++){const f=document.createElement('i');f.textContent='❄';f.style.cssText=`left:${(i*4.7+((i*37)%9))%100}%;font-size:${9+(i*7)%13}px;opacity:${.4+((i*13)%5)/10};animation-duration:${9+(i*5)%10}s;animation-delay:-${(i*3)%14}s`;iw.appendChild(f)}}
+ thFill()}
+function thFill(){const a=$('thg'),b=$('acg');if(a)a.innerHTML=TH.map(t=>`<button type="button" class="tc${t[0]===thCur?' sel':''}" data-th="${t[0]}" style="background:${t[2]};color:${t[4]}"><i style="background:${t[3]}"></i><span>${t[1]}</span></button>`).join('');if(b)b.innerHTML=`<button type="button" class="acb${acCur?'':' sel'}" data-acc="" title="Culoarea temei" aria-label="Culoarea temei" style="background:var(--cd);color:var(--tx)">A</button>`+Object.keys(TACC).map(k=>`<button type="button" class="acb${k===acCur?' sel':''}" data-acc="${k}" aria-label="${k}" style="background:${TACC[k][0]}"></button>`).join('')}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-th]'),c=e.target.closest('[data-acc]');if(t){thCur=t.dataset.th;lsS('nth',thCur);thApply()}else if(c){acCur=c.dataset.acc;lsS('nac',acCur);thApply()}});
+thApply();
 
 const mn=t=>{const[a,b]=t.split(':');return +a*60+ +b},iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 let ANCH=new Date(2026,8,28);let myName=(()=>{try{return localStorage.getItem('nm')||''}catch(e){return''}})(),prof='',dirty=0,swap=0,off=0,mine={},all={},names={},db=null,user=null,uid=null,room=null;
