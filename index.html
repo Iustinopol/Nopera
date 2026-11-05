@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ro"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Nopera</title><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Nopera"><meta name="theme-color" content="#4f46e5"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" type="image/png" sizes="192x192" href="icon-192.png"><link rel="manifest" href="manifest.json"><meta name="mobile-web-app-capable" content="yes">
+<title>Nopera</title><meta name="apple-mobile-web-app-title" content="Nopera"><meta name="theme-color" content="#4f46e5"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" type="image/png" sizes="192x192" href="icon-192.png"><script>if(!/iPhone|iPad|iPod/.test(navigator.userAgent)&&!(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1)){var l=document.createElement("link");l.rel="manifest";l.href="manifest.json";document.head.appendChild(l)}</script><meta name="mobile-web-app-capable" content="yes">
 <style>
 :root{--bg:#f6f7fb;--cd:#fff;--tx:#1b1d29;--mu:#6b7080;--ac:#4f46e5;--ok:#16a34a;--no:#dc2626;--bd:#e3e5ee;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12131a;--cd:#1c1e29;--tx:#eceef6;--mu:#9a9fb2;--ac:#8b85ff;--ok:#4ade80;--no:#f87171;--bd:#2c2f3f}}
@@ -299,7 +299,7 @@ body.pf .tabs [data-t="prf"]{order:-1}
 <div style="text-align:center;margin-top:12px"><a href="#" id="lins">📲 Cum pun aplicația pe ecran?</a></div></div></div><div id="iw" aria-hidden="true"><div id="iice"></div><div id="ihill"></div><div class="itree" id="iwt1"></div><div class="itree" id="iwt2"></div></div><div id="hw" aria-hidden="true"><span class="b1">🦇</span><span class="b2">🦇</span><span class="b3">🦇</span><span class="g">👻</span><span class="w">🕸️</span></div>
 <div id="ins" class="hide"><div class="c" style="width:100%;max-width:420px;margin:auto">
 <div class="r" style="align-items:center;margin:0 0 8px"><div class="b" style="font-size:18px;flex:1">📲 Pune Nopera pe ecran</div><button id="insx" style="flex:0 0 auto">✕</button></div>
-<div class="mu" style="margin-bottom:10px">Așa o deschizi dintr-o atingere, ca pe o aplicație, fără bara browserului.</div>
+<div class="mu" style="margin-bottom:10px">Așa o deschizi dintr-o atingere, ca pe o aplicație.</div>
 <div class="r" style="margin-bottom:12px"><button id="ti">iPhone</button><button id="ta">Android</button></div>
 <div id="insb"></div>
 <div class="mu" style="margin-top:12px">💡 Dacă ai deschis linkul din WhatsApp, Instagram sau Facebook, deschide-l mai întâi în browser (meniul ⋯ sau ⋮ → „Deschide în Safari/Chrome"). Altfel opțiunea de adăugare nu apare.</div>
@@ -642,6 +642,7 @@ $('glg').onclick=async()=>{const m=$('glrm');m.textContent='';const p=new Google
 $('glrs').onclick=()=>{glSkip=true;glGate()};$('glro').onclick=()=>signOut(auth);
 $('olda').onclick=e=>{e.preventDefault();$('oldm').classList.toggle('hide')};
 if(/FBAN|FBAV|FB_IAB|Instagram|WhatsApp|TikTok|musical_ly|BytedanceWebview|Snapchat|; wv\)/i.test(navigator.userAgent)){$('iab').classList.remove('hide');$('gg').style.display='none'}
+else if(/iPhone|iPad|iPod/.test(navigator.userAgent)&&isPWA()){$('iab').classList.remove('hide');$('gg').style.display='none';$('iab').querySelector('.b').textContent='Șterge iconița și pune-o din nou';$('iab').querySelector('.mu').textContent='Pe iPhone, Google nu merge din iconița veche. Copiază linkul, deschide-l în Safari și conectează-te acolo. Apoi șterge iconița și pune-o din nou, cu „Deschide ca aplicație web” oprit.'}
 $('iabc').onclick=async()=>{try{await navigator.clipboard.writeText(location.origin+location.pathname);$('iabm').textContent='✓ Copiat. Lipește-l în Chrome sau Safari.'}catch(e){$('iabm').textContent='Linkul: '+location.origin+location.pathname}};
 function glFill(){const l=[...new Set((glU[glFid]||[]).filter(k=>!glPc||pgOf(k)===glPc).map(gName))].sort(),el=$('gl');if(el)el.innerHTML=l.map(g=>`<option value="${esc(g)}">`).join('');grPickRef()}
 function rebuildAll(){all={...pe};if(uid)all[uid]=dirty?{...mine}:{...ownM}}
@@ -1256,7 +1257,7 @@ const isStandalone=()=>(window.matchMedia&&window.matchMedia('(display-mode: sta
  isMobile=()=>/android|iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&innerWidth<900),
  detOS=()=>/android/i.test(navigator.userAgent)?'and':'ios',
  SHARE='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px"><path d="M12 15V3M8 7l4-4 4 4M5 11v9h14v-9"/></svg>',
- STEPS={ios:['Deschide linkul în <b>Safari</b> (merge și din Chrome, dar Safari e cel mai sigur).','Atinge butonul <b>Partajează</b> '+SHARE+' (jos, la mijloc). La unele versiuni e în meniul <b>⋯</b>, jos în dreapta.','Derulează și alege <b>„Adaugă pe ecranul principal”</b> (Add to Home Screen).','Lasă pornit „Deschide ca aplicație web”, dacă apare, și atinge <b>Adaugă</b>.','Deschide Nopera din pictograma nouă de pe ecranul principal.'],
+ STEPS={ios:['Deschide linkul în <b>Safari</b> (merge și din Chrome, dar Safari e cel mai sigur).','Atinge butonul <b>Partajează</b> '+SHARE+' (jos, la mijloc). La unele versiuni e în meniul <b>⋯</b>, jos în dreapta.','Derulează și alege <b>„Adaugă pe ecranul principal”</b> (Add to Home Screen).','<b>Oprește</b> „Deschide ca aplicație web”, dacă apare, ca să meargă conectarea cu Google, și atinge <b>Adaugă</b>.','Deschide Nopera din pictograma nouă de pe ecranul principal.'],
   and:['Deschide linkul în <b>Chrome</b>.','Atinge meniul <b>⋮</b> (sus, în dreapta).','Alege <b>„Adaugă pe ecranul principal”</b> sau <b>„Instalează aplicația”</b>.','Confirmă cu <b>Adaugă</b> sau <b>Instalează</b>.','Deschide Nopera din pictograma nouă de pe ecran. <span class="mu">(Samsung Internet: ☰ → „Adaugă pagina la” → „Ecran principal”.)</span>']};
 function setOS(os){$('ti').classList.toggle('on',os==='ios');$('ta').classList.toggle('on',os==='and');$('insb').innerHTML='<ol>'+STEPS[os].map(x=>'<li>'+x+'</li>').join('')+'</ol>'}
 function showIns(os){$('ins').classList.remove('hide');setOS(os||detOS())}
