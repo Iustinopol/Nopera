@@ -626,7 +626,7 @@ const ACH=[{i:'g3',e:'🤝',n:'Nu mai ești singur',d:'3 oameni din grupă pe No
  ACT=['Bronz','Argint','Aur'],ACP=[10,25,50],ACC=['Grupa ta','Serie','Prezență','Caiete și chat','Secrete','Prieteni'],ACM=ACH.reduce((a,x)=>a+ACP[x.t],0);
 let achT=0,achTm=0,achU='',achA='',achOff=false,achL=[];
 const achGot=()=>(ownProf&&ownProf.ach)||{},achPts=g=>ACH.reduce((a,x)=>a+(g[x.i]?ACP[x.t]:0),0),achLv=p=>1+Math.floor(p/50),achChk=()=>{clearTimeout(achT);achT=setTimeout(achRun,500)},achShare=x=>{const t=(x?'Am deblocat „'+x.n+'” pe Nopera '+x.e+' Intră și tu':'Intră și tu pe Nopera')+(myCode?' cu codul grupei '+myCode:'')+': '+location.origin+location.pathname;window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank')};
-function achDay(){if(!uid)return{n:0,b:0};const k='nst_'+uid,t=iso(new Date());let x={};try{x=JSON.parse(localStorage.getItem(k)||'{}')||{}}catch(e){}if(x.d===t)return x;const y=new Date();y.setDate(y.getDate()-1);const n=x.d===iso(y)?(x.n||0)+1:1;x={d:t,n,b:Math.max(n,x.b||0)};try{localStorage.setItem(k,JSON.stringify(x))}catch(e){}return x}
+function achDay(){if(!uid)return{n:0,b:0};const k='nst_'+uid,t=iso(new Date());let l={};try{l=JSON.parse(localStorage.getItem(k)||'{}')||{}}catch(e){}if(!profLoaded)return l;const c=(ownProf&&ownProf.st)||{},ld=String(l.d||''),cd=String(c.d||''),n0=ld===cd?Math.max(+l.n||0,+c.n||0):(ld>cd?+l.n||0:+c.n||0),d0=ld>cd?ld:cd,b0=Math.max(+l.b||0,+c.b||0),y=new Date();y.setDate(y.getDate()-1);const n=d0===t?n0:d0===iso(y)?n0+1:1,x={d:t,n,b:Math.max(n,b0)};try{localStorage.setItem(k,JSON.stringify(x))}catch(e){}if(c.d!==x.d||c.n!==x.n||c.b!==x.b){ownProf={...(ownProf||{}),st:x};setDoc(doc(fs,'profiles',uid),{st:x},{merge:true}).catch(()=>{})}return x}
 function achInvd(){if(!uid)return false;try{return localStorage.getItem('nin_'+uid)==='1'}catch(e){return false}}
 function achVals(){const m=Object.keys(mine||{}).filter(k=>/^\d{4}-/.test(k)).map(k=>mine[k]),c=v=>m.filter(x=>x===v).length,h=new Date().getHours();return{g:myGroup?Object.keys(all).filter(u=>u!=='_'&&grp[u]===myGroup).length:0,i:achInvd()?1:0,s:achDay().b||0,p:c(1),r:c(2),f:c(3),n:nbNotes.length,c:gMsgs.some(x=>x.uid===uid)?1:0,b:h>=1&&h<5?1:0,fr:pzAcc().length,cm:Math.max(achCnt('ncm'),gMsgs.filter(x=>x.uid===uid).length),sh:achCnt('nsh'),mo:h>=5&&h<7?1:0,we:[0,6].includes(new Date().getDay())?1:0,dt:tkMine.some(x=>/^\[Orar\]/.test(x.text||''))?1:0}}
 function achCnt(k){try{return +localStorage.getItem(k+'_'+uid)||0}catch(e){return 0}}
@@ -1405,11 +1405,11 @@ const onAuth=u=>{if(u&&regBusy)return;$('glr').classList.add('hide');$('pfr').cl
   un.push(onSnapshot(query(collection(fs,'support'),where('uid','==',uid)),s=>{tkMine=s.docs.map(d=>({id:d.id,...d.data()}));renSup()},()=>{}));
   un.push(onSnapshot(query(collection(fs,'notes'),where('uid','==',uid)),s=>{nbNotes=s.docs.map(d=>({id:d.id,...d.data()}));nbRender()},()=>{}));
 
-  un.push(onSnapshot(doc(fs,'profiles',uid),s=>{ownProf=s.exists()?s.data():null;profLoaded=true;achU=uid;rebuildProfs();pzIdx()},()=>{}));
+  un.push(onSnapshot(doc(fs,'profiles',uid),s=>{ownProf=s.exists()?s.data():null;profLoaded=true;achU=uid;achDay();rebuildProfs();pzIdx()},()=>{}));
   un.push(onSnapshot(query(collection(fs,'chats'),where('members','array-contains',uid)),s=>{chats=s.docs.map(d=>({id:d.id,...d.data()}));renChats();pzRen();chNew()},()=>{}));
 
   pres();hb=setInterval(()=>{if(Date.now()-presAt>=270000)pres()},60000)};
 onAuthStateChanged(auth,u=>{try{onAuth(u)}finally{const b=$('boot');if(b)b.remove()}});
-render();setInterval(()=>{render();peers();if(prVis())presLoad()},30000);
+render();setInterval(()=>{achDay();render();peers();if(prVis())presLoad()},30000);
 
 </script></body></html>
