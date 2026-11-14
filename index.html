@@ -1372,14 +1372,14 @@ function sesRen(){const c=$('sesc'),k=$('sescal');const C=calOf();if(!C){if(c)c.
  else if(cv){const nn=P.find(x=>x[1]>cv[2]);h=`<div class="c sesk"><div class="sesi">🏖️</div><div style="flex:1;min-width:0"><div class="b">${esc(cv[0])}</div><div class="mu">Până pe ${dRo(cv[2])}${nn?' · apoi '+esc(nn[0].toLowerCase()):''}</div></div></div>`}
  if(c)c.innerHTML=h?h.replace('class="c sesk','data-t="tmn" class="c sesk'):'';
  if(k)k.innerHTML=P.length?`<div class="c" style="margin-top:14px"><div class="b" style="margin-bottom:8px">📅 Calendarul anului</div>${P.map(x=>{const on=x[1]<=t&&t<=x[2],n=dIn(x[1]);return`<div class="calr${on?' on':''}${x[3]==='ses'?' ses':''}"><div style="flex:1;min-width:0"><div class="b">${esc(x[0])}</div><div class="mu">${dRo(x[1])} – ${dRo(x[2])}</div></div><span class="mu" style="flex:0 0 auto">${on?'acum':n===1?'mâine':'în '+n+' zile'}</span></div>`}).join('')}${C.src?`<div class="mu" style="font-size:12px;margin-top:8px">Sursa: ${esc(C.src)}</div>`:''}</div>`:''}
-const MDPX='';
+const MDPX='https://nopera-moodle.nopera-app.workers.dev/';
 const mdK=()=>'mdl_'+uid,mdTK=()=>'mdlT_'+uid,mdUrl=()=>{try{return localStorage.getItem(mdK())||''}catch(e){return''}},mdLast=()=>{try{return +localStorage.getItem(mdTK())||0}catch(e){return 0}};
 const mdOk=u=>/^https:\/\/[^\s/]+\/calendar\/export_execute\.php\?\S*authtoken=\w+/i.test(u||'');
 let mdBusy=false,mdDone=0;
 function mdRen(){const u=mdUrl(),on=!!u;const a=$('mdin'),b=$('mdon');if(!a)return;a.classList.toggle('hide',on);b.classList.toggle('hide',!on);$('mdv').textContent=on?'conectat':'';const t=mdLast();$('mds').textContent=on?(t?'Ultima sincronizare: '+new Date(t).toLocaleString('ro-RO',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+(mdDone?' · '+mdDone+' termene noi':'')+'.':'Încă nesincronizat.')+' Se sincronizează singur când deschizi aplicația.':'';const h=$('mdhint');if(h)h.innerHTML=myGroup&&!on&&!tmL.some(x=>x.dl&&x.dl.room==='Moodle')?`<div class="c" style="margin-top:12px;display:flex;gap:12px;align-items:center;cursor:pointer" data-mdo><div class="sesi">📚</div><div style="flex:1;min-width:0"><div class="b">Temele din Moodle, aici automat</div><div class="mu">Conectează Moodle o singură dată și toată grupa vede temele și testele.</div></div></div>`:''}
 async function mdGet(u){
  if(isNat()&&Capacitor.Plugins&&Capacitor.Plugins.CapacitorHttp){const r=await Capacitor.Plugins.CapacitorHttp.get({url:u,responseType:'text'});if(r.status>=400)throw new Error('http '+r.status);return typeof r.data==='string'?r.data:JSON.stringify(r.data)}
- const tries=[u].concat(MDPX?[MDPX+'?u='+encodeURIComponent(u)]:[]);let err;
+ const tries=(MDPX?[MDPX+'?u='+encodeURIComponent(u)]:[]).concat([u]);let err;
  for(const x of tries){try{const r=await fetch(x,{cache:'no-store'});if(!r.ok)throw new Error('http '+r.status);return await r.text()}catch(e){err=e}}
  throw err||new Error('fetch')}
 function mdParse(txt){const L=String(txt).replace(/\r\n[ \t]/g,'').replace(/\n[ \t]/g,'').split(/\r?\n/),ev=[];let c=null;
@@ -1398,7 +1398,7 @@ async function mdSync(force){
    if(!ex&&tmL.some(x=>x.dl&&x.dl.d===dd&&String(x.dl.subj).toLowerCase()===subj.toLowerCase()&&String(x.dl.title||'').toLowerCase()===title.toLowerCase()))continue;
    try{await setDoc(doc(gCol('messages'),id),{uid,name:String(myName||'Coleg').slice(0,40)+' · Moodle',text:'',dk:1,dl:{k,subj,title,d:dd,tm:tm==='00:00'?'':tm,room:'Moodle'}});n++}catch(x){}}
   mdDone=n;try{localStorage.setItem(mdTK(),String(Date.now()))}catch(e){}if(m)m.textContent=force?(n?'Gata: '+n+' termene noi.':'Totul e la zi.'):'';
- }catch(e){if(m&&force)m.textContent=isNat()?'Nu am putut citi calendarul. Verifică linkul.':'Pe site nu pot citi încă Moodle direct. Deschide aplicația Nopera de pe telefon ca să sincronizezi.'}
+ }catch(e){if(m&&force)m.textContent=isNat()?'Nu am putut citi calendarul. Verifică linkul.':'Nu am putut citi calendarul. Verifică linkul (poate a expirat) și încearcă din nou.'}
  mdBusy=false;mdRen()}
 $('mdc').onclick=()=>{const v=$('mdu').value.trim(),m=$('mdm');if(!mdOk(v)){m.textContent='Linkul nu pare bun. Trebuie să conțină „export_execute.php” și „authtoken”.';return}if(!myGroup){m.textContent='Alege mai întâi grupa.';return}try{localStorage.setItem(mdK(),v);localStorage.removeItem(mdTK())}catch(e){}$('mdu').value='';mdRen();mdSync(true)};
 $('mdy').onclick=()=>mdSync(true);$('mdx').onclick=()=>{if(!confirm('Deconectezi Moodle? Termenele deja puse rămân la grupă.'))return;try{localStorage.removeItem(mdK());localStorage.removeItem(mdTK())}catch(e){}mdDone=0;$('mdm').textContent='';mdRen()};
