@@ -489,7 +489,7 @@ body.indm #sup{display:none}
 .ghd .b{font-size:16.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ghd .mu{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ghd .gib,.ghd>button[id^="m"]{background:transparent;border-color:transparent;width:40px;height:40px;min-height:0;padding:0;border-radius:50%;font-size:17px}.ghd .gib:hover,.ghd>button[id^="m"]:hover{background:var(--bg)}
 .gavg{background:linear-gradient(135deg,var(--ac),color-mix(in srgb,var(--ac) 62%,#d46bff))!important;box-shadow:0 4px 14px color-mix(in srgb,var(--ac) 38%,transparent)}
-#gms,#mm{border-radius:22px;background-color:color-mix(in srgb,var(--bg) 92%,var(--ac));background-image:radial-gradient(color-mix(in srgb,var(--ac) 16%,transparent) 1px,transparent 1.4px),radial-gradient(ellipse at 100% 0,color-mix(in srgb,var(--ac) 10%,transparent),transparent 55%);background-size:22px 22px,100% 100%;background-attachment:local,local;padding:12px 8px!important}
+#gms,#mm{border-radius:22px;background-color:color-mix(in srgb,var(--bg) 92%,var(--ac));background-image:radial-gradient(color-mix(in srgb,var(--ac) 16%,transparent) 1px,transparent 1.4px),radial-gradient(ellipse at 100% 0,color-mix(in srgb,var(--ac) 10%,transparent),transparent 55%);background-size:22px 22px,100% 100%;padding:12px 8px!important}
 .grw .gm,#mm .bub{font-size:15px;line-height:1.42;padding:8px 13px 6px;border:1px solid color-mix(in srgb,var(--bd) 75%,transparent);box-shadow:0 1px 1px #0000000a,0 3px 10px #00000010}
 .grw .gm.me,#mm .bub.me{background:linear-gradient(135deg,var(--ac),color-mix(in srgb,var(--ac) 62%,#d46bff));border-color:transparent;box-shadow:0 4px 14px color-mix(in srgb,var(--ac) 28%,transparent)}
 .grw .gm.me a,#mm .bub.me a{color:inherit;text-decoration:underline}
@@ -537,7 +537,7 @@ body.indm #sup{display:none}
 #now::after{content:"";position:absolute;width:180px;height:180px;left:-70px;bottom:-110px;border-radius:50%;background:radial-gradient(circle,#ffffff22,transparent 70%);pointer-events:none}
 #now>*{position:relative}
 #now .ht{font-size:28px;letter-spacing:-.01em}
-.ndot{display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor;margin-right:8px;vertical-align:1px;animation:npl 1.8s ease-out infinite}
+.ndot{display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor;margin-right:8px;vertical-align:1px;animation:npl 1.8s ease-out 4}
 @keyframes npl{0%{box-shadow:0 0 0 0 #ffffffaa}100%{box-shadow:0 0 0 10px #ffffff00}}
 #now .pb{height:10px;border-radius:99px;background:#ffffff30}#now .pb i{height:10px;border-radius:99px;background:linear-gradient(90deg,#ffffffb3,#fff);box-shadow:0 0 14px #ffffffa0}
 #now .hm{display:flex;flex-wrap:wrap;gap:6px}#now .hm span{background:#ffffff26;padding:6px 11px;border-radius:999px;font-size:12.5px}
@@ -752,7 +752,7 @@ body.indm #sup{display:none}
 .anc.new{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac) inset,0 10px 28px color-mix(in srgb,var(--ac) 18%,transparent)}
 .anct{display:flex;gap:12px;align-items:flex-start}.anci{flex:0 0 auto;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:21px;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 5px 14px color-mix(in srgb,var(--c1) 35%,transparent)}
 .ancm{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.anchip{font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:color-mix(in srgb,var(--c1) 16%,transparent);color:var(--c1)}
-.annew{font-size:10.5px;font-weight:800;letter-spacing:.05em;padding:2px 8px;border-radius:999px;color:#fff;background:linear-gradient(135deg,#ff6fae,#c86bff);animation:anpulse 2s ease-in-out infinite}
+.annew{font-size:10.5px;font-weight:800;letter-spacing:.05em;padding:2px 8px;border-radius:999px;color:#fff;background:linear-gradient(135deg,#ff6fae,#c86bff);animation:anpulse 2s ease-in-out 3}
 @keyframes anpulse{50%{box-shadow:0 0 0 5px color-mix(in srgb,#ff6fae 25%,transparent)}}
 .anti{margin:6px 0 2px;font-size:17.5px;line-height:1.25;letter-spacing:-.01em}.ancb{font-size:12.5px}
 .anx{margin:12px 2px 4px;font-size:15px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}.anx a{color:var(--ac)}
@@ -761,11 +761,21 @@ body.indm #sup{display:none}
 .anact{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--bd)}.anact button{min-height:0!important;padding:6px 11px!important;border-radius:999px;font-size:12.5px;font-weight:700;background:transparent}.anact .anrm{margin-left:auto;color:var(--no)}
 .ane{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:40px 20px;color:var(--mu)}.ane div{font-size:46px}.ane b{color:var(--tx);font-size:17px}.ane span{max-width:340px;font-size:13.5px}
 .anpc{display:flex;gap:12px;align-items:center;cursor:pointer;border-radius:22px;padding:14px;border-color:var(--ac);background:linear-gradient(135deg,color-mix(in srgb,var(--ac) 14%,var(--cd)),var(--cd) 70%);margin-bottom:12px}
-.anpi{flex:0 0 auto;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:linear-gradient(135deg,var(--ac),color-mix(in srgb,var(--ac) 55%,#d46bff));animation:anring 2.6s ease-in-out infinite}
+.anpi{flex:0 0 auto;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:linear-gradient(135deg,var(--ac),color-mix(in srgb,var(--ac) 55%,#d46bff));animation:anring 2.6s ease-in-out 2}
 @keyframes anring{0%,70%,100%{transform:rotate(0)}75%{transform:rotate(-12deg)}80%{transform:rotate(12deg)}85%{transform:rotate(-8deg)}90%{transform:rotate(6deg)}}
 .anpk{font-size:11px;font-weight:800;letter-spacing:.07em;color:var(--ac)}.anpt{font-size:13px;margin-top:2px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.anpa{font-size:24px;color:var(--mu)}
 @media (min-width:1100px){main:has(#ann:not(.hide)){max-width:1000px}}
 @media (prefers-reduced-motion:reduce){.annew,.anpi{animation:none}}
+
+/* ===== Viteză pe telefon ===== */
+@media (pointer:coarse),(max-width:899px){
+*{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.ghd{background:var(--cd)}.qehd{background:var(--bg)}.gday span{background:var(--cd)}
+body{background-attachment:scroll!important}
+[data-theme="noapte"] body,[data-theme="palat"] body,[data-theme="halloween"] body{background-attachment:scroll!important}
+[data-theme="noapte"] body::before,[data-theme="palat"] body::before,[data-theme="halloween"] body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:inherit;transform:translateZ(0)}
+.anc:hover,.uor:hover,.qer:hover,.nvi:hover,.rcn:hover,.pst button:hover,.wgx:hover{transform:none}
+}
 </style><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"></head><body><div id="boot"><b>Nopera</b><div class="mu" id="boott">Se deschide…</div><button type="button" id="bootr" class="hide">Încearcă din nou</button></div>
 <script>setTimeout(function(){var b=document.getElementById('boot');if(!b)return;document.getElementById('boott').textContent='Durează mai mult decât de obicei. Verifică internetul.';var r=document.getElementById('bootr');r.classList.remove('hide');r.onclick=function(){location.reload()}},12000)</script>
 <div id="ov" style="position:fixed;inset:0;z-index:9;background:var(--bg);padding:20px;overflow:auto"><div class="c" style="width:100%;max-width:380px;margin:auto"><div class="lgo" role="img" aria-label="Nopera"></div><div class="lgh">Bun venit la Nopera</div><div id="iab" class="c warn hide" style="margin-top:12px"><div class="b">Deschide în Chrome sau Safari</div><div class="mu" style="margin:6px 0 10px">Google nu permite conectarea din WhatsApp, TikTok sau Instagram. Apasă meniul ⋯ sau ⋮ și alege „Deschide în browser”, sau copiază linkul și lipește-l în Chrome ori Safari.</div><button type="button" id="iabc" class="on" style="width:100%">Copiază linkul</button><div class="mu" id="iabm" style="min-height:16px;margin-top:6px"></div></div><div class="mu" id="ovt" style="margin:8px 0 18px">Orarul, grupa și colegii tăi, într-un singur loc.</div>
@@ -1034,7 +1044,7 @@ function thApply(){const r=document.documentElement,t=thCur;if(t==='auto')r.remo
  const ic=t==='halloween'?'🎃 ':(t==='noapte'||t==='palat')?'❄️ ':'📚 ';document.querySelectorAll('h1,#ov .b').forEach(el=>{if(/Nopera$/.test(el.textContent))el.textContent=ic+'Nopera'});
  const a=TACC[acCur];if(a){const L=thLight(t);r.style.setProperty('--ac',a[L?1:0]);r.style.setProperty('--onac',L?'#fff':'#11121a')}else{r.style.removeProperty('--ac');r.style.removeProperty('--onac')}
  const c=(TH.find(x=>x[0]===t)||TH[2])[2],m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='auto'?'#4f46e5':c);
- const iw=$('iw');if(iw&&(t==='noapte'||t==='palat')&&!iw.querySelector('i')){for(let i=0;i<22;i++){const f=document.createElement('i');f.textContent='❄';f.style.cssText=`left:${(i*4.7+((i*37)%9))%100}%;font-size:${9+(i*7)%13}px;opacity:${.4+((i*13)%5)/10};animation-duration:${9+(i*5)%10}s;animation-delay:-${(i*3)%14}s`;iw.appendChild(f)}}
+ const iw=$('iw');if(iw&&(t==='noapte'||t==='palat')&&!iw.querySelector('i')){for(let i=0,N=matchMedia('(pointer:coarse)').matches?9:22;i<N;i++){const f=document.createElement('i');f.textContent='❄';f.style.cssText=`left:${(i*4.7+((i*37)%9))%100}%;font-size:${9+(i*7)%13}px;opacity:${.4+((i*13)%5)/10};animation-duration:${9+(i*5)%10}s;animation-delay:-${(i*3)%14}s`;iw.appendChild(f)}}
  thFill()}
 function thFill(){const a=$('thg'),b=$('acg');if(a)a.innerHTML=TH.map(t=>`<button type="button" class="tc${t[0]===thCur?' sel':''}" data-th="${t[0]}" style="background:${t[2]};color:${t[4]}"><i style="background:${t[3]}"></i><span>${t[1]}</span></button>`).join('');if(b)b.innerHTML=`<button type="button" class="acb${acCur?'':' sel'}" data-acc="" title="Culoarea temei" aria-label="Culoarea temei" style="background:var(--cd);color:var(--tx)">A</button>`+Object.keys(TACC).map(k=>`<button type="button" class="acb${k===acCur?' sel':''}" data-acc="${k}" aria-label="${k}" style="background:${TACC[k][0]}"></button>`).join('')}
 document.addEventListener('click',e=>{const t=e.target.closest('[data-th]'),c=e.target.closest('[data-acc]');if(t){thCur=t.dataset.th;lsS('nth',thCur);thApply()}else if(c){acCur=c.dataset.acc;lsS('nac',acCur);thApply()}});
@@ -1693,7 +1703,7 @@ let picC={},picS={},picQ=new Set(),picT=0;
 const stkN=st=>{if(!st||typeof st!=='object'||!(+st.n>0)||!/^\d{4}-\d\d-\d\d$/.test(String(st.d||'')))return 0;const t=new Date();t.setHours(0,0,0,0);const dd=Math.round((new Date(st.d+'T00:00:00')-t)/864e5);return dd>=-1?Math.min(9999,+st.n):0},
  stkOf=u=>u===uid?stkN(achDay()):stkN((profs[u]&&profs[u].st)||picS[u]),
  stTag=u=>{const n=stkOf(u);return n>1?`<span class="tag stk" title="${n} zile la rând">🔥 ${n}</span>`:''};try{const c=JSON.parse(localStorage.getItem('npic')||'{}');const now=Date.now();for(const k in c)if(now-c[k][0]<12*3600e3){picC[k]=c[k][1];if(c[k][2])picS[k]=c[k][2]}}catch(e){}
-function picFlush(){picT=0;if(!uid){picQ.clear();return}const l=[...picQ].slice(0,20);l.forEach(u=>picQ.delete(u));Promise.all(l.map(u=>getDoc(doc(fs,'profiles',u)).then(d=>{picC[u]=okImg(d.exists()&&d.data().pic)||'';if(d.exists()&&d.data().st)picS[u]=d.data().st}).catch(()=>{picC[u]=''}))).then(()=>{try{const c=JSON.parse(localStorage.getItem('npic')||'{}'),now=Date.now();l.forEach(u=>c[u]=[now,picC[u],picS[u]||null]);const ks=Object.keys(c).sort((a,b)=>c[b][0]-c[a][0]).slice(0,80),o={};ks.forEach(k=>o[k]=c[k]);localStorage.setItem('npic',JSON.stringify(o))}catch(e){}if(l.some(u=>picC[u]||picS[u])){try{peers();pzRen();pzShow();renChats();renMem();hubFill();renGrp()}catch(e){}}if(picQ.size)picT=setTimeout(picFlush,400)})}
+function picFlush(){picT=0;if(!uid){picQ.clear();return}const l=[...picQ].slice(0,20);l.forEach(u=>picQ.delete(u));Promise.all(l.map(u=>getDoc(doc(fs,'profiles',u)).then(d=>{picC[u]=okImg(d.exists()&&d.data().pic)||'';if(d.exists()&&d.data().st)picS[u]=d.data().st}).catch(()=>{picC[u]=''}))).then(()=>{try{const c=JSON.parse(localStorage.getItem('npic')||'{}'),now=Date.now();l.forEach(u=>c[u]=[now,picC[u],picS[u]||null]);const ks=Object.keys(c).sort((a,b)=>c[b][0]-c[a][0]).slice(0,40),o={};ks.forEach(k=>o[k]=c[k]);localStorage.setItem('npic',JSON.stringify(o))}catch(e){}if(l.some(u=>picC[u]||picS[u])){try{peers();pzRen();pzShow();renChats();renMem();hubFill();renGrp()}catch(e){}}if(picQ.size)picT=setTimeout(picFlush,400)})}
 const picOf=u=>{if(!u)return'';const p=okImg(profs[u]&&profs[u].pic);if(p)return p;if(profs[u])return'';if(u in picC)return picC[u];if(uid){picQ.add(u);if(!picT)picT=setTimeout(picFlush,300)}return''};
 const avIn=(u,n)=>{const p=picOf(u);return p?`<img alt="" src="${p}">`:esc(ini(n))},
  avBox=(u,n,z)=>`<div class="av" style="width:${z}px;height:${z}px;font-size:${Math.round(z*.34)}px;background:hsl(${hue(n)},55%,42%);filter:none">${avIn(u,n)}</div>`,
@@ -2300,6 +2310,6 @@ const onAuth=u=>{if(u&&regBusy)return;$('glr').classList.add('hide');$('pfr').cl
 
   pres();hb=setInterval(()=>{if(Date.now()-presAt>=270000)pres()},60000)};
 onAuthStateChanged(auth,u=>{try{onAuth(u)}finally{const b=$('boot');if(b)b.remove()}});
-render();setInterval(()=>{achDay();render();peers();if(prVis())presLoad()},30000);
+render();setInterval(()=>{if(document.hidden)return;achDay();render();peers();if(prVis())presLoad()},30000);document.addEventListener('visibilitychange',()=>{if(!document.hidden){try{achDay();render()}catch(e){}}});
 
 </script></body></html>
