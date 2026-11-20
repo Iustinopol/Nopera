@@ -449,7 +449,7 @@ h1.pt{font-size:28px;margin:0 0 14px}
 .chk input{width:auto;margin:0}
 .gm.pp{align-self:stretch;max-width:100%;background:var(--cd);color:var(--tx);border:2px solid var(--ac)}
 .gm.pp .gn{color:var(--ac);opacity:1}
-#m[data-v="tav"]>#tav{display:block}#m[data-v="cv"]>#cvv{display:block}.faonly #tav{display:none!important}
+#m[data-v="tav"]>#tav{display:block}#m[data-v="cv"]>#cvv{display:block}#m[data-v="sup"]>#supv{display:block}.faonly #tav{display:none!important}
 
 /* ===== Caiete v2 ===== */
 .ned h2{font-size:26px;margin:.6em 0 .3em}.ned blockquote{margin:.6em 0;padding:4px 14px;border-left:4px solid var(--ac);opacity:.9}
@@ -1028,6 +1028,37 @@ body{background-attachment:scroll!important}
 .sppcf{position:absolute;inset:0;pointer-events:none}.sppcf i{position:absolute;top:-30px;left:calc(8% + var(--i)*16%);font-style:normal;font-size:22px;animation:sppc 1.6s ease-in calc(var(--i)*.12s) 2 both}
 @keyframes sppc{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(340px) rotate(260deg);opacity:0}}
 .sppgo.okb{background:var(--ok);color:#06210f}
+
+#supv .suph{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:12px}.supt{font-size:24px;font-weight:800}
+.supk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:12px}
+@media(max-width:600px){.supk{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.supkc{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:12px;border-radius:16px;border:1px solid var(--bd);background:var(--cd);color:var(--tx);border-top:3px solid var(--kc)}
+.supkc b{font-size:20px}.supkc span{font-size:12px;color:var(--mu);font-weight:700}.supkc.on{background:color-mix(in srgb,var(--kc) 14%,var(--cd));border-color:var(--kc)}
+.sups{margin-bottom:10px}
+.supf{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:6px}
+.supf button{flex:0 0 auto;border:1px solid var(--bd);background:var(--cd);color:var(--tx);border-radius:20px;padding:7px 12px;font-weight:700;font-size:12.5px;white-space:nowrap}
+.supf button span{font-size:11px;background:var(--bd);border-radius:10px;padding:1px 6px;margin-left:2px}.supf button.on{background:var(--tx);color:var(--bg);border-color:var(--tx)}.supf button.on span{background:#0002}
+.supbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.supbar select{background:var(--cd);color:var(--tx);border:1px solid var(--bd);border-radius:12px;padding:8px 10px;font:inherit;font-size:13px;font-weight:700}
+#stl{display:flex;flex-direction:column;gap:10px}
+@media(min-width:1100px){#stl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}#stl .supmore,#stl .supe{grid-column:1/-1}}
+.stc{position:relative;background:var(--cd);border:1px solid var(--bd);border-radius:18px;padding:14px 14px 12px 18px;overflow:hidden;display:flex;flex-direction:column;gap:8px}
+.stc:before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--kc)}
+.stc.s-new{border-color:color-mix(in srgb,#f87171 45%,var(--bd))}.stc.s-stu{border-color:color-mix(in srgb,#fb923c 45%,var(--bd))}.stc.s-ok,.stc.s-hist{opacity:.8}
+.stct{display:flex;align-items:center;gap:10px}.stci{flex:0 0 40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:color-mix(in srgb,var(--kc) 18%,var(--bg))}
+.stcm{flex:1;min-width:0}.stcm b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.stcm span{display:block;font-size:12px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stage{flex:0 0 auto;font-size:11.5px;font-weight:800;padding:3px 9px;border-radius:20px;background:var(--bd);color:var(--mu)}.stage.u1{background:color-mix(in srgb,#fb923c 22%,var(--cd));color:#fb923c}.stage.u2{background:color-mix(in srgb,#f87171 25%,var(--cd));color:#f87171}
+.stst{display:flex;flex-wrap:wrap;gap:6px}.stpill{font-size:11.5px;font-weight:800;padding:3px 9px;border-radius:20px;background:var(--bg);border:1px solid var(--bd);color:var(--mu)}
+.stpill.p-new{color:#f87171;border-color:color-mix(in srgb,#f87171 40%,var(--bd))}.stpill.p-stu{color:#fb923c;border-color:color-mix(in srgb,#fb923c 40%,var(--bd))}.stpill.p-wait{color:var(--ac)}.stpill.p-ok{color:var(--ok)}.stpill.pnew{background:var(--no);border-color:var(--no);color:#fff}
+.stcx{font-size:14px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-wrap}
+.stlu{font-size:12.5px;color:var(--mu);background:var(--bg);border-radius:10px;padding:7px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stth{align-self:flex-start;padding:0;border:1px solid var(--bd);border-radius:12px;overflow:hidden;background:none;max-width:160px}.stth img{display:block;width:100%;max-height:120px;object-fit:cover}
+.stca{display:flex;gap:6px}.stca button{border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:12px;padding:9px 12px;font-weight:800;font-size:13px}
+.stca .pri{flex:1;background:var(--ac);border-color:var(--ac);color:#111}.stca .okb{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,var(--bd))}.stca .dng{color:var(--no)}
+.stmore{flex:0 0 auto;font-size:17px!important;padding:6px 12px!important}.stmore.on{background:var(--tx)!important;color:var(--bg)!important}
+.stx{display:flex;flex-wrap:wrap;gap:6px;padding-top:4px;border-top:1px dashed var(--bd)}.stx button{border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:10px;padding:7px 10px;font-weight:700;font-size:12.5px}.stx .dng{color:var(--no)}
+.supmore{width:100%;border:1px dashed var(--bd);background:transparent;color:var(--tx);border-radius:14px;padding:12px;font-weight:800}
+.supe{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;padding:30px 16px;border-radius:18px;background:var(--cd);border:1px dashed var(--bd)}.supe span{font-size:13px;color:var(--mu)}
+.supbot{margin-top:12px}.supbot button{width:100%;border:1px solid var(--bd);background:var(--cd);color:var(--mu);border-radius:14px;padding:11px;font-weight:700}.supbot button:disabled{opacity:.5}
 </style><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"></head><body><div id="boot"><b>Nopera</b><div class="mu" id="boott">Se deschide…</div><button type="button" id="bootr" class="hide">Încearcă din nou</button></div>
 <script>setTimeout(function(){var b=document.getElementById('boot');if(!b)return;document.getElementById('boott').textContent='Durează mai mult decât de obicei. Verifică internetul.';var r=document.getElementById('bootr');r.classList.remove('hide');r.onclick=function(){location.reload()}},12000)</script>
 <div id="ov" style="position:fixed;inset:0;z-index:9;background:var(--bg);padding:20px;overflow:auto"><div class="c" style="width:100%;max-width:380px;margin:auto"><div class="lgo" role="img" aria-label="Nopera"></div><div class="lgsw lgs2"><button type="button" data-uil="ro">🇷🇴 RO</button><button type="button" data-uil="en">🇬🇧 EN</button></div><div class="lgh">Bun venit la Nopera</div><div id="iab" class="c warn hide" style="margin-top:12px"><div class="b">Deschide în Chrome sau Safari</div><div class="mu" style="margin:6px 0 10px">Google nu permite conectarea din WhatsApp, TikTok sau Instagram. Apasă meniul ⋯ sau ⋮ și alege „Deschide în browser”, sau copiază linkul și lipește-l în Chrome ori Safari.</div><button type="button" id="iabc" class="on" style="width:100%">Copiază linkul</button><div class="mu" id="iabm" style="min-height:16px;margin-top:6px"></div></div><div class="mu" id="ovt" style="margin:8px 0 18px">Orarul, grupa și colegii tăi, într-un singur loc.</div>
@@ -1083,7 +1114,7 @@ body{background-attachment:scroll!important}
 <button type="button" class="at" data-av="adv"><b>👥 Admini</b><span>Numește admini de facultate</span></button>
 <button type="button" class="at" data-av="tav"><b>🎓 Profesori</b><span>Aprobă profesorii pe materii și grupe</span></button>
 <button type="button" class="at" data-av="uf"><b>🏛 Universități și facultăți</b><span>Adaugă universități, facultăți și specializări</span></button>
-<button type="button" class="at" data-av="uo"><b>🟢 Utilizatori</b><span>Vezi cine e online și când a intrat ultima dată</span></button> <button type="button" class="at" data-av="cv"><b>👑 Șefi de grupă <span id="cvbd" class="nb hide"></span></b><span>Studenții votează șeful, tu aprobi câștigătorul</span></button> <button type="button" class="at" data-av="st"><b>📊 Statistici, suport și prezențe</b><span>Cifrele pe scurt, mesajele de la suport (cu orarul grupei de editat) și prezențele</span></button></div>
+<button type="button" class="at" data-av="uo"><b>🟢 Utilizatori</b><span>Vezi cine e online și când a intrat ultima dată</span></button> <button type="button" class="at" data-av="cv"><b>👑 Șefi de grupă <span id="cvbd" class="nb hide"></span></b><span>Studenții votează șeful, tu aprobi câștigătorul</span></button> <button type="button" class="at hot" data-av="sup"><b>💬 Suport <span id="supbd" class="nb hide"></span></b><span>Mesajele studenților: răspunde, rezolvă, vezi pozele cu orarul</span></button> <button type="button" class="at" data-av="st"><b>📊 Statistici și prezențe</b><span>Cifrele pe scurt și prezențele pe grupe</span></button></div>
 <div id="bk" class="r" style="align-items:center;margin:0 0 12px"><button type="button" id="bkb" style="flex:0 0 auto">← Admin</button><div class="b" id="bkt" style="flex:1;text-align:center"></div><span style="flex:0 0 74px"></span></div><details class="c adp" id="anc"><summary class="b">📢 Anunț nou</summary>
 <select id="ant" class="fi" style="margin-top:8px"></select>
 <input id="anh" class="fi" placeholder="Titlu" maxlength="100">
@@ -1170,7 +1201,7 @@ body{background-attachment:scroll!important}
 <input id="tatq" class="fi" placeholder="🔎 Caută numele în orar (ex: Popescu)"><div id="tat" class="chk"></div>
 <div class="r"><button id="tatsave" type="button" class="on">Salvează legătura cu orarul</button></div><div class="mu" id="tatm" style="min-height:18px;margin-top:6px"></div>
 <h2>Profesori aprobați</h2><div id="tal"></div></div>
-<div id="cvv" class="adp"><div id="cvA"><div class="mu">Încă nu a votat nimeni.</div></div></div><div id="stv" class="adp"><div id="sdash"></div><div id="st" style="margin-bottom:10px"></div>
+<div id="cvv" class="adp"><div id="cvA"><div class="mu">Încă nu a votat nimeni.</div></div></div><div id="supv" class="adp"><div id="st"></div></div><div id="stv" class="adp"><div id="sdash"></div>
 <div class="r" style="margin:0 0 8px"><select id="mg" class="fi" style="margin:0"></select><button id="mx" style="flex:0 0 auto;padding:9px 12px">⬇ CSV</button></div><div class="mu" id="mc" style="margin-bottom:8px"></div><div id="ml"></div>
 </div>
 <div class="mu" id="ufm" style="min-height:18px;margin:8px 0"></div>
@@ -1264,7 +1295,7 @@ var tm=document.getElementById('tm'),htm=document.getElementById('htm');if(tm&&h
 </script>
 <script>
 (function(){var m=document.getElementById('m');if(!m)return;
-var T={tav:'🎓 Profesori',ed:'📅 Orare',anc:'📢 Anunț nou',adv:'👥 Admini',uf:'🏛 Facultăți',st:'📊 Statistici',uo:'🟢 Utilizatori',cv:'👑 Șefi de grupă'},DET={ed:'ed',anc:'anc',uf:'uf'};
+var T={tav:'🎓 Profesori',ed:'📅 Orare',anc:'📢 Anunț nou',adv:'👥 Admini',uf:'🏛 Facultăți',st:'📊 Statistici',uo:'🟢 Utilizatori',cv:'👑 Șefi de grupă',sup:'💬 Suport'},DET={ed:'ed',anc:'anc',uf:'uf'};
 function setV(v){m.setAttribute('data-v',v);var id=DET[v];if(id){var d=document.getElementById(id);if(d)d.open=true}var t=document.getElementById('bkt');if(t)t.textContent=T[v]||'';window.scrollTo(0,0)}
 setV('home');
 document.addEventListener('click',function(e){var a=e.target.closest('[data-av]');if(a){setV(a.getAttribute('data-av'));return}if(e.target.closest('#bkb')){setV('home');return}if(e.target.closest('[data-t="m"]'))setV(document.body.classList.contains('faonly')?'ed':'home')});
@@ -1611,11 +1642,44 @@ const banMsg=()=>alert('Contul tău nu mai poate trimite mesaje, pentru că a fo
 const SK={fac:'🏫 Facultate nouă',raport:'🚩 Raport',orar:'📅 Orar',bug:'🐞 Problemă',idea:'💡 Idee',q:'❓ Întrebare'};
 function renSup(){
  spList();
- if(isAdm){const act=tkAll.filter(x=>!x.deleted),arch=tkAll.filter(x=>x.deleted),o=act.filter(x=>x.status!=='solved').length,sol=act.length-o;$('tm').textContent='Admin'+(o?' ('+o+')':'');
-  const card=(x,h)=>`<div class="c ${x.status==='solved'||h?'':'warn'}"><div class="b">${esc(x.name||'Elev')}<span class="tag">${esc(gDisp(fullG(x.g))||'fără grupă')}</span>${SK[x.k]?`<span class="tag">${SK[x.k]}</span>`:''}</div><div class="mu">${fmtT(x.t)} · ${stt(x)}${h&&x.dt?' · șters '+fmtT(x.dt):''}</div><div style="margin:6px 0">${esc(x.text)}</div>${x.lu?`<div class="mu" style="margin:0 0 6px">${x.lf==='u'?'<span class="spnm">NOU</span> 🧑‍🎓 ':'↪ Tu: '}${esc(x.lu)}</div>`:''}${x.rth?`<img class="gi" alt="" src="${okImg(x.rth)}">`:''}${x.dv?`<div class="mu" style="font-size:12px;margin:0 0 6px">📱 ${esc(x.dv)}</div>`:''}${x.reply?`<div class="mu">💬 ${esc(x.reply)}</div>`:''}<div class="r">${h?`<button data-su="${esc(x.id)}">↩ Restaurează</button><button data-sp="${esc(x.id)}">Șterge definitiv</button>`:`${x.k==='raport'&&x.rm&&(x.rk==='g'||x.rc)&&x.status!=='solved'?`<button data-srd="${esc(x.id)}" class="on">🗑 Șterge mesajul</button>`:''}${x.k==='raport'&&x.ru?`<button data-sban="${esc(x.ru)}" data-n="${esc((String(x.text||'').match(/^\[Raport\] ([^:]+):/)||[])[1]||'utilizatorul')}">${banL[x.ru]?'✅ Ridică suspendarea':'⛔ Suspendă'}</button>`:''}${x.k!=='raport'?`<button data-sq="${esc(x.id)}" ${x.status==='solved'||!(x.g||/^\[Orar\]/.test(x.text||''))?'':'class="on"'}>📅 Orarul grupei</button><button data-sqadd="${esc(x.id)}">➕ Adaugă oră</button>`:''}${/^o[rp]:/.test(x.eid||'')?`<button data-sop="${esc(x.id)}" class="on">📸 Vezi orarul trimis</button>`:''}<button data-sch="${esc(x.id)}" class="on">💬 Conversație</button><button data-sv="${esc(x.id)}">${x.status==='solved'?'Redeschide':'Rezolvat ✓'}</button>${x.status==='solved'?`<button data-sdl="${esc(x.id)}">🗑 Șterge</button>`:''}`}</div></div>`;
-  const nav=`<div class="r" style="margin:0 0 10px"><button data-sda ${sol?'':'disabled'}>🗑 Șterge rezolvate (${sol})</button><button data-sh>${showHist?'← Înapoi':'📜 Istoric ('+arch.length+')'}</button></div>`;
-  const srt=a=>[...a].sort((a,b)=>(a.status==='solved')-(b.status==='solved')||b.t-a.t).slice(0,40);
-  if(spCur&&spCur.adm)spHead();renDash();$('st').innerHTML=showHist?`<h2>ISTORIC · ${arch.length} șterse</h2>${nav}`+(srt(arch).map(x=>card(x,1)).join('')||'<div class="mu">Istoricul e gol.</div>'):`<h2>SUPORT · ${o} deschise</h2>${nav}`+(srt(act).map(x=>card(x,0)).join('')||'<div class="mu">Niciun mesaj.</div>')}}
+ if(isAdm){const act=tkAll.filter(x=>!x.deleted),o=act.filter(x=>x.status!=='solved').length;$('tm').textContent='Admin'+(o?' ('+o+')':'');if(spCur&&spCur.adm)spHead();renDash();supRen()}}
+let supF='todo',supQ='',supS='urg',supM=null,supLim=30;
+const SUPK={orar:['📅','Orar','#3db8ff'],fac:['🏫','Facultate nouă','#a78bfa'],bug:['🐞','Problemă','#f87171'],raport:['🚩','Raport','#fb923c'],idea:['💡','Idee','#facc15'],q:['❓','Întrebare','#34d399']},supKd=x=>SUPK[x.k]||['💬','Mesaj','#94a3b8'];
+const supSt=x=>x.deleted?'hist':x.status==='solved'?'ok':x.lf==='a'?'wait':(x.lf==='u'||x.reply)&&(x.reply||(x.lt||0)>(x.t||0)+5000)?'stu':'new';
+const SUPST={new:['🔴','Fără răspuns'],stu:['🟠','Elevul a scris'],wait:['💬','Așteaptă elevul'],ok:['✅','Rezolvat'],hist:['🗂','În istoric']};
+const supAgo=t=>{if(!t)return'';const m=(Date.now()-t)/6e4;return m<1?'acum':m<60?Math.floor(m)+' min':m<1440?Math.floor(m/60)+' h':Math.floor(m/1440)+(m<2880?' zi':' zile')};
+function supRen(){const el=$('st');if(!el||!isAdm)return;
+ if(!$('stq')){el.innerHTML=`<div class="suph"><div><div class="supt">💬 Suport</div><div class="mu" id="stsub"></div></div></div><div id="stk" class="supk"></div><div class="msrch sups"><span aria-hidden="true">🔎</span><input id="stq" type="search" placeholder="Caută după nume, grupă sau text" autocomplete="off"></div><div id="stf" class="supf"></div><div class="supbar"><select id="sts"><option value="urg">⚡ Urgente întâi</option><option value="new">🆕 Cele mai noi</option><option value="act">🕒 Ultima activitate</option><option value="old">⏳ Cele mai vechi</option></select><span id="stn" class="mu"></span></div><div id="stl"></div><div id="stb" class="supbot"></div>`;
+  $('stq').oninput=e=>{supQ=e.target.value;supLim=30;supRen()};$('sts').onchange=e=>{supS=e.target.value;supRen()}}
+ const all=tkAll||[],A=all.filter(x=>!x.deleted),H=all.filter(x=>x.deleted),C={new:0,stu:0,wait:0,ok:0};A.forEach(x=>C[supSt(x)]++);const todo=C.new+C.stu,old=A.filter(x=>['new','stu'].includes(supSt(x))).reduce((m,x)=>Math.min(m,x.lt||x.t||Date.now()),Date.now()),sol=C.ok;
+ const bd=$('supbd');if(bd){bd.textContent=todo;bd.classList.toggle('hide',!todo)}
+ $('stsub').textContent=todo?(todo===1?'1 mesaj așteaptă răspunsul tău':todo+' mesaje așteaptă răspunsul tău')+(old<Date.now()-36e5?' · cel mai vechi de '+supAgo(old):''):'Ești la zi cu toate mesajele 🎉';
+ const kp=(k,ic,n,l,c)=>`<button type="button" class="supkc${supF===k?' on':''}" data-supf="${k}" style="--kc:${c}"><b>${ic} ${n}</b><span>${l}</span></button>`;
+ $('stk').innerHTML=kp('new','🔴',C.new,'fără răspuns','#f87171')+kp('stu','🟠',C.stu,'elevul a scris','#fb923c')+kp('wait','💬',C.wait,'așteaptă elevul','#8b85ff')+kp('ok','✅',C.ok,'rezolvate','#34d399');
+ const chips=[['todo','⚡ De răspuns',todo],['open','Toate deschise',C.new+C.stu+C.wait],['all','Toate',A.length]].concat(Object.entries(SUPK).map(([k,v])=>[k,v[0]+' '+v[1],A.filter(x=>x.k===k).length]).filter(z=>z[2])).concat([['hist','🗂 Istoric',H.length]]);
+ $('stf').innerHTML=chips.map(([k,l,n])=>`<button type="button" class="${supF===k?'on':''}" data-supf="${k}">${l}${n?` <span>${n}</span>`:''}</button>`).join('');
+ if($('sts').value!==supS)$('sts').value=supS;
+ let L=supF==='hist'?H:A;
+ if(supF==='todo')L=L.filter(x=>['new','stu'].includes(supSt(x)));else if(supF==='open')L=L.filter(x=>x.status!=='solved');else if(['new','stu','wait','ok'].includes(supF))L=L.filter(x=>supSt(x)===supF);else if(SUPK[supF])L=L.filter(x=>x.k===supF);
+ const q=ND(supQ.trim());if(q)L=L.filter(x=>ND([x.name,gDisp(fullG(x.g)),x.g,x.text,x.lu,x.reply].join(' ')).includes(q));
+ const rk={new:0,stu:1,wait:2,ok:3,hist:4};L=[...L].sort(supS==='new'?(a,b)=>b.t-a.t:supS==='act'?(a,b)=>(b.lt||b.t)-(a.lt||a.t):supS==='old'?(a,b)=>a.t-b.t:(a,b)=>rk[supSt(a)]-rk[supSt(b)]||(a.lt||a.t)-(b.lt||b.t));
+ $('stn').textContent=L.length+(L.length===1?' mesaj':' mesaje');
+ const card=x=>{const st=supSt(x),[ki,kl,kc]=supKd(x),[si,sl]=SUPST[st],ag=Date.now()-(x.lt||x.t||0),urg=(st==='new'||st==='stu')?(ag>864e5?' u2':ag>6*36e5?' u1':''):'',ph=/^o[rp]:/.test(x.eid||'')||x.rth,np=(String(x.eid||'').slice(3).split(',').filter(Boolean).length)||(x.rth?1:0),txt=String(x.text||'').replace(/^📸[^·]*·\s*/,''),op=supM===x.id,ban=x.k==='raport'&&x.ru;
+  return`<div class="stc s-${st}" style="--kc:${kc}"><div class="stct"><span class="stci">${ki}</span><div class="stcm"><b>${esc(x.name||'Elev')}</b><span>${esc(gDisp(fullG(x.g))||'fără grupă')} · ${esc(kl)}</span></div><span class="stage${urg}" title="${esc(fmtT(x.lt||x.t))}">${supAgo(x.lt||x.t)}</span></div>
+  <div class="stst"><span class="stpill p-${st}">${si} ${sl}</span>${ph?`<span class="stpill">📸 ${np} ${np===1?'poză':'poze'}</span>`:''}${x.dv&&x.k==='bug'?`<span class="stpill">📱 ${esc(String(x.dv).split(' ').slice(0,2).join(' '))}</span>`:''}${x.sn?'':'<span class="stpill pnew">NOU</span>'}</div>
+  <div class="stcx">${esc(txt.slice(0,260))}</div>${x.lu&&x.lu!==txt?`<div class="stlu">${x.lf==='u'?'🧑‍🎓 '+esc(String(x.name||'Elev').split(' ')[0])+': ':'↪ Tu: '}${esc(String(x.lu).slice(0,140))}</div>`:x.reply?`<div class="stlu">↪ Tu: ${esc(String(x.reply).slice(0,140))}</div>`:''}
+  ${x.rth&&okImg(x.rth)?`<button type="button" class="stth" data-sch="${esc(x.id)}"><img alt="" src="${okImg(x.rth)}"></button>`:''}
+  <div class="stca">${st==='hist'?`<button type="button" data-su="${esc(x.id)}" class="pri">↩ Restaurează</button><button type="button" data-sp="${esc(x.id)}" class="dng">Șterge definitiv</button>`:`<button type="button" data-sch="${esc(x.id)}" class="pri">💬 ${st==='new'?'Răspunde':'Deschide'}</button>${x.status==='solved'?`<button type="button" data-sv="${esc(x.id)}">↺ Redeschide</button>`:`<button type="button" data-sv="${esc(x.id)}" class="okb">✓ Rezolvă</button>`}${x.k!=='raport'?`<button type="button" data-sq="${esc(x.id)}" title="Orarul grupei">📅 Orar</button>`:''}<button type="button" class="stmore${op?' on':''}" data-supm="${esc(x.id)}" aria-label="Mai multe">⋯</button>`}</div>
+  ${op&&st!=='hist'?`<div class="stx">${x.k!=='raport'?`<button type="button" data-sqadd="${esc(x.id)}">➕ Adaugă oră</button>`:''}${/^o[rp]:/.test(x.eid||'')?`<button type="button" data-sop="${esc(x.id)}">📸 Pozele în fereastră nouă</button>`:''}${x.k==='raport'&&x.rm&&(x.rk==='g'||x.rc)&&x.status!=='solved'?`<button type="button" data-srd="${esc(x.id)}" class="dng">🗑 Șterge mesajul raportat</button>`:''}${ban?`<button type="button" data-sban="${esc(x.ru)}" data-n="${esc((String(x.text||'').match(/^\[Raport\] ([^:]+):/)||[])[1]||'utilizatorul')}">${banL[x.ru]?'✅ Ridică suspendarea':'⛔ Suspendă'}</button>`:''}<button type="button" data-supcp="${esc(x.id)}">📋 Copiază textul</button><button type="button" data-sdl="${esc(x.id)}" class="dng">🗂 Mută în istoric</button></div>`:''}</div>`};
+ const shown=L.slice(0,supLim);
+ $('stl').innerHTML=shown.length?shown.map(card).join('')+(L.length>supLim?`<button type="button" class="supmore" data-supmore>Arată încă ${Math.min(30,L.length-supLim)} (din ${L.length-supLim})</button>`:''):`<div class="supe"><div style="font-size:40px">${supF==='todo'?'🎉':'📭'}</div><b>${supF==='todo'?'Nimic de răspuns':'Niciun mesaj aici'}</b><span>${supF==='todo'?'Ai răspuns la toate mesajele. Bravo!':q?'Nimic nu se potrivește cu „'+esc(supQ)+'”.':'Schimbă filtrul de mai sus.'}</span></div>`;
+ $('stb').innerHTML=supF==='hist'?'':`<button type="button" data-sda ${sol?'':'disabled'}>🗂 Mută cele ${sol} rezolvate în istoric</button>`}
+document.addEventListener('click',e=>{if(!isAdm)return;let b;const g=k=>e.target.closest('['+k+']');
+ if(b=g('data-supf')){supF=b.dataset.supf;supM=null;supLim=30;supRen();return}
+ if(b=g('data-supm')){supM=supM===b.dataset.supm?null:b.dataset.supm;supRen();return}
+ if(g('data-supmore')){supLim+=30;supRen();return}
+ if(b=g('data-supcp')){const x=tkAll.find(y=>y.id===b.dataset.supcp);if(x)try{navigator.clipboard.writeText(x.text||'');hidSnack('📋 Text copiat')}catch(y){prompt('Copiază:',x.text||'')}return}});
+
 function fillProf(){const a=document.activeElement;if(a&&(a.id==='pn'||a.id==='pg'||a.id==='pgs'||a.id==='pu'||a.id==='pf'||a.id==='pp'))return;$('pn').value=myName;if(!profEdit){fillUF($('pu'),$('pf'),fcOf(myGroup)||'upb_sim',$('pp'),pgOf(myGroup)||(myGroup?'*':''));$('pg').value=gName(myGroup);if(!$('p').classList.contains('hide'))glLoad($('pf').value,$('pp').value)}$('pe').textContent=((auth.currentUser&&auth.currentUser.email)||'')+(REQUIRE_VERIFY&&auth.currentUser?(auth.currentUser.emailVerified?' · email confirmat ✓':' · ⚠️ email neconfirmat'):'');$('plg').value=myLang()||myLq();glkUpd();$('pav').innerHTML=avIn(uid,myName);$('pav').style.background='hsl('+hue(myName)+',55%,42%)';$('pfd').classList.toggle('hide',!(profs[uid]&&profs[uid].pic));glFill()}
 const fb=initializeApp(CFG),auth=getAuth(fb),fs=getFirestore(fb),pr={};let un=[],hb=null,prAt=0,presAt=0;const ONL=360000;
 const em=u=>u.trim().toLowerCase(),er=(t,ok)=>{$('er').style.color=ok?'var(--ok)':'var(--no)';$('er').textContent=t};
