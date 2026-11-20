@@ -1645,8 +1645,8 @@ function renSup(){
  if(isAdm){const act=tkAll.filter(x=>!x.deleted),o=act.filter(x=>x.status!=='solved').length;$('tm').textContent='Admin'+(o?' ('+o+')':'');if(spCur&&spCur.adm)spHead();renDash();supRen()}}
 let supF='todo',supQ='',supS='urg',supM=null,supLim=30;
 const SUPK={orar:['📅','Orar','#3db8ff'],fac:['🏫','Facultate nouă','#a78bfa'],bug:['🐞','Problemă','#f87171'],raport:['🚩','Raport','#fb923c'],idea:['💡','Idee','#facc15'],q:['❓','Întrebare','#34d399']},supKd=x=>SUPK[x.k]||['💬','Mesaj','#94a3b8'];
-const supSt=x=>x.deleted?'hist':x.status==='solved'?'ok':x.lf==='a'?'wait':(x.lf==='u'||x.reply)&&(x.reply||(x.lt||0)>(x.t||0)+5000)?'stu':'new';
-const SUPST={new:['🔴','Fără răspuns'],stu:['🟠','Elevul a scris'],wait:['💬','Așteaptă elevul'],ok:['✅','Rezolvat'],hist:['🗂','În istoric']};
+const supSt=x=>x.deleted?'hist':x.status==='solved'?'ok':x.lf==='a'||(!x.lf&&x.reply)?'wait':x.lf==='u'&&(x.lt||0)>(x.t||0)+5000?'stu':'new';
+const SUPST={new:['🔴','Fără răspuns'],stu:['🟠','Elevul a scris din nou'],wait:['💬','Așteaptă elevul'],ok:['✅','Rezolvat'],hist:['🗂','În istoric']};
 const supAgo=t=>{if(!t)return'';const m=(Date.now()-t)/6e4;return m<1?'acum':m<60?Math.floor(m)+' min':m<1440?Math.floor(m/60)+' h':Math.floor(m/1440)+(m<2880?' zi':' zile')};
 function supRen(){const el=$('st');if(!el||!isAdm)return;
  if(!$('stq')){el.innerHTML=`<div class="suph"><div><div class="supt">💬 Suport</div><div class="mu" id="stsub"></div></div></div><div id="stk" class="supk"></div><div class="msrch sups"><span aria-hidden="true">🔎</span><input id="stq" type="search" placeholder="Caută după nume, grupă sau text" autocomplete="off"></div><div id="stf" class="supf"></div><div class="supbar"><select id="sts"><option value="urg">⚡ Urgente întâi</option><option value="new">🆕 Cele mai noi</option><option value="act">🕒 Ultima activitate</option><option value="old">⏳ Cele mai vechi</option></select><span id="stn" class="mu"></span></div><div id="stl"></div><div id="stb" class="supbot"></div>`;
@@ -1655,7 +1655,7 @@ function supRen(){const el=$('st');if(!el||!isAdm)return;
  const bd=$('supbd');if(bd){bd.textContent=todo;bd.classList.toggle('hide',!todo)}
  $('stsub').textContent=todo?(todo===1?'1 mesaj așteaptă răspunsul tău':todo+' mesaje așteaptă răspunsul tău')+(old<Date.now()-36e5?' · cel mai vechi de '+supAgo(old):''):'Ești la zi cu toate mesajele 🎉';
  const kp=(k,ic,n,l,c)=>`<button type="button" class="supkc${supF===k?' on':''}" data-supf="${k}" style="--kc:${c}"><b>${ic} ${n}</b><span>${l}</span></button>`;
- $('stk').innerHTML=kp('new','🔴',C.new,'fără răspuns','#f87171')+kp('stu','🟠',C.stu,'elevul a scris','#fb923c')+kp('wait','💬',C.wait,'așteaptă elevul','#8b85ff')+kp('ok','✅',C.ok,'rezolvate','#34d399');
+ $('stk').innerHTML=kp('new','🔴',C.new,'fără răspuns','#f87171')+kp('stu','🟠',C.stu,'elevul a scris din nou','#fb923c')+kp('wait','💬',C.wait,'așteaptă elevul','#8b85ff')+kp('ok','✅',C.ok,'rezolvate','#34d399');
  const chips=[['todo','⚡ De răspuns',todo],['open','Toate deschise',C.new+C.stu+C.wait],['all','Toate',A.length]].concat(Object.entries(SUPK).map(([k,v])=>[k,v[0]+' '+v[1],A.filter(x=>x.k===k).length]).filter(z=>z[2])).concat([['hist','🗂 Istoric',H.length]]);
  $('stf').innerHTML=chips.map(([k,l,n])=>`<button type="button" class="${supF===k?'on':''}" data-supf="${k}">${l}${n?` <span>${n}</span>`:''}</button>`).join('');
  if($('sts').value!==supS)$('sts').value=supS;
